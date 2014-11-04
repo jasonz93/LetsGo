@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DDD04B71-DC3C-4185-B7C7-D76E47A26B51</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LetsGo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B09C4D6DE81E4BCB1D6E51C5A32FA6D2E4398A03</key>
+		<string>ssh://github.com/jasonz93/LetsGo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LetsGo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B09C4D6DE81E4BCB1D6E51C5A32FA6D2E4398A03</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/jasonz93/LetsGo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B09C4D6DE81E4BCB1D6E51C5A32FA6D2E4398A03</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B09C4D6DE81E4BCB1D6E51C5A32FA6D2E4398A03</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LetsGo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
