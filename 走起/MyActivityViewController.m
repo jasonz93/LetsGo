@@ -1,18 +1,18 @@
 //
 //  SecondViewController.m
-//  走起
+//  zouqi
 //
-//  Created by Nicholas on 14-10-30.
-//  Copyright (c) 2014年 Nicholas. All rights reserved.
+//  Created by 周瑞琦 on 10/31/14.
+//  Copyright (c) 2014 Neuq. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "MyActivityViewController.h"
 
-@interface SecondViewController ()
+@interface MyActivityViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation MyActivityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
