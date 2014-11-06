@@ -14,6 +14,11 @@
 		73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E811A08E8CD0056BFD6 /* ActivityDetailViewController.m */; };
 		73DB6E881A08EA4D0056BFD6 /* HotActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E841A08EA4D0056BFD6 /* HotActivityViewController.m */; };
 		73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */; };
+		E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */; };
+		E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E171A09521A00F43300 /* CreateActivityScrollView.m */; };
+		E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */; };
+		E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E221A0A63B500F43300 /* SearchOrgViewController.m */; };
+		E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E251A0A94E900F43300 /* OrgDetailViewController.m */; };
 		E1949D8C1A08B47A005CC530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949D8B1A08B47A005CC530 /* main.m */; };
 		E1949DAC1A08B47B005CC530 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DAB1A08B47B005CC530 /* __Tests.m */; };
 		E1949DCB1A08B5C0005CC530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DB41A08B5C0005CC530 /* AppDelegate.m */; };
@@ -49,6 +54,16 @@
 		73DB6E841A08EA4D0056BFD6 /* HotActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotActivityViewController.m; sourceTree = "<group>"; };
 		73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityViewController.h; sourceTree = "<group>"; };
 		73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityViewController.m; sourceTree = "<group>"; };
+		E117E86D1A091B3700E19CA8 /* CreateActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateActivityViewController.h; sourceTree = "<group>"; };
+		E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateActivityViewController.m; sourceTree = "<group>"; };
+		E1215E171A09521A00F43300 /* CreateActivityScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateActivityScrollView.m; sourceTree = "<group>"; };
+		E1215E191A09522D00F43300 /* CreateActivityScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateActivityScrollView.h; sourceTree = "<group>"; };
+		E1215E1E1A0A5FA100F43300 /* MyOrgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrgViewController.h; sourceTree = "<group>"; };
+		E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrgViewController.m; sourceTree = "<group>"; };
+		E1215E211A0A63A400F43300 /* SearchOrgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchOrgViewController.h; sourceTree = "<group>"; };
+		E1215E221A0A63B500F43300 /* SearchOrgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOrgViewController.m; sourceTree = "<group>"; };
+		E1215E241A0A94BB00F43300 /* OrgDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgDetailViewController.h; sourceTree = "<group>"; };
+		E1215E251A0A94E900F43300 /* OrgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgDetailViewController.m; sourceTree = "<group>"; };
 		E1949D861A08B47A005CC530 /* 走起.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "走起.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1949D8A1A08B47A005CC530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1949D8B1A08B47A005CC530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,7 +162,17 @@
 				E1949DC21A08B5C0005CC530 /* LoginView.m */,
 				E1949DC51A08B5C0005CC530 /* RegisterView.h */,
 				E1949DC61A08B5C0005CC530 /* RegisterView.m */,
+				E117E86D1A091B3700E19CA8 /* CreateActivityViewController.h */,
+				E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */,
 				E1949D891A08B47A005CC530 /* Supporting Files */,
+				E1215E171A09521A00F43300 /* CreateActivityScrollView.m */,
+				E1215E191A09522D00F43300 /* CreateActivityScrollView.h */,
+				E1215E1E1A0A5FA100F43300 /* MyOrgViewController.h */,
+				E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */,
+				E1215E211A0A63A400F43300 /* SearchOrgViewController.h */,
+				E1215E221A0A63B500F43300 /* SearchOrgViewController.m */,
+				E1215E241A0A94BB00F43300 /* OrgDetailViewController.h */,
+				E1215E251A0A94E900F43300 /* OrgDetailViewController.m */,
 			);
 			path = "走起";
 			sourceTree = "<group>";
@@ -278,16 +303,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */,
 				73DB6E771A08E5F30056BFD6 /* ImgCell.m in Sources */,
 				73DB6E7F1A08E8990056BFD6 /* MyInfoViewController.m in Sources */,
+				E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */,
 				E1949DD41A08B5C0005CC530 /* RegisterView.m in Sources */,
 				73DB6E881A08EA4D0056BFD6 /* HotActivityViewController.m in Sources */,
 				E1949DD21A08B5C0005CC530 /* LoginView.m in Sources */,
+				E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */,
 				E1949DCE1A08B5C0005CC530 /* Common.m in Sources */,
 				E1949DCB1A08B5C0005CC530 /* AppDelegate.m in Sources */,
 				E1949D8C1A08B47A005CC530 /* main.m in Sources */,
 				73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */,
+				E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */,
 				73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */,
+				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,
 				73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

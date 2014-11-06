@@ -12,6 +12,9 @@
 @interface Common : NSObject
 
 +(NSString *)getToken;
++(NSString *)stringFromDate:(NSDate *)date;
++(NSString *)durFromDate:(NSDate *)date;
+
 @end
 
 @interface HTTPPost : NSObject
@@ -25,5 +28,17 @@
 
 -(id)initWithArgs:(NSString *)URLstring postData:(NSData *)data resultData:(NSMutableData *)resultData sender:(id)sender onSuccess:(SEL)onSuccess onError:(SEL)onError;
 -(void)Run;
+
+@end
+
+@interface clsOrg : NSObject
+
+@property NSString *orgID;
+@property NSString *name;
+@property NSString *content;
+@property NSString *logoUrl;
+@property BOOL isJoined;
+
+-(id)initWithData:(NSDictionary *)dic;
 
 @end

@@ -99,6 +99,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     txtSchool.text = cell.textLabel.text;
+    [cell setSelected:NO animated:YES];
     [self setSearchControllerHidden:YES];
 }
 

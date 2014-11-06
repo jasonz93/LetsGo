@@ -15,6 +15,34 @@
     return (NSString *)[localData objectForKey:@"token"];
 }
 
++(NSString *)stringFromDate:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日 H:mm"];
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    return destDateString;
+}
+
++(NSString *)durFromDate:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"H小时m分"];
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    return destDateString;
+}
+
+@end
+
+@implementation clsOrg
+
+-(id)initWithData:(NSDictionary *)dic{
+    //NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    self.orgID=[dic objectForKey:@"id"];
+    self.name=[dic objectForKey:@"name"];
+    self.content=[dic objectForKey:@"content"];
+    self.logoUrl=[dic objectForKey:@"logoUrl"];
+    self.isJoined=[[dic objectForKey:@"isJoined"]boolValue];
+    return self;
+}
+
 @end
 
 @implementation HTTPPost
