@@ -111,11 +111,6 @@ clsOrg *org;
     return cell;
 }
 
--(IBAction)JoinOrg:(id)sender{
-    UIStoryboard *board=self.storyboard;
-    [self.navigationController pushViewController:[board instantiateViewControllerWithIdentifier:@"SearchOrgView"] animated:YES];
-}
-
 -(void)viewDidLoad{
     self.tblOrgs.dataSource=self;
     self.tblOrgs.delegate=self;
