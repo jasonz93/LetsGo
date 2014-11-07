@@ -34,13 +34,13 @@ NSInteger cc=0;
     }
     if([indexPath section]==0)
     {
-    cell.textLabel.text=[[self.ActivityList_ing objectAtIndex:[indexPath row]]objectForKey:@"activity_title"];
-    cell.detailTextLabel.text=[[self.ActivityList_ing objectAtIndex:[indexPath row]]objectForKey:@"activity_place"];//[ActivityJsonInfo objectForKey:@"title"];
-    cell.imageView.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[self.ActivityList_ing objectAtIndex:[indexPath row]]objectForKey:@"activity_pic"]]]];
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    return cell;
+        cell.textLabel.text=[[self.ActivityList_ing objectAtIndex:[indexPath row]]objectForKey:@"activity_title"];
+        cell.detailTextLabel.text=[[self.ActivityList_ing objectAtIndex:[indexPath row]]objectForKey:@"activity_place"];
+        cell.imageView.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[self.ActivityList_ing objectAtIndex:[indexPath row]]objectForKey:@"activity_pic"]]]];
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        return cell;
     }
     else
     {
@@ -88,7 +88,7 @@ NSInteger cc=0;
 
 
 - (void)viewWillAppear:(BOOL)animated{
-   
+    
 }
 
 
@@ -117,16 +117,14 @@ NSInteger cc=0;
     self.Activity_Info.delegate=self;
     self.Activity_Info.dataSource=self;
     [self PostInfo];
-   // self.Activity_Info.rowHeight=UITableViewAutomaticDimension;
-   }
+    // self.Activity_Info.rowHeight=UITableViewAutomaticDimension;
+}
 
 
 
 -(void)PostInfo{
     NSLog(@"Post information");
     self.ActivityList_ingData=[NSMutableData alloc];
-    /*HTTPPost *PersonInfoPost=[[HTTPPost alloc]initWithArgs:@"http://www.douban.com/j/app/radio/people" postData:[PersonLinkParameter dataUsingEncoding:NSUTF8StringEncoding] resultData:self.ActivityList_ingData sender:self onSuccess:@selector(DealWithJsonData) onError:nil];
-    [PersonInfoPost Run];*/
     [[GetInfo alloc]initWithURL:@"http://1.r7test.sinaapp.com/Person.json" ResultData:self.ActivityList_ingData sender:self OnSuccess:@selector(DealWithJsonData) OnError:nil];
     
 }
@@ -176,13 +174,13 @@ NSInteger cc=0;
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

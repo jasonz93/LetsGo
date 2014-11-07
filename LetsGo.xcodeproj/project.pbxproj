@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7346D7141A0CA8D20024B4B5 /* ActivityPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7111A0CA8D20024B4B5 /* ActivityPoint.m */; };
+		7346D7151A0CA8D20024B4B5 /* ActivityTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7131A0CA8D20024B4B5 /* ActivityTable.m */; };
+		7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D71A1A0CA9580024B4B5 /* ActivityIntroCell.m */; };
+		7346D7201A0CA9580024B4B5 /* ActivityIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7346D71B1A0CA9580024B4B5 /* ActivityIntroCell.xib */; };
+		7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D71D1A0CA9580024B4B5 /* CommentCell.m */; };
+		7346D7221A0CA9580024B4B5 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7346D71E1A0CA9580024B4B5 /* CommentCell.xib */; };
+		7346D7241A0CA9D50024B4B5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7346D7231A0CA9D50024B4B5 /* CoreLocation.framework */; };
+		7346D7261A0CA9E40024B4B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7346D7251A0CA9E40024B4B5 /* MapKit.framework */; };
+		7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */; };
+		734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */; };
 		73DB6E771A08E5F30056BFD6 /* ImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E751A08E5F30056BFD6 /* ImgCell.m */; };
 		73DB6E781A08E5F30056BFD6 /* ImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73DB6E761A08E5F30056BFD6 /* ImgCell.xib */; };
 		73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7B1A08E8720056BFD6 /* GetInfo.m */; };
@@ -41,6 +51,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7346D7101A0CA8D20024B4B5 /* ActivityPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityPoint.h; sourceTree = "<group>"; };
+		7346D7111A0CA8D20024B4B5 /* ActivityPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityPoint.m; sourceTree = "<group>"; };
+		7346D7121A0CA8D20024B4B5 /* ActivityTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTable.h; sourceTree = "<group>"; };
+		7346D7131A0CA8D20024B4B5 /* ActivityTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTable.m; sourceTree = "<group>"; };
+		7346D7191A0CA9580024B4B5 /* ActivityIntroCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityIntroCell.h; path = CellClass/ActivityIntroCell.h; sourceTree = "<group>"; };
+		7346D71A1A0CA9580024B4B5 /* ActivityIntroCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityIntroCell.m; path = CellClass/ActivityIntroCell.m; sourceTree = "<group>"; };
+		7346D71B1A0CA9580024B4B5 /* ActivityIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityIntroCell.xib; path = CellClass/ActivityIntroCell.xib; sourceTree = "<group>"; };
+		7346D71C1A0CA9580024B4B5 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = CellClass/CommentCell.h; sourceTree = "<group>"; };
+		7346D71D1A0CA9580024B4B5 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = CellClass/CommentCell.m; sourceTree = "<group>"; };
+		7346D71E1A0CA9580024B4B5 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentCell.xib; path = CellClass/CommentCell.xib; sourceTree = "<group>"; };
+		7346D7231A0CA9D50024B4B5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		7346D7251A0CA9E40024B4B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		7346D7271A0CB0FE0024B4B5 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		734BD4991A0CBFA5008A12C2 /* SendCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendCommentViewController.h; sourceTree = "<group>"; };
+		734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendCommentViewController.m; sourceTree = "<group>"; };
 		73DB6E741A08E5F30056BFD6 /* ImgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImgCell.h; path = CellClass/ImgCell.h; sourceTree = "<group>"; };
 		73DB6E751A08E5F30056BFD6 /* ImgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImgCell.m; path = CellClass/ImgCell.m; sourceTree = "<group>"; };
 		73DB6E761A08E5F30056BFD6 /* ImgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImgCell.xib; path = CellClass/ImgCell.xib; sourceTree = "<group>"; };
@@ -88,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7346D7261A0CA9E40024B4B5 /* MapKit.framework in Frameworks */,
+				7346D7241A0CA9D50024B4B5 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +132,12 @@
 		73DB6E731A08E5DB0056BFD6 /* CellClass */ = {
 			isa = PBXGroup;
 			children = (
+				7346D7191A0CA9580024B4B5 /* ActivityIntroCell.h */,
+				7346D71A1A0CA9580024B4B5 /* ActivityIntroCell.m */,
+				7346D71B1A0CA9580024B4B5 /* ActivityIntroCell.xib */,
+				7346D71C1A0CA9580024B4B5 /* CommentCell.h */,
+				7346D71D1A0CA9580024B4B5 /* CommentCell.m */,
+				7346D71E1A0CA9580024B4B5 /* CommentCell.xib */,
 				73DB6E741A08E5F30056BFD6 /* ImgCell.h */,
 				73DB6E751A08E5F30056BFD6 /* ImgCell.m */,
 				73DB6E761A08E5F30056BFD6 /* ImgCell.xib */,
@@ -125,6 +159,8 @@
 		E1949D671A08B268005CC530 = {
 			isa = PBXGroup;
 			children = (
+				7346D7251A0CA9E40024B4B5 /* MapKit.framework */,
+				7346D7231A0CA9D50024B4B5 /* CoreLocation.framework */,
 				E1949D881A08B47A005CC530 /* 走起 */,
 				E1949DA81A08B47B005CC530 /* 走起Tests */,
 				E1949D871A08B47A005CC530 /* Products */,
@@ -143,6 +179,10 @@
 		E1949D881A08B47A005CC530 /* 走起 */ = {
 			isa = PBXGroup;
 			children = (
+				7346D7101A0CA8D20024B4B5 /* ActivityPoint.h */,
+				7346D7111A0CA8D20024B4B5 /* ActivityPoint.m */,
+				7346D7121A0CA8D20024B4B5 /* ActivityTable.h */,
+				7346D7131A0CA8D20024B4B5 /* ActivityTable.m */,
 				73DB6E831A08EA4D0056BFD6 /* HotActivityViewController.h */,
 				73DB6E841A08EA4D0056BFD6 /* HotActivityViewController.m */,
 				73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */,
@@ -151,6 +191,10 @@
 				73DB6E811A08E8CD0056BFD6 /* ActivityDetailViewController.m */,
 				73DB6E7D1A08E8990056BFD6 /* MyInfoViewController.h */,
 				73DB6E7E1A08E8990056BFD6 /* MyInfoViewController.m */,
+				7346D7271A0CB0FE0024B4B5 /* CommentViewController.h */,
+				7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */,
+				734BD4991A0CBFA5008A12C2 /* SendCommentViewController.h */,
+				734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */,
 				73DB6E791A08E7F20056BFD6 /* NetWorkClass */,
 				73DB6E731A08E5DB0056BFD6 /* CellClass */,
 				E1949DD71A08B5E7005CC530 /* LaunchScreen.xib */,
@@ -282,8 +326,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7346D7201A0CA9580024B4B5 /* ActivityIntroCell.xib in Resources */,
 				E1949DDC1A08B5E7005CC530 /* Main.storyboard in Resources */,
 				73DB6E781A08E5F30056BFD6 /* ImgCell.xib in Resources */,
+				7346D7221A0CA9580024B4B5 /* CommentCell.xib in Resources */,
 				E1949DDB1A08B5E7005CC530 /* LaunchScreen.xib in Resources */,
 				E1949DD11A08B5C0005CC530 /* Images.xcassets in Resources */,
 			);
@@ -303,12 +349,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */,
 				E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */,
 				73DB6E771A08E5F30056BFD6 /* ImgCell.m in Sources */,
 				73DB6E7F1A08E8990056BFD6 /* MyInfoViewController.m in Sources */,
+				7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */,
 				E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */,
 				E1949DD41A08B5C0005CC530 /* RegisterView.m in Sources */,
 				73DB6E881A08EA4D0056BFD6 /* HotActivityViewController.m in Sources */,
+				7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */,
 				E1949DD21A08B5C0005CC530 /* LoginView.m in Sources */,
 				E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */,
 				E1949DCE1A08B5C0005CC530 /* Common.m in Sources */,
@@ -317,8 +366,11 @@
 				73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */,
 				E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */,
 				73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */,
+				7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */,
 				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,
+				7346D7141A0CA8D20024B4B5 /* ActivityPoint.m in Sources */,
 				73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */,
+				7346D7151A0CA8D20024B4B5 /* ActivityTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +442,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -408,11 +461,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "走起/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dccdaeae-932a-4d4d-a222-6c387cba14ed";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -447,10 +501,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "走起/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dccdaeae-932a-4d4d-a222-6c387cba14ed";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -474,6 +529,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -500,6 +556,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dccdaeae-932a-4d4d-a222-6c387cba14ed";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/走起.app/走起";
 			};
@@ -523,6 +580,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -542,6 +600,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dccdaeae-932a-4d4d-a222-6c387cba14ed";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/走起.app/走起";
 				VALIDATE_PRODUCT = YES;

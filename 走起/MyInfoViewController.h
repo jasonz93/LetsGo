@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+
+
+
 #define ActivityIng 0
 #define ActivityEd 1
-#ifndef PersonalInfoPostLink
-#define PersonalInfoPostLink "http://www.douban.com/j/app/radio/people"
-#endif
-
 
 @interface MyInfoViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
-   
-
+    
+    
 }
 @property ( nonatomic, retain) NSArray *ActivityList_ing;
 @property ( nonatomic, strong) NSMutableData *ActivityList_ingData;

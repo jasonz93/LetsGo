@@ -7,37 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import"GetInfo.h"
-#import "ImgCell.h"
-
-#define ActvtImgCell 0
-#define ActvtNameCell 1
-#define ActvtOriginatorCell 2
-#define ActvtTimeCell 3
-#define ActvtAdressCell 4
-#define ActvtPeopleCell 5
-//#define ActvtDetailCell 6
+#import"Common.h"
+#import"ActivityTable.h"
 
 
-@interface ActivityDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ActivityDetailViewController : UIViewController
 {
-    BOOL _reloading;
-    //EGORefreshTableHeaderView *_refreshHeaderView;
-    NSData *ActivityBigImgURL,*ActivityLogo;
-    NSString *ActivityTitle,*ActivityOrganizationName,*ActivityOriginatorName,*ActivityContent,*ActivityPlace,*ActivityPlaceXYZ,*ActivityTime,*ActivityDuration,*ActivityPeopleMAX,*ActivityPeopleNumber;
+    
 }
 
 
+@property (weak, nonatomic) IBOutlet UIView *ATableContainer;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *JionButton;
 @property NSInteger Activity_Id;
-@property (weak, nonatomic) IBOutlet UITableView *ActivityDetailView;
-@property BOOL ImgCellLoaded;
 @property NSMutableData *ResultData;
+@property NSString *PostData;
 
 
-
-/*- (void)reloadTableViewDataSource;
-- (void)doneLoadingTableViewData;*/
-- (void)ProcessData;
-
-
+-(void)ReceiveSuccess;
 @end
