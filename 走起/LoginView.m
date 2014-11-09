@@ -18,7 +18,6 @@
 @implementation LoginView
 
 @synthesize txtPaswd;
-@synthesize txtUser;
 @synthesize act;
 @synthesize navtitle;
 @synthesize loginData;
@@ -33,7 +32,7 @@
 
 -(void)tapOnce//手势方法
 {
-    [self.txtUser resignFirstResponder];
+    [self.txtEmail resignFirstResponder];
     [self.txtPaswd resignFirstResponder];
 }
 
@@ -64,11 +63,11 @@
     [self.act startAnimating];
     self.navtitle.title = @"请稍候...";
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:txtUser.text forKey:@"Username"];
-    [dic setValue:txtPaswd.text forKey:@"Password"];
+    [dic setValue:self.txtEmail.text forKey:@"Email"];
+    [dic setValue:self.txtPaswd.text forKey:@"Password"];
     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error: nil];
     loginData = [NSMutableData alloc];
-    HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/test.php" postData:data resultData:loginData sender:self onSuccess:@selector(loginFinished) onError:@selector(loginError)];
+    HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://localhost/login.php" postData:data resultData:loginData sender:self onSuccess:@selector(loginFinished) onError:@selector(loginError)];
     [post Run];
 }
 
@@ -77,7 +76,7 @@
     NSString *recvStr = [[NSString alloc]initWithData:self.loginData encoding:NSUTF8StringEncoding];
     NSLog(@"%@", recvStr);
     
-    if ([recvStr  isEqual: @""]){
+    if (self.loginData.length==0){
         navtitle.title = @"用户登录";
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"用户名或密码错误" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
         [alert show];
@@ -86,6 +85,7 @@
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.loginData options:NSJSONReadingMutableLeaves error: nil];
         NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
         [localData setObject:[json objectForKey:@"token"] forKey:@"token"];
+        [localData setObject:self.txtEmail.text forKey:@"Email"];
         [localData synchronize];
         [self performSegueWithIdentifier:@"logged" sender:nil];
     }
@@ -104,6 +104,8 @@
     [self tapBackground];
     NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
     [localData removeObjectForKey:@"token"];
+    [localData removeObjectForKey:@"Email"];
+    [localData synchronize];
 }
 
 @end

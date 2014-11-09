@@ -44,6 +44,7 @@ clsOrg *org;
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"org" postData:json resultData:rData sender:self onSuccess:@selector(orgQuited) onError:@selector(networkErr)];
     [post Run];
+    
 }
 
 -(void)orgQuited{
@@ -61,7 +62,7 @@ clsOrg *org;
     [dic setValue:user forKey:@"Username"];
     [dic setValue:token forKey:@"Token"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/org.php" postData:json resultData:orgData sender:self onSuccess:@selector(gotOrgs) onError:@selector(networkErr)];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/myorg.php" postData:json resultData:orgData sender:self onSuccess:@selector(gotOrgs) onError:@selector(networkErr)];
     [post Run];
 }
 
@@ -119,7 +120,7 @@ clsOrg *org;
     user=[local objectForKey:@"Username"];
     token=[Common getToken];
     [self refreshOrgs];
-    self.tblOrgs.editing=NO;
+    //self.tblOrgs.editing=NO;
 }
 
 @end

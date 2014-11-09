@@ -20,7 +20,6 @@
 
 
 @interface RegisterView : UIViewController{
-    IBOutlet UITextField *txtUser;
     IBOutlet UITextField *txtPaswd;
     IBOutlet UITextField *txtEmail;
     IBOutlet UITextField *txtSid;
@@ -30,7 +29,6 @@
 
 }
 
-@property UITextField *txtUser;
 @property UITextField *txtPaswd;
 @property UITextField *txtEmail;
 @property UITextField *txtSid;

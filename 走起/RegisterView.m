@@ -18,7 +18,6 @@
 @implementation RegisterView
 
 @synthesize txtPaswd;
-@synthesize txtUser;
 @synthesize txtEmail;
 @synthesize txtSid;
 @synthesize txtSpwd;
@@ -151,7 +150,6 @@
 -(IBAction)Register:(id)sender{
     [self disableAll];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:txtUser.text forKey:@"Username"];
     [dic setValue:txtPaswd.text forKey:@"Password"];
     [dic setValue:txtEmail.text forKey:@"Email"];
     [dic setValue:txtSid.text forKey:@"sID"];
@@ -169,7 +167,6 @@
 }
 
 -(void)disableAll{
-    txtUser.enabled = NO;
     txtPaswd.enabled = NO;
     txtEmail.enabled = NO;
     txtSid.enabled = NO;
@@ -177,7 +174,6 @@
 }
 
 -(void)enableAll{
-    txtUser.enabled = YES;
     txtPaswd.enabled = YES;
     txtEmail.enabled = YES;
     txtSid.enabled = YES;
@@ -201,15 +197,7 @@
             [self performSegueWithIdentifier:@"registed" sender:self];
             break;
         }
-        
-        case _REG_USER_EXIST_:{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"用户名已存在" delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
-            [alert show];
-            txtUser.text = @"";
-            [txtUser becomeFirstResponder];
-            break;
-        }
-        
+            
         case _REG_EMAIL_EXIST_:{
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"该E-Mail地址已被使用" delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
             [alert show];
@@ -249,7 +237,6 @@
 
 -(void)tapOnce//手势方法
 {
-    [self.txtUser resignFirstResponder];
     [self.txtPaswd resignFirstResponder];
     [self.txtEmail resignFirstResponder];
     [self.txtSid resignFirstResponder];
@@ -296,10 +283,16 @@
     txtSid.enabled = NO;
     txtSpwd.enabled = NO;
     txtSchool.delegate = self;
+    CGPoint point=self.txtSchool.frame.origin;
+    CGRect frame=CGRectMake(point.x, point.y-182, 200, 180);
+    self.schoolSearchView=[[UITableView alloc]initWithFrame:frame style:UITableViewStylePlain];
+    self.schoolSearchView.layer.borderWidth=1;
+    self.schoolSearchView.layer.borderColor=[[UIColor blackColor]CGColor];
+    [self.view addSubview:self.schoolSearchView];
     [self setSearchControllerHidden:YES];
     self.dataList = [[NSMutableArray alloc]init];
-    schoolSearchView.dataSource = self;
-    schoolSearchView.delegate = self;
+    self.schoolSearchView.dataSource = self;
+    self.schoolSearchView.delegate = self;
     [self initLoc];
     //schoolSearchView = [[schoolSearchViewController alloc]initWithStyle:UITableViewStylePlain];
     //[schoolSearchView.view setFrame:CGRectMake(30, 40, 200, 0)];
@@ -313,7 +306,7 @@
         [UIView setAnimationDuration:0];
     else
         [UIView setAnimationDuration:0.5];
-    [schoolSearchView setAlpha:alpha];
+    [self.schoolSearchView setAlpha:alpha];
     [UIView commitAnimations];
 }
 

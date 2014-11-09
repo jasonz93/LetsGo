@@ -12,13 +12,12 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginView : UIViewController{
-    IBOutlet UITextField *txtUser;
     IBOutlet UITextField *txtPaswd;
     IBOutlet UIActivityIndicatorView *act;
     IBOutlet UINavigationItem *navtitle;
     
 }
-@property (nonatomic, retain) UITextField *txtUser;
+@property (nonatomic, retain) IBOutlet UITextField *txtEmail;
 @property (nonatomic, retain) UITextField *txtPaswd;
 @property NSMutableData *loginData;
 @property (retain) UIActivityIndicatorView *act;

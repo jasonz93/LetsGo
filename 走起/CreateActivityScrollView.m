@@ -97,7 +97,7 @@ NSString *user;
 
 -(void)uploadPic:(UIImage *)image result:(NSMutableData *)result{
     NSData *picData=UIImageJPEGRepresentation(image, 1.0);
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"upload" postData:picData resultData:result sender:self onSuccess:@selector(uploadDone) onError:@selector(errOrgData)];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/upload.php" postData:picData resultData:result sender:self onSuccess:@selector(uploadDone) onError:@selector(errOrgData)];
     [post Run];
 }
 
@@ -106,7 +106,7 @@ NSString *user;
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     if (picker == logoPicker){
         self.imgActLogo.image=image;
         logoUrlData=[[NSMutableData alloc]init];
@@ -231,8 +231,7 @@ NSString *user;
 
 -(void)initScrollView{
     NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
-    [local setObject:@"jasonz93" forKey:@"Username"];
-    user=[local objectForKey:@"Username"];
+    user=[local objectForKey:@"Email"];
     orgData=[[NSMutableData alloc]init];
     orgDataList=[[NSMutableArray alloc]init];
     HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/search.php" postData:[user dataUsingEncoding:NSUTF8StringEncoding] resultData:orgData sender:self onSuccess:@selector(gotOrgData) onError:@selector(errOrgData)];

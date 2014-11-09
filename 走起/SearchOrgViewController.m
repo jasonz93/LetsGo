@@ -52,8 +52,9 @@ BOOL shouldTouch;
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if (searchText.length>0){
-        
-        //[self.tblOrgs reloadData];
+        searchData=[[NSMutableData alloc]init];
+        HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/searchorg.php" postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
+        [post Run];
     }
 }
 
@@ -71,11 +72,7 @@ BOOL shouldTouch;
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     shouldTouch=NO;
-    if (searchBar.text.length>0){
-        searchData=[[NSMutableData alloc]init];
-        HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/org.php" postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
-        [post Run];
-    }
+    
 }
 
 -(void)searchDone{

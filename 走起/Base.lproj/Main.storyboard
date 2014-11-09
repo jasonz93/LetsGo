@@ -64,6 +64,57 @@
             </objects>
             <point key="canvasLocation" x="1519" y="1428"/>
         </scene>
+        <!--发起活动-->
+        <scene sceneID="nfV-RV-OlD">
+            <objects>
+                <viewController id="0xt-Gc-dCq" customClass="CreateActivityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iPO-by-ghw"/>
+                        <viewControllerLayoutGuide type="bottom" id="GIT-5y-zuo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m09-2e-mr4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RIK-GX-B8v" customClass="CreateActivityScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Asw-As-CX6">
+                                        <rect key="frame" x="41" y="91" width="130" height="130"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giI-V7-aYQ">
+                                        <rect key="frame" x="83" y="240" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="getLogo:" destination="RIK-GX-B8v" eventType="touchUpInside" id="2l3-Ul-J9O"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <connections>
+                                    <outlet property="controller" destination="0xt-Gc-dCq" id="KaS-T5-vA4"/>
+                                    <outlet property="imgActLogo" destination="Asw-As-CX6" id="Zel-Bq-Dhm"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="RIK-GX-B8v" secondAttribute="bottom" id="4Pd-zq-Mcv"/>
+                            <constraint firstItem="RIK-GX-B8v" firstAttribute="top" secondItem="m09-2e-mr4" secondAttribute="top" id="LCU-tU-J4N"/>
+                            <constraint firstItem="RIK-GX-B8v" firstAttribute="leading" secondItem="m09-2e-mr4" secondAttribute="leading" id="hZR-rs-krL"/>
+                            <constraint firstAttribute="trailing" secondItem="RIK-GX-B8v" secondAttribute="trailing" id="kTL-c5-E9l"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="发起活动" id="EJO-WB-mnd"/>
+                    <connections>
+                        <outlet property="scrollView" destination="RIK-GX-B8v" id="ZQ4-sv-WKX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VqY-hH-x96" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2268" y="732"/>
+        </scene>
         <!--加入群组-->
         <scene sceneID="gyx-6n-8FV">
             <objects>
@@ -160,10 +211,41 @@
                     <view key="view" contentMode="scaleToFill" id="eoe-2S-Chl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N09-64-C5f">
+                                <rect key="frame" x="59" y="115" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ft-KB-Xql">
+                                <rect key="frame" x="59" y="163" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3g9-yM-K1j">
+                                <rect key="frame" x="59" y="214" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SBg-yi-IQI">
+                                <rect key="frame" x="59" y="263" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LiN-F8-uBB">
+                                <rect key="frame" x="59" y="300" width="214" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="用户注册" id="1Ez-ht-w1O"/>
                     <connections>
+                        <outlet property="txtEmail" destination="N09-64-C5f" id="Yps-se-IaJ"/>
+                        <outlet property="txtPaswd" destination="9ft-KB-Xql" id="9Mp-Y7-WR0"/>
+                        <outlet property="txtSchool" destination="LiN-F8-uBB" id="aqe-OW-IT1"/>
+                        <outlet property="txtSid" destination="3g9-yM-K1j" id="aHR-PP-lAg"/>
+                        <outlet property="txtSpwd" destination="SBg-yi-IQI" id="oTh-jf-ccf"/>
                         <segue destination="49e-Tb-3d3" kind="modal" id="mv4-C7-6O4"/>
                     </connections>
                 </viewController>
@@ -235,8 +317,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="txtEmail" destination="6UN-wC-crl" id="Pb5-ae-feU"/>
                         <outlet property="txtPaswd" destination="p7w-tp-Vbr" id="tbu-El-lr6"/>
-                        <outlet property="txtUser" destination="6UN-wC-crl" id="PW0-ch-69X"/>
                         <segue destination="49e-Tb-3d3" kind="modal" identifier="logged" id="rBH-de-R4k"/>
                     </connections>
                 </viewController>
@@ -420,13 +502,20 @@
                             <constraint firstItem="1a7-sJ-jg2" firstAttribute="leading" secondItem="nPC-vI-V98" secondAttribute="leading" id="dgW-8W-5JF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JDn-GN-Znq"/>
+                    <navigationItem key="navigationItem" id="JDn-GN-Znq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="b4P-jj-oor">
+                            <connections>
+                                <segue destination="0xt-Gc-dCq" kind="push" id="csc-EV-nA3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="Activity_Info" destination="teg-F4-hyj" id="Yhb-aC-7cM"/>
                         <outlet property="User_Good_Reputation" destination="Vr8-wc-Ajg" id="KFz-Gs-cKE"/>
                         <outlet property="User_Icon" destination="v55-eU-9HZ" id="wYc-te-X5S"/>
                         <outlet property="User_Name" destination="T7a-ly-w8P" id="vAU-m8-we1"/>
                         <outlet property="User_School" destination="fu3-fq-lV1" id="ocS-wb-uvn"/>
+                        <segue destination="0xt-Gc-dCq" kind="push" id="c9M-5Q-GMc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q8w-Jn-XoZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -557,5 +646,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="rBH-de-R4k"/>
         <segue reference="jrn-Rd-rfp"/>
+        <segue reference="csc-EV-nA3"/>
     </inferredMetricsTieBreakers>
 </document>
