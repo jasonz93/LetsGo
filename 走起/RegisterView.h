@@ -40,6 +40,9 @@
 @property UITableView *schoolSearchView;
 @property NSMutableArray *dataList;
 @property NSMutableData *searchData;
+@property IBOutlet UIButton *btnReg;
+@property UIImagePickerController *picker;
+@property IBOutlet UIImageView *imgIcon;
 
 //-(void)stest;
 

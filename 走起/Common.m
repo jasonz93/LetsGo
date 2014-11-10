@@ -28,6 +28,10 @@
     NSString *destDateString = [dateFormatter stringFromDate:date];
     return destDateString;
 }
+/*
++(NSString *)getUrlString:(NSString *)path{
+    
+}*/
 
 @end
 
@@ -35,11 +39,21 @@
 
 -(id)initWithData:(NSDictionary *)dic{
     //NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-    self.orgID=[dic objectForKey:@"id"];
-    self.name=[dic objectForKey:@"name"];
-    self.content=[dic objectForKey:@"content"];
-    self.logoUrl=[dic objectForKey:@"logoUrl"];
+    self.orgID=[[dic objectForKey:@"id"]integerValue];
+    self.name=[dic objectForKey:@"organization_name"];
+    self.content=[dic objectForKey:@"organization_content"];
+    self.logoUrl=[dic objectForKey:@"organization_logo"];
     self.isJoined=[[dic objectForKey:@"isJoined"]boolValue];
+    return self;
+}
+
+@end
+
+@implementation clsSchool
+
+-(id)initWithData:(NSDictionary *)dic{
+    self.schoolID=[[dic objectForKey:@"school_id"]integerValue];
+    self.name=[dic objectForKey:@"name"];
     return self;
 }
 

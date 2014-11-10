@@ -36,11 +36,11 @@ clsOrg *org;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSUInteger row=[indexPath row];
+    NSUInteger row=[indexPath section];
     org=[orgDataList objectAtIndex:row];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:@"quit" forKey:@"action"];
-    [dic setValue:org.orgID forKey:@"id"];
+    [dic setValue:[NSNumber numberWithUnsignedInteger:org.orgID] forKey:@"id"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"org" postData:json resultData:rData sender:self onSuccess:@selector(orgQuited) onError:@selector(networkErr)];
     [post Run];
@@ -62,17 +62,17 @@ clsOrg *org;
     [dic setValue:user forKey:@"Username"];
     [dic setValue:token forKey:@"Token"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/myorg.php" postData:json resultData:orgData sender:self onSuccess:@selector(gotOrgs) onError:@selector(networkErr)];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/organization_list.txt" postData:json resultData:orgData sender:self onSuccess:@selector(gotOrgs) onError:@selector(networkErr)];
     [post Run];
 }
 
 -(void)gotOrgs{
     if (orgData.length>0) {
         [orgDataList removeAllObjects];
-        NSMutableDictionary *dic=[NSJSONSerialization JSONObjectWithData:orgData options:NSJSONReadingMutableLeaves error:nil];
-        NSInteger count=[[dic objectForKey:@"Count"]integerValue];
+        NSMutableArray *keys=[NSJSONSerialization JSONObjectWithData:orgData options:NSJSONReadingMutableLeaves error:nil];
+        NSInteger count=keys.count;
         for (int i=0; i<count; i++) {
-            [orgDataList addObject:[[clsOrg alloc]initWithData:[dic objectForKey:[NSString stringWithFormat:@"%d",i ]]]];
+            [orgDataList addObject:[[clsOrg alloc]initWithData:[keys objectAtIndex:i]]];
         }
         [self.tblOrgs reloadData];
     }
@@ -87,29 +87,45 @@ clsOrg *org;
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO animated:YES];
     OrgDetailViewController *view=[self.storyboard instantiateViewControllerWithIdentifier:@"OrgDetailView"];
-    NSUInteger row=[indexPath row];
+    NSUInteger row=[indexPath section];
     view.org=[orgDataList objectAtIndex:row];
     [self.navigationController pushViewController:view animated:YES];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return orgDataList.count;
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    NSUInteger row=[indexPath row];
+    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    NSUInteger row=[indexPath section];
     clsOrg *org=[orgDataList objectAtIndex:row];
     NSURL *url=[NSURL URLWithString:org.logoUrl];
     UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     cell.imageView.image=image;
     cell.textLabel.text=org.name;
     cell.detailTextLabel.text=org.content;
+    cell.layer.borderWidth=1;
+    cell.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *header=[[UIView alloc]init];
+    header.backgroundColor=[UIColor clearColor];
+    return header;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 150;
 }
 
 -(void)viewDidLoad{

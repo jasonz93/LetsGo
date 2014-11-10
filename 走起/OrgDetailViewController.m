@@ -29,7 +29,7 @@ NSMutableData *rData;
         sel=@selector(orgJoined);
         [dic setValue:@"join" forKey:@"action"];
     }
-    [dic setValue:self.org.orgID forKey:@"id"];
+    [dic setValue:[NSNumber numberWithUnsignedInteger:self.org.orgID] forKey:@"id"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
     HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"org" postData:json resultData:rData sender:self onSuccess:sel onError:@selector(networkErr)];
     [post Run];
@@ -60,12 +60,12 @@ NSMutableData *rData;
 
 -(void)refreshBtn{
     if (self.org.isJoined) {
-        self.btnJoin.title=@"退出";
+        [self.btnJoin setTitle:@"退出" forState:UIControlStateNormal];
         self.btnJoin.tintColor=[UIColor redColor];
     }
     else
     {
-        self.btnJoin.title=@"加入";
+        [self.btnJoin setTitle:@"加入" forState:UIControlStateNormal];
         self.btnJoin.tintColor=defaultColor;
     }
 }
@@ -77,6 +77,10 @@ NSMutableData *rData;
     NSURL *url=[NSURL URLWithString:self.org.logoUrl];
     UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     self.imgOrgLogo.image=image;
+    [self.imgOrgLogo.layer setMasksToBounds:YES];
+    [self.imgOrgLogo.layer setCornerRadius:75];
+    [self.btnJoin.layer setBorderWidth:1];
+    [self.btnJoin.layer setBorderColor:[[UIColor lightGrayColor]CGColor]];
     [self refreshBtn];
 }
 

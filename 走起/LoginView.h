@@ -19,6 +19,7 @@
 }
 @property (nonatomic, retain) IBOutlet UITextField *txtEmail;
 @property (nonatomic, retain) UITextField *txtPaswd;
+@property IBOutlet UIButton *btnLogin;
 @property NSMutableData *loginData;
 @property (retain) UIActivityIndicatorView *act;
 @property (retain) UINavigationItem *navtitle;

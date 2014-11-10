@@ -10,7 +10,7 @@
 #import "LoginView.h"
 #import "Common.h"
 
-@interface LoginView ()
+@interface LoginView ()<UITextFieldDelegate>
     
 
 @end
@@ -36,9 +36,7 @@
     [self.txtPaswd resignFirstResponder];
 }
 
--(IBAction)textFieldDidBeginEditing:(id)sender
-{
-    UITextField * textField = (UITextField *)sender;
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
     CGRect frame = textField.frame;
     int offset = frame.origin.y + 32 - (self.view.frame.size.height - 225.0);//键盘高度216
     
@@ -53,19 +51,25 @@
     [UIView commitAnimations];
 }
 
--(IBAction)textFieldDidEndEditing:(id)sender
-{
+-(void)textFieldDidEndEditing:(UITextField *)textField{
     self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self tapOnce];
+    return YES;
+}
 
+//login:/users/sign_in
 -(IBAction)Login:(id)sender{
     [self.act startAnimating];
     self.navtitle.title = @"请稍候...";
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:self.txtEmail.text forKey:@"Email"];
-    [dic setValue:self.txtPaswd.text forKey:@"Password"];
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error: nil];
+    [dic setValue:self.txtEmail.text forKey:@"email"];
+    [dic setValue:self.txtPaswd.text forKey:@"password"];
+    NSMutableDictionary *request=[[NSMutableDictionary alloc]init];
+    [request setObject:dic forKey:@"user"];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error: nil];
     loginData = [NSMutableData alloc];
     HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://localhost/login.php" postData:data resultData:loginData sender:self onSuccess:@selector(loginFinished) onError:@selector(loginError)];
     [post Run];
@@ -84,8 +88,9 @@
     else{
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.loginData options:NSJSONReadingMutableLeaves error: nil];
         NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-        [localData setObject:[json objectForKey:@"token"] forKey:@"token"];
-        [localData setObject:self.txtEmail.text forKey:@"Email"];
+        [localData setObject:[json objectForKey:@"user_token"] forKey:@"token"];
+        [localData setObject:self.txtEmail.text forKey:@"email"];
+        [localData setObject:[json objectForKey:@"user_id"] forKey:@"user_id"];
         [localData synchronize];
         [self performSegueWithIdentifier:@"logged" sender:nil];
     }
@@ -97,15 +102,20 @@
     [alert show];
     navtitle.title = @"用户登录";
 }
-
+//登出/uesrs/sign_out?user_token=...
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self tapBackground];
+    self.txtEmail.delegate=self;
+    self.txtPaswd.delegate=self;
     NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-    [localData removeObjectForKey:@"token"];
-    [localData removeObjectForKey:@"Email"];
+    [localData removeObjectForKey:@"user_token"];
+    [localData removeObjectForKey:@"email"];
+    [localData removeObjectForKey:@"user_id"];
     [localData synchronize];
+    [self.btnLogin.layer setMasksToBounds:YES];
+    [self.btnLogin.layer setCornerRadius:8.0];
 }
 
 @end

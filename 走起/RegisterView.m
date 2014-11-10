@@ -10,7 +10,7 @@
 #import "RegisterView.h"
 #import "Common.h"
 
-@interface RegisterView()<CLLocationManagerDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface RegisterView()<CLLocationManagerDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
     
 
 @end
@@ -29,9 +29,65 @@
 @synthesize dataList;
 @synthesize searchData;
 
+NSMutableData *iconUrlData;
+NSString *iconUrl;
+
+
+-(BOOL)canCommit{
+    if ([self.txtEmail.text isEqualToString:@""])
+        return NO;
+    if ([self.txtPaswd.text isEqualToString:@""])
+        return NO;
+    if ([self.txtSid.text isEqualToString:@""])
+        return NO;
+    if ([self.txtSpwd.text isEqualToString:@""])
+        return NO;
+    if ([self.txtSchool.text isEqualToString:@""]) {
+        return NO;
+    }
+    if (iconUrlData == nil)
+        return NO;
+    else
+    {
+        iconUrl=[[NSString alloc]initWithData:iconUrlData encoding:NSUTF8StringEncoding];
+        if ([iconUrl isEqualToString:@""])
+            return NO;
+    }
+    return YES;
+}
+
+-(void)uploadPic:(UIImage *)image result:(NSMutableData *)result{
+    NSData *picData=UIImageJPEGRepresentation(image, 1.0);
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/upload.php" postData:picData resultData:result sender:self onSuccess:@selector(uploadDone) onError:@selector(networkErr)];
+    [post Run];
+}
+
+-(void)uploadDone{
+    [self.btnReg setEnabled:[self canCommit]];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    self.imgIcon.image=image;
+    iconUrlData=[[NSMutableData alloc]init];
+    [self uploadPic:image result:iconUrlData];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction)getIcon:(id)sender{
+    self.picker=[[UIImagePickerController alloc]init];
+    self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    self.picker.mediaTypes=[NSArray arrayWithObjects:@"public.image", nil];
+    self.picker.allowsEditing=YES;
+    
+    self.picker.delegate=self;
+    [self presentViewController:self.picker animated:YES completion:nil];
+}
+
+
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     NSLog(@"did end");
-    
+    [self.btnReg setEnabled:[self canCommit]];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -64,22 +120,18 @@
 
 -(void)searchSchool:(NSString *)name{
     self.searchData = [[NSMutableData alloc]init];
-    HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/search.php" postData:[name dataUsingEncoding:NSUTF8StringEncoding] resultData:self.searchData sender:self onSuccess:@selector(searchDone) onError:@selector(searchError)];
+    HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://localhost/school.txt" postData:[name dataUsingEncoding:NSUTF8StringEncoding] resultData:self.searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
     [post Run];
 }
 
 -(void)searchDone{
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:self.searchData options:NSJSONReadingMutableLeaves error:nil];
-    NSInteger count = [[dic objectForKey:@"Count"]integerValue];
+    NSArray *keys = [NSJSONSerialization JSONObjectWithData:self.searchData options:NSJSONReadingMutableLeaves error:nil];
+    NSInteger count = keys.count;
     [self.dataList removeAllObjects];
     for (int i=0; i<count; i++){
-        [self.dataList addObject:[dic objectForKey:[NSString stringWithFormat:@"%d",i]]];
+        [self.dataList addObject:[[clsSchool alloc]initWithData:[keys objectAtIndex:i]]];
     }
     [schoolSearchView reloadData];
-}
-
--(void)searchError{
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,7 +142,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
     }
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [self.dataList objectAtIndex:row];
+    clsSchool *sch=[self.dataList objectAtIndex:row];
+    cell.textLabel.text = sch.name;
     //cell.detailTextLabel.text = @"详细信息";
     return cell;
 }
@@ -127,7 +180,7 @@
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         self.locData = [NSMutableData alloc];
         NSLog(@"%f,%f",loc.coordinate.latitude,loc.coordinate.longitude);
-        HTTPPost *pLoc = [[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/loc.php" postData:data resultData:self.locData sender:self onSuccess:@selector(gotSchool) onError:@selector(errSchool)];
+        HTTPPost *pLoc = [[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/loc.php" postData:data resultData:self.locData sender:self onSuccess:@selector(gotSchool) onError:@selector(networkErr)];
         [pLoc Run];
         [self.locMgr stopUpdatingLocation];
     }
@@ -142,42 +195,39 @@
     txtSchool.text = [dic objectForKey:@"SchoolName"];
 }
 
--(void)errSchool{
+-(void)networkErr{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"网络错误，请检查网络连接。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
 }
-
+//reg:/users.json
 -(IBAction)Register:(id)sender{
-    [self disableAll];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:txtPaswd.text forKey:@"Password"];
-    [dic setValue:txtEmail.text forKey:@"Email"];
-    [dic setValue:txtSid.text forKey:@"sID"];
-    [dic setValue:txtSpwd.text forKey:@"sPwd"];
-    [dic setValue:txtSchool.text forKey:@"School"];
+    [dic setValue:txtPaswd.text forKey:@"password"];
+    [dic setValue:txtPaswd.text forKey:@"password_confirmation"];
+    [dic setValue:txtEmail.text forKey:@"email"];
+    [dic setValue:txtSid.text forKey:@"student_id"];
+    [dic setValue:txtSpwd.text forKey:@"student_pwd"];
+    clsSchool *sch;
+    int i;
+    for (i=0; i<self.dataList.count; i++) {
+        sch=[self.dataList objectAtIndex:i];
+        if ([sch.name isEqualToString:txtSchool.text]) {
+            [dic setValue:[NSNumber numberWithInteger:sch.schoolID] forKey:@"school_id"];
+            break;
+        }
+    }
+    if (i==self.dataList.count) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"请选择学校" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    [dic setValue:iconUrl forKey:@"user_logo"];
     self.registerData = [NSMutableData alloc];
     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error: nil];
+    NSString *str=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",str);
     HTTPPost *pRegister = [[HTTPPost alloc]initWithArgs:@"" postData:data resultData:self.registerData sender:self onSuccess:@selector(registerFinished) onError:@selector(registerError)];
     [pRegister Run];
-}
-
--(IBAction)enablePerson:(id)sender{
-    txtSid.enabled = YES;
-    txtSpwd.enabled = YES;
-}
-
--(void)disableAll{
-    txtPaswd.enabled = NO;
-    txtEmail.enabled = NO;
-    txtSid.enabled = NO;
-    txtSpwd.enabled = NO;
-}
-
--(void)enableAll{
-    txtPaswd.enabled = YES;
-    txtEmail.enabled = YES;
-    txtSid.enabled = YES;
-    txtSpwd.enabled = YES;
 }
 
 -(void)registerFinished{
@@ -186,7 +236,6 @@
     //传输成功
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.registerData options:NSJSONReadingMutableLeaves error:nil];
     int status = [[json objectForKey:@"status"]intValue];
-    [self enableAll];
     switch (status) {
         case _REG_SUCCESS_:{
             NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
@@ -224,7 +273,6 @@
     //网络错误
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: nil message:@"网络错误，请检查网络连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
-    [self enableAll];
 }
 
 -(void)tapBackground //在ViewDidLoad中调用
@@ -254,10 +302,8 @@
         return YES;
 }
 
--(IBAction)textFieldDidBeginEditing:(id)sender
-{
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
     NSLog(@"ib begin");
-    UITextField * textField = (UITextField *)sender;
     CGRect frame = textField.frame;
     int offset = frame.origin.y + 32 - (self.view.frame.size.height - 225.0);//键盘高度216
     
@@ -272,17 +318,24 @@
     [UIView commitAnimations];
 }
 
--(IBAction)textFieldDidEndEditing:(id)sender
-{
+-(void)textFieldDidEndEditing:(UITextField *)textField{
     self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    [self.btnReg setEnabled:[self canCommit]];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self tapOnce];
+    return YES;
 }
 
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self tapBackground];
-    txtSid.enabled = NO;
-    txtSpwd.enabled = NO;
     txtSchool.delegate = self;
+    txtEmail.delegate=self;
+    txtPaswd.delegate=self;
+    txtSid.delegate=self;
+    txtSpwd.delegate=self;
     CGPoint point=self.txtSchool.frame.origin;
     CGRect frame=CGRectMake(point.x, point.y-182, 200, 180);
     self.schoolSearchView=[[UITableView alloc]initWithFrame:frame style:UITableViewStylePlain];
@@ -293,6 +346,9 @@
     self.dataList = [[NSMutableArray alloc]init];
     self.schoolSearchView.dataSource = self;
     self.schoolSearchView.delegate = self;
+    self.btnReg.layer.borderWidth=1;
+    self.btnReg.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    [self.btnReg setEnabled:[self canCommit]];
     [self initLoc];
     //schoolSearchView = [[schoolSearchViewController alloc]initWithStyle:UITableViewStylePlain];
     //[schoolSearchView.view setFrame:CGRectMake(30, 40, 200, 0)];

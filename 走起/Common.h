@@ -33,11 +33,20 @@
 
 @interface clsOrg : NSObject
 
-@property NSString *orgID;
+@property NSInteger orgID;
 @property NSString *name;
 @property NSString *content;
 @property NSString *logoUrl;
 @property BOOL isJoined;
+
+-(id)initWithData:(NSDictionary *)dic;
+
+@end
+
+@interface clsSchool : NSObject
+
+@property NSInteger schoolID;
+@property NSString *name;
 
 -(id)initWithData:(NSDictionary *)dic;
 

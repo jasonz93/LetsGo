@@ -25,35 +25,51 @@ BOOL shouldTouch;
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO animated:YES];
     OrgDetailViewController *view=[self.storyboard instantiateViewControllerWithIdentifier:@"OrgDetailView"];
-    NSUInteger row=[indexPath row];
+    NSUInteger row=[indexPath section];
     view.org=[orgList objectAtIndex:row];
     [self.navigationController pushViewController:view animated:YES];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return orgList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    NSUInteger row=[indexPath row];
+    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    NSUInteger row=[indexPath section];
     clsOrg *org=[orgList objectAtIndex:row];
     NSURL *url=[NSURL URLWithString:org.logoUrl];
     UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     cell.textLabel.text=org.name;
     cell.detailTextLabel.text=org.content;
     cell.imageView.image=image;
+    cell.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    cell.layer.borderWidth=1;
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 150;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return orgList.count;
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *header=[[UIView alloc]init];
+    header.backgroundColor=[UIColor clearColor];
+    return header;
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if (searchText.length>0){
         searchData=[[NSMutableData alloc]init];
-        HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/searchorg.php" postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
+        HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/organization_list.txt" postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
         [post Run];
     }
 }
@@ -77,10 +93,10 @@ BOOL shouldTouch;
 
 -(void)searchDone{
     [orgList removeAllObjects];
-    NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:searchData options:NSJSONReadingMutableLeaves error:nil];
-    NSInteger count=[[dic objectForKey:@"Count"]integerValue];
+    NSArray *keys=[NSJSONSerialization JSONObjectWithData:searchData options:NSJSONReadingMutableLeaves error:nil];
+    NSInteger count=keys.count;
     for (int i=0; i<count; i++) {
-        [orgList addObject:[[clsOrg alloc]initWithData:[dic objectForKey:[NSString stringWithFormat:@"%d",i]]]];
+        [orgList addObject:[[clsOrg alloc]initWithData:[keys objectAtIndex:i]]];
     }
     [self.tblOrgs reloadData];
 }
@@ -109,6 +125,8 @@ BOOL shouldTouch;
     self.tblOrgs.dataSource=self;
     self.txtSearch.delegate=self;
     [self tapBackground];
+    self.tblOrgs.sectionHeaderHeight=10;
+    self.tblOrgs.rowHeight=150;
 }
 
 @end

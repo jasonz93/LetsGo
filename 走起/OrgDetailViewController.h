@@ -18,7 +18,7 @@
 @property IBOutlet UITextField *txtOrgName;
 @property IBOutlet UITextView *txtOrgContent;
 @property IBOutlet UIImageView *imgOrgLogo;
-@property IBOutlet UIBarButtonItem  *btnJoin;
+@property IBOutlet UIButton  *btnJoin;
 
 @end
 
