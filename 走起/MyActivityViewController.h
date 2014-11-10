@@ -7,9 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GetInfo.h"
+#import "ActivityIntroCell.h"
+#include "ActivityDetailViewController.h"
+@interface MyActivityViewController : UITableViewController{
+    
+}
 
-@interface MyActivityViewController : UITableViewController
+@property NSArray *AList;
+@property NSMutableData *RevData;
+@property BOOL CellInited;
+@property (strong, nonatomic) IBOutlet UITableView *ActivityList;
 
 
+
+-(void) ProcessData;
+-(void) GetMyAList;
+-(void) initRefreshControl;
 @end
 
