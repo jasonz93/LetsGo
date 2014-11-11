@@ -10,9 +10,9 @@
 #define ___RegisterView_h
 
 #define _REG_SUCCESS_ 0
-#define _REG_USER_EXIST_ 1
 #define _REG_PERSON_EXIST_ 2
-#define _REG_EMAIL_EXIST_ 3
+#define _REG_EMAIL_EXIST_ 1
+#define _REG_PASWD_SHORT_ 3
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>

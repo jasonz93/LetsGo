@@ -11,6 +11,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "GetInfo.h"
 
 @interface MyOrgViewController : UIViewController{
     IBOutlet UIBarButtonItem *btnJoinOrg;

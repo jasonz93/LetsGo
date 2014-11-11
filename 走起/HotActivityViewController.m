@@ -75,7 +75,9 @@
 
 -(void) GetMyAList{
     self.RevData=[NSMutableData alloc];
-    [[GetInfo alloc]initWithURL:@"http://1.r7test.sinaapp.com/activitylist.json" ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:nil];
+    //NSString *url=[Common getUrlString:@"/organization_list.txt"];
+    NSString *url=@"org";
+    //[[GetInfo alloc]initWithURL:url ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:nil];
 }
 
 -(void) ProcessData{

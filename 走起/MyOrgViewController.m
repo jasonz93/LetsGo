@@ -38,13 +38,8 @@ clsOrg *org;
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger row=[indexPath section];
     org=[orgDataList objectAtIndex:row];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    [dic setValue:@"quit" forKey:@"action"];
-    [dic setValue:[NSNumber numberWithUnsignedInteger:org.orgID] forKey:@"id"];
-    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"org" postData:json resultData:rData sender:self onSuccess:@selector(orgQuited) onError:@selector(networkErr)];
-    [post Run];
-    
+    [Common quitOrg:[[NSNumber alloc] initWithInteger:org.orgID]];
+    [self.tblOrgs reloadData];
 }
 
 -(void)orgQuited{
@@ -55,15 +50,16 @@ clsOrg *org;
         [self refreshOrgs];
     }
 }
-
+//http://localhost:3000/users/1/organizations.json
 -(void)refreshOrgs{
     orgData=[[NSMutableData alloc]init];
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    [dic setValue:user forKey:@"Username"];
-    [dic setValue:token forKey:@"Token"];
-    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/organization_list.txt" postData:json resultData:orgData sender:self onSuccess:@selector(gotOrgs) onError:@selector(networkErr)];
-    [post Run];
+    NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
+    NSString *url=[Common getUrlString:@"/users/"];
+    url=[url stringByAppendingString:[[NSString alloc]initWithFormat:@"%ld",[[local objectForKey:@"user_id"]integerValue]]];
+    url=[url stringByAppendingString:@"/organizations.json"];
+    //NSString *url=[Common getUrlString:@"/organization_list.txt"];
+    GetInfo *get=[[GetInfo alloc]init];
+    [get initWithURL:url ResultData:orgData sender:self OnSuccess:@selector(gotOrgs) OnError:@selector(networkErr)];
 }
 
 -(void)gotOrgs{
@@ -108,6 +104,7 @@ clsOrg *org;
     UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     cell.imageView.image=image;
     cell.textLabel.text=org.name;
+    NSLog(@"%@",org.name);
     cell.detailTextLabel.text=org.content;
     cell.layer.borderWidth=1;
     cell.layer.borderColor=[[UIColor lightGrayColor]CGColor];
@@ -135,8 +132,11 @@ clsOrg *org;
     NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
     user=[local objectForKey:@"Username"];
     token=[Common getToken];
+    self.tblOrgs.backgroundColor=[UIColor groupTableViewBackgroundColor];
     [self refreshOrgs];
-    //self.tblOrgs.editing=NO;
+    self.tblOrgs.editing=YES;
+    //[Common joinOrg:[[NSNumber alloc]initWithInt:4]];
+    //[Common quitOrg:[[NSNumber alloc] initWithInt:1]];
 }
 
 @end

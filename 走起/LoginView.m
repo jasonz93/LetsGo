@@ -67,11 +67,10 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     [dic setValue:self.txtEmail.text forKey:@"email"];
     [dic setValue:self.txtPaswd.text forKey:@"password"];
-    NSMutableDictionary *request=[[NSMutableDictionary alloc]init];
-    [request setObject:dic forKey:@"user"];
-    NSData *data = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error: nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error: nil];
     loginData = [NSMutableData alloc];
-    HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://localhost/login.php" postData:data resultData:loginData sender:self onSuccess:@selector(loginFinished) onError:@selector(loginError)];
+    NSString *url=[Common getUrlString:@"/users/sign_in"];
+    HTTPPost *post = [[HTTPPost alloc]initWithArgs:url postData:data resultData:loginData sender:self onSuccess:@selector(loginFinished) onError:@selector(loginError)];
     [post Run];
 }
 
@@ -88,9 +87,9 @@
     else{
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.loginData options:NSJSONReadingMutableLeaves error: nil];
         NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-        [localData setObject:[json objectForKey:@"user_token"] forKey:@"token"];
+        [localData setObject:[json objectForKey:@"user_token"] forKey:@"user_token"];
         [localData setObject:self.txtEmail.text forKey:@"email"];
-        [localData setObject:[json objectForKey:@"user_id"] forKey:@"user_id"];
+        [localData setInteger:[[json objectForKey:@"user_id"]integerValue] forKey:@"user_id"];
         [localData synchronize];
         [self performSegueWithIdentifier:@"logged" sender:nil];
     }
@@ -110,10 +109,10 @@
     self.txtEmail.delegate=self;
     self.txtPaswd.delegate=self;
     NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-    [localData removeObjectForKey:@"user_token"];
-    [localData removeObjectForKey:@"email"];
-    [localData removeObjectForKey:@"user_id"];
-    [localData synchronize];
+    NSString *token=[localData objectForKey:@"user_token"];
+    if (token) {
+        [self performSegueWithIdentifier:@"logged" sender:self];
+    }
     [self.btnLogin.layer setMasksToBounds:YES];
     [self.btnLogin.layer setCornerRadius:8.0];
 }

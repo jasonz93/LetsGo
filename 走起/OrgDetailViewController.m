@@ -31,7 +31,8 @@ NSMutableData *rData;
     }
     [dic setValue:[NSNumber numberWithUnsignedInteger:self.org.orgID] forKey:@"id"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"org" postData:json resultData:rData sender:self onSuccess:sel onError:@selector(networkErr)];
+    NSString *url=[Common getUrlString:@"org"];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:rData sender:self onSuccess:sel onError:@selector(networkErr)];
     [post Run];
 }
 

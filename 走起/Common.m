@@ -12,7 +12,7 @@
 
 +(NSString *)getToken{
     NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-    return (NSString *)[localData objectForKey:@"token"];
+    return (NSString *)[localData objectForKey:@"user_token"];
 }
 
 +(NSString *)stringFromDate:(NSDate *)date{
@@ -28,10 +28,45 @@
     NSString *destDateString = [dateFormatter stringFromDate:date];
     return destDateString;
 }
-/*
+
 +(NSString *)getUrlString:(NSString *)path{
-    
-}*/
+    NSString *host=@"http://localhost:3000";
+    NSString *url=[host stringByAppendingString:path];
+    return url;
+}
+
++(void)joinOrg:(NSNumber *)ship_id{
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    [dic setValue:ship_id forKey:@"organization_id"];
+    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    NSString *url=[Common getUrlString:@"/organization_userships.json"];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:[[NSMutableData alloc]init] sender:self onSuccess:nil onError:nil];
+    [post Run];
+}
+
++(void)quitOrg:(NSNumber *)ship_id{
+    NSString *str=[Common getUrlString:@"/organizations/"];
+    NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
+    NSString *token=[local objectForKey:@"user_token"];
+    str=[[NSString alloc]initWithFormat:@"%@%ld.json?user_token=%@",str,[ship_id integerValue],token];
+    NSURL *url=[NSURL URLWithString:str];
+    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"DELETE"];
+    NSURLConnection *conn=[[NSURLConnection alloc]initWithRequest:request delegate:nil startImmediately:YES];
+}
+
++(NSData *)jsonProc:(NSData *)data{
+    NSString *str=@"{";
+    NSMutableData *d=[[NSMutableData alloc]initWithData:data];
+    NSData *pat=[str dataUsingEncoding:NSUTF8StringEncoding];
+    const Byte *con=[pat bytes];
+    NSRange r=[d rangeOfData:pat options:NSDataSearchBackwards range:NSMakeRange(0, d.length)];
+    while (r.location!=NSNotFound) {
+        [d replaceBytesInRange:r withBytes:con];
+        r=[d rangeOfData:pat options:NSDataSearchAnchored range:NSMakeRange(0, d.length)];
+    }
+    return d;
+}
 
 @end
 
@@ -43,7 +78,14 @@
     self.name=[dic objectForKey:@"organization_name"];
     self.content=[dic objectForKey:@"organization_content"];
     self.logoUrl=[dic objectForKey:@"organization_logo"];
-    self.isJoined=[[dic objectForKey:@"isJoined"]boolValue];
+    //self.isJoined=[[dic objectForKey:@"isJoined"]boolValue];
+    self.ship_id=[dic objectForKey:@"ship_id"];
+    if (self.ship_id) {
+        self.isJoined=YES;
+    }
+    else{
+        self.isJoined=NO;
+    }
     return self;
 }
 
@@ -69,12 +111,24 @@
 @synthesize sender;
 
 -(id)initWithArgs:(NSString *)URLstring postData:(NSData *)data resultData:(NSMutableData *)resultData sender:(id)sender onSuccess:(SEL)onSuccess onError:(SEL)onError{
-    NSURL *url = [NSURL URLWithString:URLstring];
+    NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
+    NSString *str=URLstring;
+    NSString *token=[local stringForKey:@"user_token"];
+    if (token) {
+        str=[str stringByAppendingString:@"?user_token="];
+        str=[str stringByAppendingString:token];
+    }
+    NSURL *url = [NSURL URLWithString:str];
     self.request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSLog(@"%@",self.request.HTTPMethod);
+    NSData *d=self.request.HTTPBody;
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:data];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSString *jsondata=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",jsondata);
     self.receiveData = resultData;
-    self.conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    self.conn = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:NO];
     self.onSucc = onSuccess;
     self.onErr = onError;
     self.sender = sender;
@@ -87,7 +141,7 @@
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
-    //NSLog(@"%@", [res allHeaderFields]);
+    NSLog(@"%@", [res allHeaderFields]);
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
@@ -96,13 +150,15 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSString *recvStr = [[NSString alloc]initWithData:self.receiveData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", recvStr);
-    [sender performSelector:onSucc];
+    NSLog(@"%@", recvStr);
+    if (self.onSucc)
+        [sender performSelector:onSucc];
 }
 
 -(void)conncetion:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-    //NSLog(@"%@", [error localizedDescription]);
-    [sender performSelector:onErr];
+    NSLog(@"%@", [error localizedDescription]);
+    if(self.onErr)
+        [sender performSelector:onErr];
 }
 
 

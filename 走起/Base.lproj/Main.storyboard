@@ -39,6 +39,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uOT-tD-La0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="sectionIndexTrackingBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,6 +131,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t8N-eV-YpX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="vKf-6F-vKX">
                                     <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -377,7 +380,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="sd2-12-AAS" firstAttribute="top" secondItem="eoe-2S-Chl" secondAttribute="top" constant="94" id="3KH-3E-fyz"/>
                             <constraint firstItem="muE-8H-T0O" firstAttribute="leading" secondItem="eoe-2S-Chl" secondAttribute="leading" constant="44" id="6Kj-GD-dZ4"/>
@@ -422,7 +425,7 @@
                         <outlet property="txtSchool" destination="LiN-F8-uBB" id="aqe-OW-IT1"/>
                         <outlet property="txtSid" destination="3g9-yM-K1j" id="aHR-PP-lAg"/>
                         <outlet property="txtSpwd" destination="SBg-yi-IQI" id="oTh-jf-ccf"/>
-                        <segue destination="49e-Tb-3d3" kind="modal" id="mv4-C7-6O4"/>
+                        <segue destination="49e-Tb-3d3" kind="modal" identifier="registed" id="mv4-C7-6O4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B0n-Fi-gve" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -495,7 +498,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6UN-wC-crl" firstAttribute="leading" secondItem="r9P-if-Z2B" secondAttribute="trailing" constant="16" id="0Tc-RZ-9Fj"/>
                             <constraint firstItem="r9P-if-Z2B" firstAttribute="leading" secondItem="fR3-YC-jV0" secondAttribute="trailing" constant="-81" id="2s1-NX-G9U"/>
@@ -515,7 +518,7 @@
                         <barButtonItem key="rightBarButtonItem" title="注册" id="YXg-Af-U2c">
                             <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="qwl-aH-TLt" kind="push" id="MmX-3O-O84"/>
+                                <segue destination="qwl-aH-TLt" kind="push" id="LEb-0n-gxH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -167,7 +167,8 @@ NSString *user;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
     }
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [orgDataList objectAtIndex:row];
+    clsOrg *org=[orgDataList objectAtIndex:row];
+    cell.textLabel.text = org.name;
     //cell.detailTextLabel.text = @"详细信息";
     return cell;
 }
@@ -217,11 +218,11 @@ NSString *user;
 }
 
 -(void)gotOrgData{
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:orgData options:NSJSONReadingMutableLeaves error:nil];
-    NSInteger count = [[dic objectForKey:@"Count"]integerValue];
+    NSArray *dic = [NSJSONSerialization JSONObjectWithData:orgData options:NSJSONReadingMutableLeaves error:nil];
+    NSInteger count = dic.count;
     [orgDataList removeAllObjects];
     for (int i=0; i<count; i++){
-        [orgDataList addObject:[dic objectForKey:[NSString stringWithFormat:@"%d",i]]];
+        [orgDataList addObject:[[clsOrg alloc]initWithData:[dic objectAtIndex:i]]];
     }
     [tblActOrg reloadData];
 }
@@ -236,7 +237,8 @@ NSString *user;
     user=[local objectForKey:@"Email"];
     orgData=[[NSMutableData alloc]init];
     orgDataList=[[NSMutableArray alloc]init];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/search.php" postData:[user dataUsingEncoding:NSUTF8StringEncoding] resultData:orgData sender:self onSuccess:@selector(gotOrgData) onError:@selector(errOrgData)];
+    NSString *url=[Common getUrlString:@"/search.php"];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:[user dataUsingEncoding:NSUTF8StringEncoding] resultData:orgData sender:self onSuccess:@selector(gotOrgData) onError:@selector(errOrgData)];
     [post Run];
     CGRect pos = CGRectMake(0.0f, self.view.frame.size.height, 0, 0);
     dateActTime=[[UIDatePicker alloc]initWithFrame:pos];

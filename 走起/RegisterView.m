@@ -58,7 +58,9 @@ NSString *iconUrl;
 
 -(void)uploadPic:(UIImage *)image result:(NSMutableData *)result{
     NSData *picData=UIImageJPEGRepresentation(image, 1.0);
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/upload.php" postData:picData resultData:result sender:self onSuccess:@selector(uploadDone) onError:@selector(networkErr)];
+    NSString *url=@"http://192.168.18.179/upload.php";
+    //NSString *url=[Common getUrlString:@"/upload.php"];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:picData resultData:result sender:self onSuccess:@selector(uploadDone) onError:@selector(networkErr)];
     [post Run];
 }
 
@@ -120,7 +122,9 @@ NSString *iconUrl;
 
 -(void)searchSchool:(NSString *)name{
     self.searchData = [[NSMutableData alloc]init];
-    HTTPPost *post = [[HTTPPost alloc]initWithArgs:@"http://localhost/school.txt" postData:[name dataUsingEncoding:NSUTF8StringEncoding] resultData:self.searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
+    //NSString *url=[Common getUrlString:@"/school.txt"];
+    NSString *url=@"http://localhost/school.txt";
+    HTTPPost *post = [[HTTPPost alloc]initWithArgs:url postData:[name dataUsingEncoding:NSUTF8StringEncoding] resultData:self.searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
     [post Run];
 }
 
@@ -180,7 +184,8 @@ NSString *iconUrl;
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         self.locData = [NSMutableData alloc];
         NSLog(@"%f,%f",loc.coordinate.latitude,loc.coordinate.longitude);
-        HTTPPost *pLoc = [[HTTPPost alloc]initWithArgs:@"http://192.168.3.6:8080/loc.php" postData:data resultData:self.locData sender:self onSuccess:@selector(gotSchool) onError:@selector(networkErr)];
+        NSString *url=[Common getUrlString:@"/loc.php"];
+        HTTPPost *pLoc = [[HTTPPost alloc]initWithArgs:url postData:data resultData:self.locData sender:self onSuccess:@selector(gotSchool) onError:@selector(networkErr)];
         [pLoc Run];
         [self.locMgr stopUpdatingLocation];
     }
@@ -221,25 +226,28 @@ NSString *iconUrl;
         [alert show];
         return;
     }
-    [dic setValue:iconUrl forKey:@"user_logo"];
+    //[dic setValue:iconUrl forKey:@"user_logo"];
     self.registerData = [NSMutableData alloc];
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error: nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
     NSString *str=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@",str);
-    HTTPPost *pRegister = [[HTTPPost alloc]initWithArgs:@"" postData:data resultData:self.registerData sender:self onSuccess:@selector(registerFinished) onError:@selector(registerError)];
+    NSString *url=[Common getUrlString:@"/users.json"];
+    HTTPPost *pRegister = [[HTTPPost alloc]initWithArgs:url postData:data resultData:self.registerData sender:self onSuccess:@selector(registerFinished) onError:@selector(registerError)];
     [pRegister Run];
 }
 
 -(void)registerFinished{
     NSString *recvStr = [[NSString alloc]initWithData:self.registerData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", recvStr);
+    NSLog(@"success!%@", recvStr);
     //传输成功
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.registerData options:NSJSONReadingMutableLeaves error:nil];
     int status = [[json objectForKey:@"status"]intValue];
     switch (status) {
         case _REG_SUCCESS_:{
             NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-            [localData setObject:[json objectForKey:@"token"] forKey:@"token"];
+            [localData setObject:[json objectForKey:@"user_token"] forKey:@"user_token"];
+            [localData setInteger:[[json objectForKey:@"user_id"]integerValue] forKey:@"user_id"];
+            [localData setObject:self.txtEmail.text forKey:@"email"];
             [localData synchronize];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册成功！" delegate:self cancelButtonTitle:@"继续" otherButtonTitles: nil];
             [alert show];
@@ -261,6 +269,14 @@ NSString *iconUrl;
             txtSid.text = @"";
             txtSpwd.text = @"";
             [txtSid becomeFirstResponder];
+            break;
+        }
+            
+        case _REG_PASWD_SHORT_:{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"密码过短，请设置至少8位密码。" delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
+            [alert show];
+            txtPaswd.text = @"";
+            [txtPaswd becomeFirstResponder];
             break;
         }
             

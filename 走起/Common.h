@@ -14,6 +14,10 @@
 +(NSString *)getToken;
 +(NSString *)stringFromDate:(NSDate *)date;
 +(NSString *)durFromDate:(NSDate *)date;
++(NSString *)getUrlString:(NSString *)path;
++(NSData *)jsonProc:(NSData *)data;
++(void)joinOrg:(NSNumber *)ship_id;
++(void)quitOrg:(NSNumber *)ship_id;
 
 @end
 
@@ -38,6 +42,7 @@
 @property NSString *content;
 @property NSString *logoUrl;
 @property BOOL isJoined;
+@property NSNumber *ship_id;
 
 -(id)initWithData:(NSDictionary *)dic;
 

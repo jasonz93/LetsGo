@@ -69,7 +69,8 @@ BOOL shouldTouch;
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if (searchText.length>0){
         searchData=[[NSMutableData alloc]init];
-        HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"http://localhost/organization_list.txt" postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
+        NSString *url=[Common getUrlString:@"/organization_list.txt"];
+        HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
         [post Run];
     }
 }
@@ -127,6 +128,7 @@ BOOL shouldTouch;
     [self tapBackground];
     self.tblOrgs.sectionHeaderHeight=10;
     self.tblOrgs.rowHeight=150;
+    self.tblOrgs.backgroundColor=[UIColor groupTableViewBackgroundColor];
 }
 
 @end

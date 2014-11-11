@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GetInfo : NSObject<NSURLConnectionDelegate>
+@interface GetInfo : NSObject
 @property NSMutableData* ResultDic;
 @property SEL OnSuccess;
 @property SEL OnError;
