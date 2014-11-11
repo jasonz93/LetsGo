@@ -16,28 +16,43 @@
 @implementation MyActivityViewController
 
 - (void)viewDidLoad {
+    //[[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:136/255.0 alpha:1]];
+    //[self.navigationController.navigationBar setTranslucent:NO];
     [super viewDidLoad];
     [self initRefreshControl];
-    [self GetMyAList];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.refreshControl beginRefreshing];
+    [self RefreshAList];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView{
-    return 1;
+    return 2;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+        return @"已报名活动";
+    else
+        return @"我参加过的活动";
+    
+}
+
 
 -(NSInteger ) tableView:(UITableView *)tableView
 
   numberOfRowsInSection:(NSInteger )section
 
 {
-    return [self.AList count];
+    if(section==0)
+    {
+        return AingDic.count;
+    }
+    else
+    {
+        return AedDic.count;
+    }
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView
@@ -52,7 +67,11 @@
     if (cell==nil ) {
         cell=[[ ActivityIntroCell alloc ] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"AList"];
     }
-    NSDictionary *tmp =[self.AList objectAtIndex:[indexPath row]];
+    NSDictionary *tmp;
+    if([indexPath section]==0)
+        tmp=[AingDic objectAtIndex:[indexPath row]];
+    else
+        tmp=[AedDic objectAtIndex:[indexPath row]];
     [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
     cell.accessoryType=UITableViewCellAccessoryNone;
     return cell;
@@ -66,28 +85,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ActivityDetailViewController *AactivityDetail=[storyBoard instantiateViewControllerWithIdentifier:@"ActivityDetail" ];
+    ActivityTable *AactivityDetail=[storyBoard instantiateViewControllerWithIdentifier:@"ActivityTableView" ];
     AactivityDetail.hidesBottomBarWhenPushed=YES;
-    AactivityDetail.Activity_Id=(NSInteger)[[self.AList objectAtIndex:[indexPath row]]objectForKey:@"activity_id"];
+    if([indexPath section]==0)
+        AactivityDetail.Aid=[[AingDic objectAtIndex:[indexPath row]]objectForKey:@"activity_id"];
+    else
+        AactivityDetail.Aid=[[AedDic objectAtIndex:[indexPath row]]objectForKey:@"activity_id"];
+    
     [self.navigationController pushViewController:AactivityDetail animated:YES];
 }
 
-
-
 -(void) GetMyAList{
     self.RevData=[NSMutableData alloc];
-    [[GetInfo alloc]initWithURL:@"http://1.r7test.sinaapp.com/activitylist.json" ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:nil];
+    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
+    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/1/activities.json?user_token=46Ms7ERFe7dpzXCFKjyw",URLpre] ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
+    NSLog(@"Json received success");
     if(self.refreshControl.refreshing)
     {
         [self.refreshControl endRefreshing];
         self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"👻下拉刷新"];
     }
-    NSLog(@"Json Success received!!!");
-    self.AList= [NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"%@",self.AList);
+    //NSLog(@"Json:%@",[NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil]);
+    AingDic= [[NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil]objectForKey:@"activity_ing"];
+    AedDic= [[NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil]objectForKey:@"activity_ed"];
     [self.ActivityList reloadData];
 }
 
@@ -103,6 +127,30 @@
         self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"😂加载中"];
         [self GetMyAList];
     }
+}
+
+
+-(void)DealError{
+    NSLog(@"NetWork Error");
+    MBProgressHUD *ErrorView=[[MBProgressHUD alloc]initWithView:self.view];
+    ErrorView.customView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cry"]];
+    ErrorView.mode=MBProgressHUDModeCustomView;
+    ErrorView.delegate=self;
+    [self.view addSubview:ErrorView];
+    ErrorView.labelText=@"网络不给力";
+    [ErrorView show:YES];
+    [ErrorView hide:YES afterDelay:2];
+    if(self.refreshControl.refreshing)
+    {
+        [self.refreshControl endRefreshing];
+        self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"👻下拉刷新"];
+    }
+    
+}
+-(void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [hud removeFromSuperview];
+    hud = nil;
 }
 
 

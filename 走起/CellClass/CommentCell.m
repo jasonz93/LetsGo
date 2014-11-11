@@ -12,12 +12,9 @@
 
 - (void)awakeFromNib {
     
-        // Initialization code
+    // Initialization code
 }
 
--(void) initWithComment:(NSString*)Comment
-{
-    self.CommentContent.text=Comment;
-}
-//我要重写你initWithFrame:<#(CGRect)#>
+
+
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7346D7141A0CA8D20024B4B5 /* ActivityPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7111A0CA8D20024B4B5 /* ActivityPoint.m */; };
 		7346D7151A0CA8D20024B4B5 /* ActivityTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7131A0CA8D20024B4B5 /* ActivityTable.m */; };
 		7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D71A1A0CA9580024B4B5 /* ActivityIntroCell.m */; };
 		7346D7201A0CA9580024B4B5 /* ActivityIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7346D71B1A0CA9580024B4B5 /* ActivityIntroCell.xib */; };
@@ -17,8 +16,20 @@
 		7346D7261A0CA9E40024B4B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7346D7251A0CA9E40024B4B5 /* MapKit.framework */; };
 		7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */; };
 		734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */; };
-		73DB6E771A08E5F30056BFD6 /* ImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E751A08E5F30056BFD6 /* ImgCell.m */; };
-		73DB6E781A08E5F30056BFD6 /* ImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73DB6E761A08E5F30056BFD6 /* ImgCell.xib */; };
+		7361E90B1A126E9C00E17682 /* NewHotActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9081A126E9C00E17682 /* NewHotActivityController.m */; };
+		7361E90C1A126E9C00E17682 /* NewPersonInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E90A1A126E9C00E17682 /* NewPersonInfo.m */; };
+		7361E90E1A126EC000E17682 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7361E90D1A126EC000E17682 /* Settings.plist */; };
+		7361E9121A126F9D00E17682 /* ActivityImgTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9101A126F9D00E17682 /* ActivityImgTitleCell.m */; };
+		7361E9131A126F9D00E17682 /* ActivityImgTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9111A126F9D00E17682 /* ActivityImgTitleCell.xib */; };
+		7361E9161A126FCF00E17682 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9151A126FCF00E17682 /* MBProgressHUD.m */; };
+		7361E91A1A12702500E17682 /* ActivityNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9181A12702500E17682 /* ActivityNewView.m */; };
+		7361E91B1A12702500E17682 /* ActivityNewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9191A12702500E17682 /* ActivityNewView.xib */; };
+		7361E9201A12704200E17682 /* ASPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E91D1A12704200E17682 /* ASPopUpView.m */; };
+		7361E9211A12704200E17682 /* ASProgressPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E91F1A12704200E17682 /* ASProgressPopUpView.m */; };
+		7361E9251A12708100E17682 /* LevelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9231A12708100E17682 /* LevelCell.m */; };
+		7361E9261A12708100E17682 /* LevelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9241A12708100E17682 /* LevelCell.xib */; };
+		7361E92A1A12709800E17682 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9281A12709800E17682 /* PersonInfoCell.m */; };
+		7361E92B1A12709800E17682 /* PersonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9291A12709800E17682 /* PersonInfoCell.xib */; };
 		73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7B1A08E8720056BFD6 /* GetInfo.m */; };
 		73DB6E7F1A08E8990056BFD6 /* MyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7E1A08E8990056BFD6 /* MyInfoViewController.m */; };
 		73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E811A08E8CD0056BFD6 /* ActivityDetailViewController.m */; };
@@ -51,8 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7346D7101A0CA8D20024B4B5 /* ActivityPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityPoint.h; sourceTree = "<group>"; };
-		7346D7111A0CA8D20024B4B5 /* ActivityPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityPoint.m; sourceTree = "<group>"; };
 		7346D7121A0CA8D20024B4B5 /* ActivityTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTable.h; sourceTree = "<group>"; };
 		7346D7131A0CA8D20024B4B5 /* ActivityTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTable.m; sourceTree = "<group>"; };
 		7346D7191A0CA9580024B4B5 /* ActivityIntroCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityIntroCell.h; path = CellClass/ActivityIntroCell.h; sourceTree = "<group>"; };
@@ -67,9 +76,29 @@
 		7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		734BD4991A0CBFA5008A12C2 /* SendCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendCommentViewController.h; sourceTree = "<group>"; };
 		734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendCommentViewController.m; sourceTree = "<group>"; };
-		73DB6E741A08E5F30056BFD6 /* ImgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImgCell.h; path = CellClass/ImgCell.h; sourceTree = "<group>"; };
-		73DB6E751A08E5F30056BFD6 /* ImgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImgCell.m; path = CellClass/ImgCell.m; sourceTree = "<group>"; };
-		73DB6E761A08E5F30056BFD6 /* ImgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImgCell.xib; path = CellClass/ImgCell.xib; sourceTree = "<group>"; };
+		7361E9071A126E9C00E17682 /* NewHotActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHotActivityController.h; sourceTree = "<group>"; };
+		7361E9081A126E9C00E17682 /* NewHotActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHotActivityController.m; sourceTree = "<group>"; };
+		7361E9091A126E9C00E17682 /* NewPersonInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPersonInfo.h; sourceTree = "<group>"; };
+		7361E90A1A126E9C00E17682 /* NewPersonInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPersonInfo.m; sourceTree = "<group>"; };
+		7361E90D1A126EC000E17682 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		7361E90F1A126F9D00E17682 /* ActivityImgTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityImgTitleCell.h; sourceTree = "<group>"; };
+		7361E9101A126F9D00E17682 /* ActivityImgTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityImgTitleCell.m; sourceTree = "<group>"; };
+		7361E9111A126F9D00E17682 /* ActivityImgTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityImgTitleCell.xib; sourceTree = "<group>"; };
+		7361E9141A126FCF00E17682 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		7361E9151A126FCF00E17682 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		7361E9171A12702500E17682 /* ActivityNewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityNewView.h; sourceTree = "<group>"; };
+		7361E9181A12702500E17682 /* ActivityNewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityNewView.m; sourceTree = "<group>"; };
+		7361E9191A12702500E17682 /* ActivityNewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityNewView.xib; sourceTree = "<group>"; };
+		7361E91C1A12704200E17682 /* ASPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPopUpView.h; sourceTree = "<group>"; };
+		7361E91D1A12704200E17682 /* ASPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPopUpView.m; sourceTree = "<group>"; };
+		7361E91E1A12704200E17682 /* ASProgressPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASProgressPopUpView.h; sourceTree = "<group>"; };
+		7361E91F1A12704200E17682 /* ASProgressPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASProgressPopUpView.m; sourceTree = "<group>"; };
+		7361E9221A12708100E17682 /* LevelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelCell.h; sourceTree = "<group>"; };
+		7361E9231A12708100E17682 /* LevelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelCell.m; sourceTree = "<group>"; };
+		7361E9241A12708100E17682 /* LevelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelCell.xib; sourceTree = "<group>"; };
+		7361E9271A12709800E17682 /* PersonInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
+		7361E9281A12709800E17682 /* PersonInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
+		7361E9291A12709800E17682 /* PersonInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoCell.xib; sourceTree = "<group>"; };
 		73DB6E7A1A08E8720056BFD6 /* GetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetInfo.h; sourceTree = "<group>"; };
 		73DB6E7B1A08E8720056BFD6 /* GetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetInfo.m; sourceTree = "<group>"; };
 		73DB6E7D1A08E8990056BFD6 /* MyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoViewController.h; sourceTree = "<group>"; };
@@ -132,15 +161,30 @@
 		73DB6E731A08E5DB0056BFD6 /* CellClass */ = {
 			isa = PBXGroup;
 			children = (
+				7361E9271A12709800E17682 /* PersonInfoCell.h */,
+				7361E9281A12709800E17682 /* PersonInfoCell.m */,
+				7361E9291A12709800E17682 /* PersonInfoCell.xib */,
+				7361E9221A12708100E17682 /* LevelCell.h */,
+				7361E9231A12708100E17682 /* LevelCell.m */,
+				7361E9241A12708100E17682 /* LevelCell.xib */,
+				7361E91C1A12704200E17682 /* ASPopUpView.h */,
+				7361E91D1A12704200E17682 /* ASPopUpView.m */,
+				7361E91E1A12704200E17682 /* ASProgressPopUpView.h */,
+				7361E91F1A12704200E17682 /* ASProgressPopUpView.m */,
+				7361E9171A12702500E17682 /* ActivityNewView.h */,
+				7361E9181A12702500E17682 /* ActivityNewView.m */,
+				7361E9191A12702500E17682 /* ActivityNewView.xib */,
+				7361E9141A126FCF00E17682 /* MBProgressHUD.h */,
+				7361E9151A126FCF00E17682 /* MBProgressHUD.m */,
+				7361E90F1A126F9D00E17682 /* ActivityImgTitleCell.h */,
+				7361E9101A126F9D00E17682 /* ActivityImgTitleCell.m */,
+				7361E9111A126F9D00E17682 /* ActivityImgTitleCell.xib */,
 				7346D7191A0CA9580024B4B5 /* ActivityIntroCell.h */,
 				7346D71A1A0CA9580024B4B5 /* ActivityIntroCell.m */,
 				7346D71B1A0CA9580024B4B5 /* ActivityIntroCell.xib */,
 				7346D71C1A0CA9580024B4B5 /* CommentCell.h */,
 				7346D71D1A0CA9580024B4B5 /* CommentCell.m */,
 				7346D71E1A0CA9580024B4B5 /* CommentCell.xib */,
-				73DB6E741A08E5F30056BFD6 /* ImgCell.h */,
-				73DB6E751A08E5F30056BFD6 /* ImgCell.m */,
-				73DB6E761A08E5F30056BFD6 /* ImgCell.xib */,
 			);
 			name = CellClass;
 			sourceTree = "<group>";
@@ -179,8 +223,11 @@
 		E1949D881A08B47A005CC530 /* 走起 */ = {
 			isa = PBXGroup;
 			children = (
-				7346D7101A0CA8D20024B4B5 /* ActivityPoint.h */,
-				7346D7111A0CA8D20024B4B5 /* ActivityPoint.m */,
+				7361E90D1A126EC000E17682 /* Settings.plist */,
+				7361E9071A126E9C00E17682 /* NewHotActivityController.h */,
+				7361E9081A126E9C00E17682 /* NewHotActivityController.m */,
+				7361E9091A126E9C00E17682 /* NewPersonInfo.h */,
+				7361E90A1A126E9C00E17682 /* NewPersonInfo.m */,
 				7346D7121A0CA8D20024B4B5 /* ActivityTable.h */,
 				7346D7131A0CA8D20024B4B5 /* ActivityTable.m */,
 				73DB6E831A08EA4D0056BFD6 /* HotActivityViewController.h */,
@@ -326,12 +373,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7361E9261A12708100E17682 /* LevelCell.xib in Resources */,
+				7361E92B1A12709800E17682 /* PersonInfoCell.xib in Resources */,
 				7346D7201A0CA9580024B4B5 /* ActivityIntroCell.xib in Resources */,
 				E1949DDC1A08B5E7005CC530 /* Main.storyboard in Resources */,
-				73DB6E781A08E5F30056BFD6 /* ImgCell.xib in Resources */,
 				7346D7221A0CA9580024B4B5 /* CommentCell.xib in Resources */,
+				7361E90E1A126EC000E17682 /* Settings.plist in Resources */,
+				7361E9131A126F9D00E17682 /* ActivityImgTitleCell.xib in Resources */,
 				E1949DDB1A08B5E7005CC530 /* LaunchScreen.xib in Resources */,
 				E1949DD11A08B5C0005CC530 /* Images.xcassets in Resources */,
+				7361E91B1A12702500E17682 /* ActivityNewView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,25 +402,32 @@
 			files = (
 				734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */,
 				E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */,
-				73DB6E771A08E5F30056BFD6 /* ImgCell.m in Sources */,
+				7361E90C1A126E9C00E17682 /* NewPersonInfo.m in Sources */,
+				7361E9211A12704200E17682 /* ASProgressPopUpView.m in Sources */,
 				73DB6E7F1A08E8990056BFD6 /* MyInfoViewController.m in Sources */,
 				7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */,
 				E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */,
+				7361E9201A12704200E17682 /* ASPopUpView.m in Sources */,
 				E1949DD41A08B5C0005CC530 /* RegisterView.m in Sources */,
 				73DB6E881A08EA4D0056BFD6 /* HotActivityViewController.m in Sources */,
 				7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */,
 				E1949DD21A08B5C0005CC530 /* LoginView.m in Sources */,
 				E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */,
 				E1949DCE1A08B5C0005CC530 /* Common.m in Sources */,
+				7361E9121A126F9D00E17682 /* ActivityImgTitleCell.m in Sources */,
+				7361E92A1A12709800E17682 /* PersonInfoCell.m in Sources */,
 				E1949DCB1A08B5C0005CC530 /* AppDelegate.m in Sources */,
 				E1949D8C1A08B47A005CC530 /* main.m in Sources */,
 				73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */,
+				7361E9161A126FCF00E17682 /* MBProgressHUD.m in Sources */,
 				E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */,
 				73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */,
+				7361E91A1A12702500E17682 /* ActivityNewView.m in Sources */,
 				7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */,
 				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,
-				7346D7141A0CA8D20024B4B5 /* ActivityPoint.m in Sources */,
+				7361E90B1A126E9C00E17682 /* NewHotActivityController.m in Sources */,
 				73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */,
+				7361E9251A12708100E17682 /* LevelCell.m in Sources */,
 				7346D7151A0CA8D20024B4B5 /* ActivityTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

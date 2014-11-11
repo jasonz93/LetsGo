@@ -52,3 +52,38 @@
     [self.Sender performSelector:self.OnSuccess];
 }
 @end
+
+
+
+@implementation PostInfo
+-(void)initWithURL:(NSString *)URLstring HttpMethod:(NSString*)Method postData:(NSData *)data resultData:(NSMutableData *)resultData sender:(id)sender onSuccess:(SEL)onSuccess onError:(SEL)onError{
+    NSURL *url = [NSURL URLWithString:URLstring];
+    self.Prequest = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [self.Prequest setHTTPMethod:Method];
+    [self.Prequest setHTTPBody:data];
+    [self.Prequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    self.PResultDic = resultData;
+    self.PTheConnection = [[NSURLConnection alloc]initWithRequest:self.Prequest delegate:self];
+    self.POnSuccess = onSuccess;
+    self.POnError = onError;
+    self.PSender = sender;
+    [self.PTheConnection start];
+}
+
+
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    [self.PResultDic appendData:data];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    [self.PSender performSelector:self.POnSuccess];
+}
+
+-(void)conncetion:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    NSLog(@"%@", [error localizedDescription]);
+    [self.PSender performSelector:self.POnError];
+}
+
+
+@end

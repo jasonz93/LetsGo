@@ -1,0 +1,19 @@
+//
+//  PersonInfoCell.h
+//  LetsGo
+//
+//  Created by 周瑞琦 on 11/10/14.
+//
+//
+
+#import <UIKit/UIKit.h>
+
+@interface PersonInfoCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *UserImg;
+@property (weak, nonatomic) IBOutlet UILabel *UserNameL;
+@property (weak, nonatomic) IBOutlet UILabel *SchoolNameL;
+@property (weak, nonatomic) IBOutlet UILabel *PraiseL;
+
+
+-(void)initWithUserLogo:(NSData*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(int)Praise;
+@end
