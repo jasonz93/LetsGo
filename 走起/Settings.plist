@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>URLprefix</key>
+	<string>http://1.r7test.sinaapp.com</string>
+	<key>R</key>
+	<integer>0</integer>
+	<key>G</key>
+	<integer>150</integer>
+	<key>B</key>
+	<integer>136</integer>
+</dict>
+</plist>

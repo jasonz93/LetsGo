@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GetInfo : NSObject
+@interface GetInfo : NSObject<NSURLConnectionDelegate>
 @property NSMutableData* ResultDic;
 @property SEL OnSuccess;
 @property SEL OnError;
@@ -17,4 +17,16 @@
 @property NSURLConnection *TheConnection;
 
 -(void)initWithURL:(NSString*)GetURL ResultData:(NSMutableData*)data sender:(id)TheSender OnSuccess:(SEL)scss OnError:(SEL)err;
+@end
+
+
+@interface PostInfo : NSObject<NSURLConnectionDelegate>
+@property NSMutableData* PResultDic;
+@property SEL POnSuccess;
+@property SEL POnError;
+@property id PSender;
+@property NSMutableURLRequest *Prequest;
+@property NSURLConnection *PTheConnection;
+
+-(void)initWithURL:(NSString *)URLstring HttpMethod:(NSString*)Method postData:(NSData *)data resultData:(NSMutableData *)resultData sender:(id)sender onSuccess:(SEL)onSuccess onError:(SEL)onError;
 @end

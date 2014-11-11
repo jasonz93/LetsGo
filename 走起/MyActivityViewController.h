@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "GetInfo.h"
 #import "ActivityIntroCell.h"
-#include "ActivityDetailViewController.h"
-@interface MyActivityViewController : UITableViewController{
-    
+//#import "ActivityDetailViewController.h"
+//#import "CommonVariable.h"
+#import "MBProgressHUD.h"
+#import "MBProgressHUD.h"
+#import "ActivityTable.h"
+@interface MyActivityViewController : UITableViewController<MBProgressHUDDelegate>{
+    NSArray *AingDic,*AedDic;
 }
 
-@property NSArray *AList;
 @property NSMutableData *RevData;
 @property BOOL CellInited;
 @property (strong, nonatomic) IBOutlet UITableView *ActivityList;
