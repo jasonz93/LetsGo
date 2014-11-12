@@ -99,8 +99,8 @@
         tmp=[AingDic objectAtIndex:[indexPath row]];
     else
         tmp=[AedDic objectAtIndex:[indexPath row]];
-    NSLog(@"%@",[tmp objectForKey:@"activity_end_time"]);
-    [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[tmp objectForKey:@"activity_logo"] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
+    NSLog(@"%@",[tmp objectForKey:@"activity_pic"]);
+    [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[tmp objectForKey:@"activity_pic"] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
     cell.accessoryType=UITableViewCellAccessoryNone;
     return cell;
     
@@ -125,11 +125,11 @@
 
 -(void) GetMyAList{
     self.RevData=[NSMutableData alloc];
-    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    NSLog(@"URL is %@",[NSString stringWithFormat:@"%@/users/%d/activities.json",URLpre,Uid] );
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/%d/activities.json",URLpre,Uid] ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/%d/activities.json",Uid]];
+    // NSLog(@"URL is %@",[NSString stringWithFormat:@"%@/users/%d/activities.json",URLpre,Uid] );
+    [[GetInfo alloc]initWithURL:URLpre ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
+
 
 -(void) ProcessData{
     NSLog(@"Json received success");

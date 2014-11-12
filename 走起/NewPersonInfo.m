@@ -168,12 +168,10 @@
         //这里捕捉“毁灭键”,其实该键的index是0，从上到下从0开始，称之为毁灭是因为是红的
     {
         NSLog(@"User Logout，没做完，需要联机，别忘了做完。。。");
-        NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-        NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
+        NSString *URLpre=[Common getUrlString:@"/users/sign_out"];
         NSData *CommentData=[[NSString stringWithFormat:@""] dataUsingEncoding:NSUTF8StringEncoding];
-        [[PostInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/sign_out?user_token=%@",URLpre,MyToken] HttpMethod:@"DELETE" postData:CommentData resultData:RevData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
-        ///////没做完，需要联机
-    }
+        [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"DELETE" postData:CommentData resultData:RevData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
+        }
 }
 
 -(void) ReceiveSuccess{
@@ -191,10 +189,9 @@
 
 -(void) GetInfo{
     RevData=[NSMutableData alloc];
-    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/%d.json",URLpre,Uid] ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
-}
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/%d.json",Uid]];
+    NSLog(@"PersonInfoPage: Request URL is:%@",URLpre);
+    [[GetInfo alloc]initWithURL:URLpre ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];}
 
 -(void) ProcessData{
     DataDic=[NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];

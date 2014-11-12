@@ -45,7 +45,7 @@
     [ASV addGestureRecognizer:SingleTap];
     ASV.backgroundColor=[UIColor colorWithRed:227.0/255 green:232.0/255 blue:234.0/255 alpha:1.0f];
     [self.view addSubview:ASV];
-    PGC=[[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight, 200, 36)];
+    PGC=[[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight+10, 200, 36)];
     PGC.currentPage = 0;
     PGC.userInteractionEnabled = YES;
     PGC.alpha = 1.0;
@@ -85,9 +85,8 @@
 #pragma mark -Newwork
 -(void) GetMyAList{
     RevData=[NSMutableData alloc];
-    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/activities.json",URLpre]  ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    NSString *URLpre=[Common getUrlString:@"/activities.json"];
+    [[GetInfo alloc]initWithURL:URLpre  ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
