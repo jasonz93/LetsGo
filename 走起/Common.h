@@ -9,6 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@interface clsOrg : NSObject
+
+@property NSInteger orgID;
+@property NSString *name;
+@property NSString *content;
+@property NSString *logoUrl;
+@property BOOL isJoined;
+@property NSNumber *ship_id;
+
+-(id)initWithData:(NSDictionary *)dic;
+
+@end
 
 @interface Common : NSObject<NSURLConnectionDelegate>
 
@@ -17,8 +29,8 @@
 +(NSString *)durFromDate:(NSDate *)date;
 +(NSString *)getUrlString:(NSString *)path;
 +(void)uploadPic:(UIImage *)pic picUrl:(NSMutableData *)picUrl sender:(id)sender onDone:(SEL)onDone;
-+(void)joinOrg:(NSNumber *)ship_id;
-+(void)quitOrg:(NSNumber *)ship_id;
++(void)joinOrg:(clsOrg *)org;
++(void)quitOrg:(clsOrg *)org;
 +(UIImage *)resizePic:(UIImage *)orig resizeTo:(CGSize)size;
 +(void)loadPic:(NSString *)urlString imageView:(UIImageView *)view;
 
@@ -38,18 +50,7 @@
 
 @end
 
-@interface clsOrg : NSObject
 
-@property NSInteger orgID;
-@property NSString *name;
-@property NSString *content;
-@property NSString *logoUrl;
-@property BOOL isJoined;
-@property NSNumber *ship_id;
-
--(id)initWithData:(NSDictionary *)dic;
-
-@end
 
 @interface clsSchool : NSObject
 

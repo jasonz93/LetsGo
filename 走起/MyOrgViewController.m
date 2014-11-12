@@ -38,8 +38,8 @@ clsOrg *org;
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger row=[indexPath section];
     org=[orgDataList objectAtIndex:row];
-    [Common quitOrg:[[NSNumber alloc] initWithInteger:org.orgID]];
-    [self.tblOrgs reloadData];
+    [Common quitOrg:org];
+    [self refreshOrgs];
 }
 
 -(void)orgQuited{
@@ -52,6 +52,8 @@ clsOrg *org;
 }
 //http://localhost:3000/users/1/organizations.json
 -(void)refreshOrgs{
+    [self.refreshControl beginRefreshing];
+    self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..."];
     orgData=[[NSMutableData alloc]init];
     NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
     NSString *url=[Common getUrlString:@"/users/"];
@@ -72,6 +74,9 @@ clsOrg *org;
         }
         [self.tblOrgs reloadData];
     }
+    [self.refreshControl endRefreshing];
+    self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"下拉刷新"];
+    
 }
 
 -(void)networkErr{
@@ -100,9 +105,10 @@ clsOrg *org;
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     NSUInteger row=[indexPath section];
     clsOrg *org=[orgDataList objectAtIndex:row];
-    NSURL *url=[NSURL URLWithString:org.logoUrl];
-    UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    cell.imageView.image=image;
+    //NSURL *url=[NSURL URLWithString:org.logoUrl];
+    //UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    //cell.imageView.image=image;
+    [Common loadPic:org.logoUrl imageView:cell.imageView];
     cell.textLabel.text=org.name;
     NSLog(@"%@",org.name);
     cell.detailTextLabel.text=org.content;
@@ -134,9 +140,12 @@ clsOrg *org;
     token=[Common getToken];
     self.tblOrgs.backgroundColor=[UIColor groupTableViewBackgroundColor];
     [self refreshOrgs];
-    self.tblOrgs.editing=YES;
     //[Common joinOrg:[[NSNumber alloc]initWithInt:4]];
     //[Common quitOrg:[[NSNumber alloc] initWithInt:1]];
+    UIRefreshControl *rc=[[UIRefreshControl alloc]init];
+    rc.attributedTitle=[[NSAttributedString alloc]initWithString:@"下拉刷新"];
+    [rc addTarget:self action:@selector(refreshOrgs) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl=rc;
 }
 
 @end

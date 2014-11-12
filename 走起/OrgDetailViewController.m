@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OrgDetailViewController.h"
+#import "MyOrgViewController.h"
 
 @interface OrgDetailViewController()
 
@@ -19,21 +20,15 @@ UIColor *defaultColor;
 NSMutableData *rData;
 
 -(IBAction)joinOrg:(id)sender{
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    SEL sel;
     if (self.org.isJoined) {
-        sel=@selector(orgQuited);
-        [dic setValue:@"quit" forKey:@"action"];
+        [Common quitOrg:self.org];
+        self.org.isJoined=NO;
     }
     else{
-        sel=@selector(orgJoined);
-        [dic setValue:@"join" forKey:@"action"];
+        [Common joinOrg:self.org];
+        self.org.isJoined=YES;
     }
-    [dic setValue:[NSNumber numberWithUnsignedInteger:self.org.orgID] forKey:@"id"];
-    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *url=[Common getUrlString:@"org"];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:rData sender:self onSuccess:sel onError:@selector(networkErr)];
-    [post Run];
+    [self refreshBtn];
 }
 
 -(void)orgJoined{
@@ -69,15 +64,24 @@ NSMutableData *rData;
         [self.btnJoin setTitle:@"加入" forState:UIControlStateNormal];
         self.btnJoin.tintColor=defaultColor;
     }
+    NSArray *views=self.navigationController.viewControllers;
+    for (int i=0; i<views.count; i++) {
+        if ([views[i] isKindOfClass:[MyOrgViewController class]]) {
+            NSLog(@"got %@",views[i]);
+            MyOrgViewController *my=views[i];
+            [my refreshOrgs];
+        }
+    }
 }
 
 -(void)viewDidLoad{
     defaultColor=self.btnJoin.tintColor;
     self.txtOrgName.text=self.org.name;
     self.txtOrgContent.text=self.org.content;
-    NSURL *url=[NSURL URLWithString:self.org.logoUrl];
-    UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    self.imgOrgLogo.image=image;
+    //NSURL *url=[NSURL URLWithString:self.org.logoUrl];
+    //UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    //self.imgOrgLogo.image=image;
+    [Common loadPic:self.org.logoUrl imageView:self.imgOrgLogo];
     [self.imgOrgLogo.layer setMasksToBounds:YES];
     [self.imgOrgLogo.layer setCornerRadius:75];
     [self.btnJoin.layer setBorderWidth:1];

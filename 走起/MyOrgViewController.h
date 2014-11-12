@@ -13,11 +13,13 @@
 #import "Common.h"
 #import "GetInfo.h"
 
-@interface MyOrgViewController : UIViewController{
+@interface MyOrgViewController : UITableViewController{
     IBOutlet UIBarButtonItem *btnJoinOrg;
 }
 
 @property IBOutlet UITableView *tblOrgs;
+
+-(void)refreshOrgs;
 
 @end
 

@@ -30,7 +30,7 @@
 }
 
 +(NSString *)getUrlString:(NSString *)path{
-    NSString *host=@"http://localhost:3000";
+    NSString *host=@"http://192.168.18.179:3000";
     NSString *url=[host stringByAppendingString:path];
     return url;
 }
@@ -49,20 +49,20 @@
     });
 }
 
-+(void)joinOrg:(NSNumber *)ship_id{
++(void)joinOrg:(clsOrg *)org{
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    [dic setValue:ship_id forKey:@"organization_id"];
+    [dic setValue:[NSNumber numberWithInteger:org.orgID] forKey:@"organization_id"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
     NSString *url=[Common getUrlString:@"/organization_userships.json"];
     HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:[[NSMutableData alloc]init] sender:self onSuccess:nil onError:nil];
     [post Run];
 }
 
-+(void)quitOrg:(NSNumber *)ship_id{
-    NSString *str=[Common getUrlString:@"/organizations/"];
++(void)quitOrg:(clsOrg *)org{
+    NSString *str=[Common getUrlString:@"/organization_userships/"];
     NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
     NSString *token=[local objectForKey:@"user_token"];
-    str=[[NSString alloc]initWithFormat:@"%@%ld.json?user_token=%@",str,[ship_id integerValue],token];
+    str=[[NSString alloc]initWithFormat:@"%@%ld.json?user_token=%@",str,[org.ship_id integerValue],token];
     NSURL *url=[NSURL URLWithString:str];
     NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     [request setHTTPMethod:@"DELETE"];
@@ -75,8 +75,8 @@
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:picEncoded forKey:@"picdata"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
-    //NSString *url=[Common getUrlString:@"/upload"];
-    NSString *url=@"http://localhost/upload.php";
+    NSString *url=[Common getUrlString:@"/pictures.json"];
+    //NSString *url=@"http://localhost/upload.php";
     HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:picUrl sender:sender onSuccess:onDone onError:@selector(networkErr)];
     [post Run];
 }
@@ -129,7 +129,7 @@
 
 -(id)initWithData:(NSDictionary *)dic{
     self.schoolID=[[dic objectForKey:@"school_id"]integerValue];
-    self.name=[dic objectForKey:@"name"];
+    self.name=[dic objectForKey:@"school_name"];
     return self;
 }
 

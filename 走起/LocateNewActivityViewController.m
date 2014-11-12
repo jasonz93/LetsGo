@@ -18,8 +18,9 @@
 -(IBAction)setLocate:(id)sender{
     NSArray *views=self.navigationController.viewControllers;
     self.createActView=views[views.count-2];
-    self.createActView.scrollView.lat=[[NSNumber alloc]initWithFloat:self.map.centerCoordinate.latitude];
-    self.createActView.scrollView.lon=[[NSNumber alloc]initWithFloat:self.map.centerCoordinate.longitude];
+    self.createActView.lat=[[NSNumber alloc]initWithFloat:self.map.centerCoordinate.latitude];
+    self.createActView.lon=[[NSNumber alloc]initWithFloat:self.map.centerCoordinate.longitude];
+    self.createActView.txtActPlace.text=self.searchBar.text;
     [self.navigationController popToViewController:views[views.count-2] animated:YES];
 }
 

@@ -115,9 +115,12 @@ NSString *iconUrl;
 
 -(void)searchSchool:(NSString *)name{
     self.searchData = [[NSMutableData alloc]init];
-    //NSString *url=[Common getUrlString:@"/school.txt"];
-    NSString *url=@"http://localhost/school.txt";
-    HTTPPost *post = [[HTTPPost alloc]initWithArgs:url postData:[name dataUsingEncoding:NSUTF8StringEncoding] resultData:self.searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
+    NSString *url=[Common getUrlString:@"/schools/search"];
+    //NSString *url=@"http://localhost/school.txt";
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    [dic setValue:name forKey:@"school_name"];
+    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    HTTPPost *post = [[HTTPPost alloc]initWithArgs:url postData:json resultData:self.searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
     [post Run];
 }
 
@@ -156,7 +159,7 @@ NSString *iconUrl;
     self.locMgr = [[CLLocationManager alloc]init];
     self.locMgr.delegate = self;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        [locMgr requestWhenInUseAuthorization];
+        [locMgr requestAlwaysAuthorization];
     if ([CLLocationManager locationServicesEnabled]){
         self.locMgr.distanceFilter = kCLDistanceFilterNone;
         self.locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
@@ -172,12 +175,12 @@ NSString *iconUrl;
     if ([txtSchool.text isEqual:@""]){
         CLLocation *loc = [locations lastObject];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.latitude]stringValue] forKey:@"latitude"];
-        [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.longitude]stringValue] forKey:@"longtitude"];
+        [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.latitude]stringValue] forKey:@"school_lat"];
+        [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.longitude]stringValue] forKey:@"school_lon"];
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         self.locData = [NSMutableData alloc];
         NSLog(@"%f,%f",loc.coordinate.latitude,loc.coordinate.longitude);
-        NSString *url=[Common getUrlString:@"/loc.php"];
+        NSString *url=[Common getUrlString:@"/schools/search"];
         HTTPPost *pLoc = [[HTTPPost alloc]initWithArgs:url postData:data resultData:self.locData sender:self onSuccess:@selector(gotSchool) onError:@selector(networkErr)];
         [pLoc Run];
         [self.locMgr stopUpdatingLocation];
@@ -190,7 +193,10 @@ NSString *iconUrl;
 
 -(void)gotSchool{
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:self.locData options:NSJSONReadingMutableLeaves error:nil];
-    txtSchool.text = [dic objectForKey:@"SchoolName"];
+    txtSchool.text = [dic objectForKey:@"school_name"];
+    if (txtSchool.text.length>0) {
+        [self.dataList addObject:[[clsSchool alloc]initWithData:dic]];
+    }
 }
 
 -(void)networkErr{

@@ -38,11 +38,12 @@ BOOL shouldTouch;
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     NSUInteger row=[indexPath section];
     clsOrg *org=[orgList objectAtIndex:row];
-    NSURL *url=[NSURL URLWithString:org.logoUrl];
-    UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    //NSURL *url=[NSURL URLWithString:org.logoUrl];
+    //UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     cell.textLabel.text=org.name;
     cell.detailTextLabel.text=org.content;
-    cell.imageView.image=image;
+    //cell.imageView.image=image;
+    [Common loadPic:org.logoUrl imageView:cell.imageView];
     cell.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     cell.layer.borderWidth=1;
     return cell;
@@ -69,8 +70,11 @@ BOOL shouldTouch;
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if (searchText.length>0){
         searchData=[[NSMutableData alloc]init];
-        NSString *url=[Common getUrlString:@"/organization_list.txt"];
-        HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:[searchBar.text dataUsingEncoding:NSUTF8StringEncoding] resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
+        NSString *url=[Common getUrlString:@"/organizations/search"];
+        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+        [dic setValue:searchBar.text forKey:@"organization_name"];
+        NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+        HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:searchData sender:self onSuccess:@selector(searchDone) onError:@selector(networkErr)];
         [post Run];
     }
 }
