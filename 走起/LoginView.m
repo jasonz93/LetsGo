@@ -109,7 +109,7 @@
     self.txtEmail.delegate=self;
     self.txtPaswd.delegate=self;
     NSUserDefaults *localData = [NSUserDefaults standardUserDefaults];
-    [localData removeObjectForKey:@"user_token"];
+    //[localData removeObjectForKey:@"user_token"];
     NSString *token=[localData objectForKey:@"user_token"];
     if (token) {
         [self performSegueWithIdentifier:@"logged" sender:self];

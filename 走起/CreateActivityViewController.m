@@ -17,6 +17,25 @@
 
 BOOL shouldTouch;
 
+-(IBAction)Commit:(id)sender{
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    [dic setValue:self.txtActTitle.text forKey:@"activity_title"];
+    [dic setValue:self.txtActContent.text forKey:@"activity_content"];
+    [dic setValue:self.txtActPlace.text forKey:@"activity_place"];
+    [dic setValue:self.lat forKey:@"activity_place_lat"];
+    [dic setValue:self.lon forKey:@"activity_place_lon"];
+    [dic setValue:self.txtActTime.text forKey:@"activity_begin_time"];
+    [dic setValue:self.txtActEnd.text forKey:@"activity_end_time"];
+    [dic setValue:self.txtActCap.text forKey:@"activity_people_max"];
+    [dic setValue:[NSNumber numberWithInteger:self.tblActOrgDele.selectOrg.orgID] forKey:@"organization_id"];
+    [dic setValue:[[NSString alloc]initWithData:self.logoUrlData encoding:NSUTF8StringEncoding] forKey:@"activity_logo"];
+    [dic setValue:[[NSString alloc]initWithData:self.picUrlData encoding:NSUTF8StringEncoding] forKey:@"activity_pic"];
+    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    self.commitResult=[[NSMutableData alloc]init];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"commit" postData:json resultData:self.commitResult sender:self onSuccess:nil onError:nil];
+    [post Run];
+}
+
 -(void)clickLocate{
     [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"actLocate"] animated:YES];
 }

@@ -58,6 +58,8 @@
 @property UIImagePickerController *picPicker;
 @property UIImagePickerController *logoPicker;
 @property tblActOrgDelegate *tblActOrgDele;
+@property NSMutableData *commitResult;
+@property clsOrg *orgChosen;
 
 @property IBOutlet UITableView *tblMain;
 
