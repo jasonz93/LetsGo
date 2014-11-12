@@ -121,7 +121,7 @@
                 }
                 NSDictionary *tmp;
                 tmp=[MyADic objectAtIndex:[indexPath row]];
-                [cell initwithTitle:[tmp objectForKey:@"acitivity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_pic"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
+                [cell initwithTitle:[tmp objectForKey:@"acitivity_title"] Img:[tmp objectForKey:@"activity_pic"] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
                 cell.accessoryType=UITableViewCellAccessoryNone;
                 return cell;
             }
@@ -181,6 +181,10 @@
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:@"user_token"];
     [defaults synchronize];
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
+    [self presentViewController:lv animated:YES completion:^{
+    }];
     //TRUE FLASE;
 }
 #pragma mark network
@@ -189,14 +193,14 @@
     RevData=[NSMutableData alloc];
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/1.json",URLpre] ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/%d.json",URLpre,Uid] ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
     DataDic=[NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
     MyADic=[DataDic objectForKey:@"myactivity"];
     
-    UserLogo=[NSData dataWithContentsOfURL:[NSURL URLWithString:[DataDic objectForKey:@"userlogo"]]];
+    UserLogo=[DataDic objectForKey:@"userlogo"];
     UserName=[DataDic objectForKey:@"email"];
     UserPraise=[[DataDic objectForKey:@"praise"] floatValue];
     SchoolName=[DataDic objectForKey:@"school_name"];

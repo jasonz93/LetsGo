@@ -13,7 +13,7 @@
 //#import "ActivityPoint.h"
 //#import "CommonVariable.h"
 #import "MBProgressHUD.h"
-
+//#import "Common.h"
 #import "ActivityImgTitleCell.h"
 //#import "TimeMapCell.h"
 //#import "CommentTableCell.h"
@@ -53,7 +53,7 @@
     float ScreenH;
     BOOL Ajioned;
     BOOL Afinished;
-    NSData *ImgURL;
+    NSString *ImgURL;
     NSString *TitleTxt;
     NSString *OwnerTxt;
     NSString *OrginizationTxt;
@@ -71,6 +71,8 @@
     NSMutableData *PostReslut;
     BOOL CommentCellLoaded;
     NSInteger ship_id;
+    NSString *PicURL;
+    UIImageView *ActivityPic;
 }
 
 

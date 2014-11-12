@@ -14,7 +14,6 @@
 		7346D7221A0CA9580024B4B5 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7346D71E1A0CA9580024B4B5 /* CommentCell.xib */; };
 		7346D7241A0CA9D50024B4B5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7346D7231A0CA9D50024B4B5 /* CoreLocation.framework */; };
 		7346D7261A0CA9E40024B4B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7346D7251A0CA9E40024B4B5 /* MapKit.framework */; };
-		7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */; };
 		734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */; };
 		7361E90B1A126E9C00E17682 /* NewHotActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9081A126E9C00E17682 /* NewHotActivityController.m */; };
 		7361E90C1A126E9C00E17682 /* NewPersonInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E90A1A126E9C00E17682 /* NewPersonInfo.m */; };
@@ -69,8 +68,6 @@
 		7346D71E1A0CA9580024B4B5 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentCell.xib; path = CellClass/CommentCell.xib; sourceTree = "<group>"; };
 		7346D7231A0CA9D50024B4B5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		7346D7251A0CA9E40024B4B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
-		7346D7271A0CB0FE0024B4B5 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
-		7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		734BD4991A0CBFA5008A12C2 /* SendCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendCommentViewController.h; sourceTree = "<group>"; };
 		734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendCommentViewController.m; sourceTree = "<group>"; };
 		7361E9071A126E9C00E17682 /* NewHotActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHotActivityController.h; sourceTree = "<group>"; };
@@ -223,8 +220,6 @@
 				7346D7131A0CA8D20024B4B5 /* ActivityTable.m */,
 				73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */,
 				73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */,
-				7346D7271A0CB0FE0024B4B5 /* CommentViewController.h */,
-				7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */,
 				734BD4991A0CBFA5008A12C2 /* SendCommentViewController.h */,
 				734BD49A1A0CBFA5008A12C2 /* SendCommentViewController.m */,
 				73DB6E791A08E7F20056BFD6 /* NetWorkClass */,
@@ -393,7 +388,6 @@
 				E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */,
 				7361E9201A12704200E17682 /* ASPopUpView.m in Sources */,
 				E1949DD41A08B5C0005CC530 /* RegisterView.m in Sources */,
-				7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */,
 				E1949DD21A08B5C0005CC530 /* LoginView.m in Sources */,
 				E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */,
 				E1949DCE1A08B5C0005CC530 /* Common.m in Sources */,

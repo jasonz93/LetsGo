@@ -20,9 +20,10 @@
 
 
 
--(void)initWithImg:(NSData*)NewImg Title:(NSString*)NewTitle Place:(NSString*)Newplace Time:(NSString*)newtime Owner:(NSString*)newowner{
+-(void)initWithImg:(NSString*)NewImg Title:(NSString*)NewTitle Place:(NSString*)Newplace Time:(NSString*)newtime Owner:(NSString*)newowner{
     NSLog(@"Load Activity Head Cell");
-    self.ActivityImg.image=[UIImage imageWithData:NewImg];
+   // self.ActivityImg.image=[UIImage imageWithData:NewImg];
+    [Common loadPic:NewImg imageView:self.ActivityImg];
     self.ActivityTitleLabel.text=NewTitle;
     self.ActivityOwnerL.text=newowner;
     self.ActivityTimeL.text=newtime;

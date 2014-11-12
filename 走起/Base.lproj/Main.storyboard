@@ -455,7 +455,7 @@
         <!--用户登录-->
         <scene sceneID="SCs-5z-nqV">
             <objects>
-                <viewController id="3fg-9m-DNq" customClass="LoginView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginview" id="3fg-9m-DNq" customClass="LoginView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Pi-YS-Zj5"/>
                         <viewControllerLayoutGuide type="bottom" id="Y4x-Bs-iPt"/>
@@ -535,7 +535,7 @@
         <!--Navigation Controller-->
         <scene sceneID="b3u-28-tQV">
             <objects>
-                <navigationController id="c8E-C4-ob4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="registerview" id="c8E-C4-ob4" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jKy-63-v2z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -561,7 +561,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FeO-GP-hmm"/>
+                    <navigationItem key="navigationItem" id="FeO-GP-hmm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="BcQ-MN-XxQ">
+                            <connections>
+                                <segue destination="Mxe-tU-RpM" kind="modal" id="TTy-at-LFm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5u9-KU-FGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -618,7 +624,13 @@
                             <outlet property="delegate" destination="exT-BR-3mF" id="YOc-wc-ies"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="nwx-m5-jUj"/>
+                    <navigationItem key="navigationItem" id="nwx-m5-jUj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3H1-Qs-amO">
+                            <connections>
+                                <segue destination="Mxe-tU-RpM" kind="modal" id="AfK-ap-rZv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ActivityList" destination="UrM-jQ-1iI" id="Big-VT-1es"/>
                     </connections>
@@ -773,6 +785,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N2K-Un-WFo"/>
+        <segue reference="AfK-ap-rZv"/>
         <segue reference="0E7-4P-c4E"/>
     </inferredMetricsTieBreakers>
 </document>

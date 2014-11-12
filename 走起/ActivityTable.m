@@ -29,7 +29,6 @@
 -(void)preinit{
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     Mytoken=[defaults objectForKey:@"user_token"];
-    //Mytoken=@"46Ms7ERFe7dpzXCFKjyw";//////////////////////////!!!!!!!!!!!!**************************************!!!!!!!!!!!!!
     NSLog(@"ActivityTable Get Aid=%@,UserToken %@",self.Aid,Mytoken);
     SendCommentBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     ContentTxT=[[UITextView alloc]initWithFrame:CGRectMake(0, 40.0f, [UIScreen mainScreen].applicationFrame.size.width, CGFLOAT_MAX)];
@@ -41,6 +40,7 @@
     ContentTitle.font=[UIFont systemFontOfSize:18.0f];
     ContentTitle.text=@"活动详情";
     ContentTitle.textColor=[UIColor colorWithRed:96.0/255 green:125.0/255 blue:139.0/255 alpha:1.0f];
+    ActivityPic=[[UIImageView alloc]initWithFrame:CGRectMake(8.0f,46.0f, [UIScreen mainScreen].applicationFrame.size.width-16, ([UIScreen mainScreen].applicationFrame.size.width-16)/2)];
 }
 -(void)CellPrepare{
     
@@ -48,15 +48,17 @@
     [ContentTxT sizeToFit];
     ContentH=ContentTxT.frame.size.height;
     
-    ImgURL=[NSData dataWithContentsOfURL:[NSURL URLWithString:[AData_Dic objectForKey:@"activity_pic"]]];
+    ImgURL=[AData_Dic objectForKey:@"activity_logo"];
     TitleTxt=[AData_Dic objectForKey:@"activity_title"];
     OwnerTxt=[NSString stringWithFormat:@"发起者：%@",[AData_Dic objectForKey:@"owner_name"]];
     OrginizationTxt=[NSString stringWithFormat:@"活动所属群组：%@",[AData_Dic objectForKey:@"organization_name"]];
     PlaceTxt=[NSString stringWithFormat:@"活动地点：%@",[AData_Dic objectForKey:@"activity_place"]];
     TimeTxt=[NSString stringWithFormat:@"%@ - %@",[AData_Dic objectForKey:@"activity_begin_time"],[AData_Dic objectForKey:@"activity_end_time"]];
     PeopleTxt=[NSString stringWithFormat:@"报名人数：%@   人数限额：%@",[AData_Dic objectForKey:@"activity_people_max"],[AData_Dic objectForKey:@"activity_people_number"]];
-    
+    PicURL=[AData_Dic objectForKey:@"activity_pic"];
     [SendCommentBtn setTitle:@"发表评论" forState:UIControlStateNormal];
+    //ActivityPic.image=[UIImage imageWithData:PicURL];
+    [Common loadPic:PicURL imageView:ActivityPic];
     SendCommentBtn.titleLabel.font=[UIFont systemFontOfSize: 13.0];
     SendCommentBtn.backgroundColor=[UIColor blackColor];
     [SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
@@ -137,7 +139,8 @@
                 {
                     cell=[[ActivityImgTitleCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AITC"];
                 }
-                cell.ActivityImg.image=[UIImage imageWithData:ImgURL];
+                //cell.ActivityImg.image=[UIImage imageWithData:ImgURL];
+                [Common loadPic:ImgURL imageView:cell.ActivityImg];
                 cell.accessoryType=UITableViewCellAccessoryNone;
                 cell.selectionStyle=UITableViewCellSelectionStyleNone;
                 [cell initWithImg:ImgURL Title:TitleTxt Place:PlaceTxt Time:TimeTxt Owner:OwnerTxt];
@@ -153,6 +156,7 @@
                     cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContentT"];
                 }
                 cell.selectionStyle=UITableViewCellSelectionStyleNone;
+                [cell addSubview:ActivityPic];
                 [cell addSubview:ContentTitle];
                 return cell;
             }
@@ -251,7 +255,7 @@
                 return 154;
                 break;
             case 1:
-                return 46;
+                return 46+ActivityPic.frame.size.height;
             case 2:
                 return ContentH;
                 break;
@@ -331,15 +335,22 @@
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
     NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships.json?user_token=%@",URLpre,Mytoken];
     NSData *JoinData=[[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]] dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"Post URL:%@\nData%@",CompleteURL,[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]]);
     [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"POST" postData:JoinData resultData:PostReslut sender:self onSuccess:@selector(JionSuccess) onError:nil];
 }
 
 -(void)JionSuccess
 {
+    NSLog(@"%@",PostReslut);
     NSLog(@"Jion Activity Success,Receive: %@",[[NSString alloc]initWithData:PostReslut encoding:NSUTF8StringEncoding]);
     ButtonStyle=1;
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    Ajioned=YES;
+    //ship_id=[[NSString alloc] initWithData:PostReslut encoding:NSUTF8StringEncoding] ob
+    NSDictionary *test=[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil];
+    NSLog(@"%@",test);
+    NSLog(@"Get New ship id:%d",ship_id);
     cell.textLabel.text = @"离开";
 }
 
@@ -349,6 +360,8 @@
     ButtonStyle=2;
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    Ajioned=NO;
+    
     cell.textLabel.text = @"加入";
 }
 

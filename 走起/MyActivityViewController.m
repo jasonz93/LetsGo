@@ -100,7 +100,7 @@
     else
         tmp=[AedDic objectAtIndex:[indexPath row]];
     NSLog(@"%@",[tmp objectForKey:@"activity_end_time"]);
-    //[cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
+    [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[tmp objectForKey:@"activity_logo"] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
     cell.accessoryType=UITableViewCellAccessoryNone;
     return cell;
     

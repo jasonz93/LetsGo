@@ -20,14 +20,13 @@
     // Configure the view for the selected state
 }
 
--(void)initwithTitle:(NSString*)NewTitle Img:(NSData*)NewImg BeginTime:(NSString*)TheBeginTime EndTime:(NSString*)TheEndTime Place:(NSString*)NewPlace{
+-(void)initwithTitle:(NSString*)NewTitle Img:(NSString*)NewImg BeginTime:(NSString*)TheBeginTime EndTime:(NSString*)TheEndTime Place:(NSString*)NewPlace{
     self.ActivityTitle.text=NewTitle;
-    
-    
-    self.ActivityImg.image=[UIImage imageWithData:NewImg];
+    //self.ActivityImg.image=[UIImage imageWithData:NewImg];
+    [Common loadPic:NewImg imageView:self.ActivityImg];
     self.ActivityPlaceLabel.text=NewPlace;
     self.ActivityBeginTimeLabel.text=TheBeginTime;
-    self.ActivityEndTimeLabel.text=TheEndTime;
+    //self.ActivityEndTimeLabel.text=TheEndTime;
 }
 
 
