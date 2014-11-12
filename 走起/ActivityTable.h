@@ -73,6 +73,7 @@
     NSInteger ship_id;
     NSString *PicURL;
     UIImageView *ActivityPic;
+    NSMutableData *JResult;
 }
 
 

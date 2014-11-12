@@ -22,7 +22,7 @@
                     <color key="textColor" red="0.37647058820000001" green="0.49019607840000001" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="2c4-3g-joC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="2c4-3g-joC">
                     <rect key="frame" x="13" y="205" width="12" height="12"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="R7w-08-ywS"/>
@@ -38,7 +38,7 @@
                     <color key="textColor" red="0.37647058820000001" green="0.49019607840000001" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="site" translatesAutoresizingMaskIntoConstraints="NO" id="c9U-O9-As1">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locate" translatesAutoresizingMaskIntoConstraints="NO" id="c9U-O9-As1">
                     <rect key="frame" x="13" y="225" width="12" height="12"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="HOf-rd-nCY"/>
@@ -117,12 +117,20 @@
                 <constraint firstItem="Eq2-3H-MV4" firstAttribute="top" secondItem="sOR-YL-66l" secondAttribute="topMargin" id="y7u-Kb-pDX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ActivityImg" destination="Eq2-3H-MV4" id="YDa-0z-hWS"/>
+                <outlet property="ApeopleL" destination="yFb-E8-GkS" id="21B-Ss-dKX"/>
+                <outlet property="ApeopleMaxL" destination="lFs-b7-Toj" id="MCw-Wv-BVS"/>
+                <outlet property="AplaceL" destination="bkG-yN-P6m" id="nF3-Xm-8wY"/>
+                <outlet property="AtimeL" destination="nBy-cf-VxT" id="ucl-ef-RcH"/>
+                <outlet property="AtitleL" destination="oFf-GG-niI" id="KwE-K9-l6E"/>
+            </connections>
             <point key="canvasLocation" x="371" y="394.5"/>
         </view>
     </objects>
     <resources>
+        <image name="clock" width="30" height="30"/>
+        <image name="locate" width="38" height="30"/>
         <image name="shadow" width="636" height="519"/>
-        <image name="site" width="72" height="72"/>
-        <image name="time" width="40" height="40"/>
     </resources>
 </document>

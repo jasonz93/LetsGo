@@ -128,7 +128,7 @@
         NSDictionary *tmp=[AList objectAtIndex:itr];
         //viewer.frame=CGRectMake(320*itr,0.0f, 320.0f, ASV.contentSize.height);
         viewer.frame=CGRectMake(ASV.frame.size.width*itr+MicroLen,MicroLen, ASV.frame.size.width-2*MicroLen, ASV.frame.size.height-2*MicroLen);
-        NSLog(@"%F,%f,%f,%f",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height);
+        //NSLog(@"%F,%f,%f,%f",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height);
         /*[viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];*/
         [viewer initWithImg:[tmp objectForKey:@"activity_logo"] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
         //NSLog(@"%f,%f,%f,%f,itr=%d",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height,itr);

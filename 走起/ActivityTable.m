@@ -63,7 +63,7 @@
     SendCommentBtn.backgroundColor=[UIColor blackColor];
     [SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
     Afinished=[[AData_Dic objectForKey:@"finished"]boolValue];
-    if([AData_Dic objectForKey:@"ship_id"]==nil)
+    if([[AData_Dic objectForKey:@"ship_id"] isEqual:@""])
     {
         Ajioned=0;
     }
@@ -336,20 +336,18 @@
     NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships.json?user_token=%@",URLpre,Mytoken];
     NSData *JoinData=[[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]] dataUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"Post URL:%@\nData%@",CompleteURL,[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]]);
+    PostReslut=[NSMutableData alloc];
     [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"POST" postData:JoinData resultData:PostReslut sender:self onSuccess:@selector(JionSuccess) onError:nil];
 }
 
 -(void)JionSuccess
 {
-    NSLog(@"%@",PostReslut);
     NSLog(@"Jion Activity Success,Receive: %@",[[NSString alloc]initWithData:PostReslut encoding:NSUTF8StringEncoding]);
     ButtonStyle=1;
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     Ajioned=YES;
-    //ship_id=[[NSString alloc] initWithData:PostReslut encoding:NSUTF8StringEncoding] ob
-    NSDictionary *test=[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"%@",test);
+    ship_id=[[[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil]objectForKey:@"ship_id"]integerValue];
     NSLog(@"Get New ship id:%d",ship_id);
     cell.textLabel.text = @"离开";
 }

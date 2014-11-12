@@ -33,14 +33,14 @@
                             <constraint firstAttribute="height" constant="15" id="oPI-Qg-VfW"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="EhI-gc-Srb">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="EhI-gc-Srb">
                         <rect key="frame" x="116" y="49" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="4Ae-25-G9S"/>
                             <constraint firstAttribute="width" constant="15" id="5rS-Mt-USr"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="site" translatesAutoresizingMaskIntoConstraints="NO" id="SGg-pq-69F">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locate" translatesAutoresizingMaskIntoConstraints="NO" id="SGg-pq-69F">
                         <rect key="frame" x="116" y="72" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="KCG-qm-Tvw"/>
@@ -106,8 +106,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="clock" width="30" height="30"/>
+        <image name="locate" width="38" height="30"/>
         <image name="person" width="48" height="48"/>
-        <image name="site" width="72" height="72"/>
-        <image name="time" width="40" height="40"/>
     </resources>
 </document>
