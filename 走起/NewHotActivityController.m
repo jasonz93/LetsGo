@@ -7,7 +7,7 @@
 //
 
 #import "NewHotActivityController.h"
-
+#import "LoginView.h"
 @interface NewHotActivityController ()
 
 @end
@@ -15,6 +15,14 @@
 @implementation NewHotActivityController
 
 - (void)viewDidLoad {
+    MicroLen=10.0f;
+    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    Mytoken=[defaults objectForKey:@"user_token"];
+    NSLog(@"Hot Activity Get token %@",Mytoken);
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.navigationItem setTitle:@"热门活动"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [self preinit];
     [self GetMyAList];
     [super viewDidLoad];
@@ -35,14 +43,14 @@
     ASV.scrollsToTop = NO;
     ASV.delegate = self;
     [ASV addGestureRecognizer:SingleTap];
-    //ASV.backgroundColor=[UIColor blueColor];
+    ASV.backgroundColor=[UIColor colorWithRed:227.0/255 green:232.0/255 blue:234.0/255 alpha:1.0f];
     [self.view addSubview:ASV];
     PGC=[[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight, 200, 36)];
     PGC.currentPage = 0;
     PGC.userInteractionEnabled = YES;
     PGC.alpha = 1.0;
     //SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
-    [PGC addTarget:self action:@selector(PageValueChanged) forControlEvents:UIControlEventTouchDown];
+  //  [PGC addTarget:self action:@selector(PageValueChanged) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:PGC];
     
 }
@@ -60,13 +68,6 @@
     AactivityDetail.Aid=[[AList objectAtIndex:PGC.currentPage]objectForKey:@"activity_id"];
     [self.navigationController pushViewController:AactivityDetail animated:YES];
 }
-
-
--(void)PageValueChanged{
-    
-    
-}
-
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollViews {
     int pageNum = fabs(scrollViews.contentOffset.x / scrollViews.frame.size.width);
@@ -86,11 +87,31 @@
     RevData=[NSMutableData alloc];
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/acitivties.json",URLpre]  ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/activities.json",URLpre]  ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
     AList= [NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
+   /* NSDictionary *Errdic=(NSDictionary*)AList;
+     NSLog(@"Alist:%@",Errdic);
+    if([Errdic objectForKey:@"error"]!=nil)
+    {
+       NSLog(@"判断到登陆失效，即将跳转到登陆界面");
+        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
+        [self presentViewController:lv animated:YES completion:^{
+        }];
+        NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"user_token"];
+        [defaults synchronize];
+        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginView *regview=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
+        regview.hidesBottomBarWhenPushed=YES;
+        [self.navigationController addChildViewController:regview];
+
+    }
+    else
+    {*/
     ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
     PGC.numberOfPages = AList.count;
     NSLog(@"Page Control Display %d dots",PGC.numberOfPages);
@@ -106,8 +127,10 @@
             viewer=[ActivityNewView alloc];
         NSDictionary *tmp=[AList objectAtIndex:itr];
         //viewer.frame=CGRectMake(320*itr,0.0f, 320.0f, ASV.contentSize.height);
-        viewer.frame=CGRectMake(ASV.frame.size.width*itr,0.0f, ASV.frame.size.width, ASV.frame.size.height);
-        [viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
+        viewer.frame=CGRectMake(ASV.frame.size.width*itr+MicroLen,MicroLen, ASV.frame.size.width-2*MicroLen, ASV.frame.size.height-2*MicroLen);
+        NSLog(@"%F,%f,%f,%f",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height);
+        /*[viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];*/
+        [viewer initWithImg:[tmp objectForKey:@"activity_logo"] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
         //NSLog(@"%f,%f,%f,%f,itr=%d",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height,itr);
         //viewer=[[ActivityNewView alloc]initWithFrame:CGRectMake(320*itr+20.0f, 0+20.0f,320, 300)];
         //[viewer defalutinit];

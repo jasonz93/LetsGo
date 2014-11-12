@@ -16,6 +16,8 @@
 #import "ActivityTable.h"
 @interface MyActivityViewController : UITableViewController<MBProgressHUDDelegate>{
     NSArray *AingDic,*AedDic;
+    NSString *mytoken;
+    NSInteger Uid;
 }
 
 @property NSMutableData *RevData;

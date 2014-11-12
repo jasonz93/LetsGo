@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Common.h"
 @interface PersonInfoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *UserImg;
 @property (weak, nonatomic) IBOutlet UILabel *UserNameL;
@@ -15,5 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *PraiseL;
 
 
--(void)initWithUserLogo:(NSData*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(int)Praise;
+-(void)initWithUserLogo:(NSString*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(int)Praise;
 @end

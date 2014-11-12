@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Common.h"
 @interface ActivityIntroCell: UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *ActivityImg;
 @property (weak, nonatomic) IBOutlet UILabel *ActivityTitle;
-@property (weak, nonatomic) IBOutlet UILabel *ActivityEndTimeLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *ActivityEndTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ActivityBeginTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ActivityPlaceLabel;
 
 
 
--(void)initwithTitle:(NSString*)NewTitle Img:(NSData*)NewImg BeginTime:(NSString*)TheBeginTime EndTime:(NSString*)TheEndTime Place:(NSString*)NewPlace;
+-(void)initwithTitle:(NSString*)NewTitle Img:(NSString*)NewImg BeginTime:(NSString*)TheBeginTime EndTime:(NSString*)TheEndTime Place:(NSString*)NewPlace;
 @end

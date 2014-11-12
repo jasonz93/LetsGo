@@ -14,20 +14,18 @@
 
 @implementation NewPersonInfo
 
--(void)defaultSaveAppSetting_forbiddisplaypic:(bool)b;
-
-{
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    [defaults setInteger:Uid forKey:@"user_id"];
-    [defaults setValue:MyToken forKey:@"user_token"];
-    [defaults synchronize];
-    
-}
-
 
 - (void)viewDidLoad {
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:136/255.0 alpha:1]];
-    [self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.navigationItem setTitle:@"个人信息"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+   
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    Uid=[[defaults objectForKey:@"user_id"]integerValue];
+    MyToken=[defaults objectForKey:@"user_token"];
+    NSLog(@"PersonInfoView Get token %@,id %d",MyToken,Uid);
+    //MyToken=@"46Ms7ERFe7dpzXCFKjyw";
 
     [self GetInfo];
     [super viewDidLoad];
@@ -60,7 +58,7 @@
     switch(section)
     {
         case 0:
-            return 2;
+            return 1;
             break;
         case 1:
             return MyADic.count;
@@ -75,11 +73,7 @@
     {
         case 0:
         {
-            switch([indexPath row])
-            {
-                case 0:
-                {
-                    static BOOL PersonCellLoaded=NO;
+                PersonCellLoaded=NO;
                     if(!PersonCellLoaded){
                         UINib *nib=[UINib nibWithNibName:@"PersonInfoCell" bundle:nil];
                         [tableView registerNib:nib forCellReuseIdentifier:@"PersonInfoCell"];
@@ -93,9 +87,9 @@
                     [cell initWithUserLogo:UserLogo UserName:UserName Schoolname:SchoolName Praise:UserPraise];
                     cell.accessoryType=UITableViewCellAccessoryNone;
                     return cell;
-                }
-                    break;
-                 default:
+        }
+            break;
+                 /*default:
                 {
                     static BOOL MyLV=NO;
                     if(!MyLV){
@@ -112,12 +106,10 @@
                     cell.accessoryType=UITableViewCellAccessoryNone;
                     return cell;
                 }
-                    break;
-            }
-        }
+                    break;*/
         case 1:
             {
-                static BOOL MyAC=NO;
+                MyAC=NO;
                 if(!MyAC){
                     UINib *nib=[UINib nibWithNibName:@"ActivityIntroCell" bundle:nil];
                     [tableView registerNib:nib forCellReuseIdentifier:@"MYAC"];
@@ -129,7 +121,7 @@
                 }
                 NSDictionary *tmp;
                 tmp=[MyADic objectAtIndex:[indexPath row]];
-                [cell initwithTitle:[tmp objectForKey:@"acitivity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_pic"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
+                [cell initwithTitle:[tmp objectForKey:@"acitivity_title"] Img:[tmp objectForKey:@"activity_pic"] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
                 cell.accessoryType=UITableViewCellAccessoryNone;
                 return cell;
             }
@@ -185,7 +177,14 @@
 }
 
 -(void) ReceiveSuccess{
-    NSLog(@"%@",[[NSString alloc]initWithData:RevData encoding:NSUTF8StringEncoding]);
+    NSLog(@"Logout! %@",[[NSString alloc]initWithData:RevData encoding:NSUTF8StringEncoding]);
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"user_token"];
+    [defaults synchronize];
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
+    [self presentViewController:lv animated:YES completion:^{
+    }];
     //TRUE FLASE;
 }
 #pragma mark network
@@ -194,17 +193,18 @@
     RevData=[NSMutableData alloc];
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/1.json",URLpre] ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/%d.json",URLpre,Uid] ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
     DataDic=[NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
     MyADic=[DataDic objectForKey:@"myactivity"];
     
-    UserLogo=[NSData dataWithContentsOfURL:[NSURL URLWithString:[DataDic objectForKey:@"userlogo"]]];
+    UserLogo=[DataDic objectForKey:@"userlogo"];
     UserName=[DataDic objectForKey:@"email"];
     UserPraise=[[DataDic objectForKey:@"praise"] floatValue];
     SchoolName=[DataDic objectForKey:@"school_name"];
+    NSLog(@"%@",DataDic);
     NSLog(@"%@,%f,%@",UserName,UserPraise,SchoolName);
     [self.InfoTable reloadData];
 }
@@ -232,26 +232,9 @@
     switch ([indexPath section]) {
         case 0:
         {
-            switch ([indexPath row]) {
-                case 0:
-                {
-                    return 70;
-                }
-                    break;
-                    
-                case 1:
-                {
-                    return 100;
-                }
-                    break;
-                default:
-                {
-                    return 40;
-                }
-                    break;
-            }
-        }
+            return 70;
             break;
+        }
             
         case 1:
         {

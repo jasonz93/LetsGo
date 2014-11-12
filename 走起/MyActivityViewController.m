@@ -16,15 +16,42 @@
 @implementation MyActivityViewController
 
 - (void)viewDidLoad {
-    //[[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:136/255.0 alpha:1]];
-    //[self.navigationController.navigationBar setTranslucent:NO];
-    [super viewDidLoad];
+  /*  UIImage *selectedImage = [UIImage imageNamed:@"selected.png"];
+    UIImage *unselectedImage = [UIImage imageNamed:@"unselected.png"];
+    
+    UITabBar *tabBar = tabBarViewController.tabBar;
+    UITabBarItem *item1 = [tabBar.items objectAtIndex:0];
+    [item1 setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];*/
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    mytoken=[defaults objectForKey:@"user_token"];
+    Uid=[[defaults objectForKey:@"user_id"]integerValue];
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    [self.navigationItem setTitle:@"我参与的"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];    [super viewDidLoad];
     [self initRefreshControl];
     [self.refreshControl beginRefreshing];
     [self RefreshAList];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"Hot Activity Get token %@,id %d",mytoken,Uid);
+}
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // Background color
+    //view.tintColor = [UIColor blackColor];
+    
+    // Text Color
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor colorWithRed:96.0/255 green:125.0/255 blue:136.0/255 alpha:1]];
+    
+    // Another way to set the background color
+    // Note: does not preserve gradient effect of original header
+    // header.contentView.backgroundColor = [UIColor blackColor];
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView{
     return 2;
@@ -72,7 +99,8 @@
         tmp=[AingDic objectAtIndex:[indexPath row]];
     else
         tmp=[AedDic objectAtIndex:[indexPath row]];
-    [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
+    NSLog(@"%@",[tmp objectForKey:@"activity_end_time"]);
+    [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[tmp objectForKey:@"activity_logo"] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
     cell.accessoryType=UITableViewCellAccessoryNone;
     return cell;
     
@@ -99,7 +127,8 @@
     self.RevData=[NSMutableData alloc];
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/1/activities.json?user_token=46Ms7ERFe7dpzXCFKjyw",URLpre] ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    NSLog(@"URL is %@",[NSString stringWithFormat:@"%@/users/%d/activities.json",URLpre,Uid] );
+    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/users/%d/activities.json",URLpre,Uid] ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
@@ -109,7 +138,6 @@
         [self.refreshControl endRefreshing];
         self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"👻下拉刷新"];
     }
-    //NSLog(@"Json:%@",[NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil]);
     AingDic= [[NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil]objectForKey:@"activity_ing"];
     AedDic= [[NSJSONSerialization JSONObjectWithData:self.RevData options:NSJSONReadingMutableContainers error:nil]objectForKey:@"activity_ed"];
     [self.ActivityList reloadData];

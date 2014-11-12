@@ -86,7 +86,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="site" width="40" height="40"/>
+        <image name="site" width="72" height="72"/>
         <image name="time" width="40" height="40"/>
     </resources>
 </document>

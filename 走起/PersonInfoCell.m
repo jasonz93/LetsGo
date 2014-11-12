@@ -18,9 +18,8 @@
     [super setSelected:selected animated:animated];
 }
     
--(void)initWithUserLogo:(NSData*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(int)Praise{
-    NSLog(@"IN!!");
-    self.UserImg.image=[UIImage imageWithData:Uimg];
+-(void)initWithUserLogo:(NSString*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(int)Praise{
+    [Common loadPic:Uimg imageView:self.UserImg];
     self.UserNameL.text=Uname;
     self.SchoolNameL.text=schoolname;
     self.PraiseL.text=[NSString stringWithFormat:@"%d",Praise];

@@ -11,9 +11,11 @@
 #import "MBProgressHUD.h"
 #import "GetInfo.h"
 #import "ActivityTable.h"
+#import "Common.h"
 //#import "ActivityDetailViewController.h"
 #define RTopHeight 64
 #define RtotalHeight 93
+#define WETIAO 10
 @interface NewHotActivityController : UIViewController<UIScrollViewDelegate,MBProgressHUDDelegate,UIPageViewControllerDelegate,UIGestureRecognizerDelegate>
 {
     BOOL pageControlUsed;
@@ -22,7 +24,9 @@
     UIScrollView *ASV;
     UIPageControl *PGC;
     UITapGestureRecognizer* SingleTap;
+    float MicroLen;
+    NSString *Mytoken;
 }
 
--(void)PageValueChanged;
+
 @end
