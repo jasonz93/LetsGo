@@ -44,7 +44,7 @@
 @property UITextField *txtActOrg;
 @property UIImageView *imgActLogo;
 @property UIImageView *imgActPic;
-@property UIBarButtonItem *btnCommit;
+@property IBOutlet UIBarButtonItem *btnCommit;
 @property UIButton *btnLocate;
 @property UIButton *btnLogo;
 @property UIButton *btnPic;

@@ -32,8 +32,16 @@ BOOL shouldTouch;
     [dic setValue:[[NSString alloc]initWithData:self.picUrlData encoding:NSUTF8StringEncoding] forKey:@"activity_pic"];
     NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
     self.commitResult=[[NSMutableData alloc]init];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:@"commit" postData:json resultData:self.commitResult sender:self onSuccess:nil onError:nil];
+    NSString *url=[Common getUrlString:@"/activities.json"];
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:self.commitResult sender:self onSuccess:@selector(commitDone) onError:nil];
     [post Run];
+}
+
+-(void)commitDone{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"成功发起活动" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
+    NSArray *views=self.navigationController.viewControllers;
+    [self.navigationController popToViewController:views[views.count-2] animated:YES];
 }
 
 -(void)clickLocate{
@@ -378,7 +386,7 @@ BOOL shouldTouch;
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    //[self.btnCommit setEnabled:[self canCommit]];
+    [self.btnCommit setEnabled:[self canCommit]];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -429,7 +437,7 @@ BOOL shouldTouch;
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
     self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    //[self.btnCommit setEnabled:[self canCommit]];
+    [self.btnCommit setEnabled:[self canCommit]];
 }
 
 -(void)tapBackground //在ViewDidLoad中调用
@@ -451,6 +459,7 @@ BOOL shouldTouch;
     [self hideActTime];
     [self hideActEnd];
     [self hideTblActOrg];
+    [self.btnCommit setEnabled:[self canCommit]];
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
@@ -485,6 +494,7 @@ BOOL shouldTouch;
 
 -(void)viewDidAppear:(BOOL)animated{
     [self tapBackground];
+    [self.btnCommit setEnabled:[self canCommit]];
 }
 
 @end
@@ -497,8 +507,11 @@ BOOL shouldTouch;
     self.onClicked=onClick;
     self.orgData=[[NSMutableData alloc]init];
     self.orgDataList=[[NSMutableArray alloc]init];
-    //NSString *url=[Common getUrlString:@"/search.php"];
-    NSString *url=@"http://localhost/organization_list.txt";
+    NSString *host=[Common getUrlString:@""];
+    NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
+    NSInteger user_id=[[local objectForKey:@"user_id"]integerValue];
+    NSString *url=[NSString stringWithFormat:@"%@/users/%ld/organizations.json",host,user_id];
+    //NSString *url=@"http://localhost/organization_list.txt";
     [[GetInfo alloc]initWithURL:url ResultData:self.orgData sender:self OnSuccess:@selector(gotOrgData) OnError:@selector(errOrgData)];
     return self;
 }

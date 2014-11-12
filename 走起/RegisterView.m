@@ -177,7 +177,7 @@ NSString *iconUrl;
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
         [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.latitude]stringValue] forKey:@"school_lat"];
         [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.longitude]stringValue] forKey:@"school_lon"];
-        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
         self.locData = [NSMutableData alloc];
         NSLog(@"%f,%f",loc.coordinate.latitude,loc.coordinate.longitude);
         NSString *url=[Common getUrlString:@"/schools/search"];

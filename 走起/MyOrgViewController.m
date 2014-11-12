@@ -52,8 +52,6 @@ clsOrg *org;
 }
 //http://localhost:3000/users/1/organizations.json
 -(void)refreshOrgs{
-    [self.refreshControl beginRefreshing];
-    self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..."];
     orgData=[[NSMutableData alloc]init];
     NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
     NSString *url=[Common getUrlString:@"/users/"];
@@ -62,6 +60,12 @@ clsOrg *org;
     //NSString *url=[Common getUrlString:@"/organization_list.txt"];
     GetInfo *get=[[GetInfo alloc]init];
     [get initWithURL:url ResultData:orgData sender:self OnSuccess:@selector(gotOrgs) OnError:@selector(networkErr)];
+}
+
+-(void)pullRefresh{
+    [self.refreshControl beginRefreshing];
+    self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中..."];
+    [self refreshOrgs];
 }
 
 -(void)gotOrgs{
@@ -144,7 +148,7 @@ clsOrg *org;
     //[Common quitOrg:[[NSNumber alloc] initWithInt:1]];
     UIRefreshControl *rc=[[UIRefreshControl alloc]init];
     rc.attributedTitle=[[NSAttributedString alloc]initWithString:@"下拉刷新"];
-    [rc addTarget:self action:@selector(refreshOrgs) forControlEvents:UIControlEventValueChanged];
+    [rc addTarget:self action:@selector(pullRefresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControl=rc;
 }
 
