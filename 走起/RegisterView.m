@@ -56,23 +56,16 @@ NSString *iconUrl;
     return YES;
 }
 
--(void)uploadPic:(UIImage *)image result:(NSMutableData *)result{
-    NSData *picData=UIImageJPEGRepresentation(image, 1.0);
-    NSString *url=@"http://192.168.18.179/upload.php";
-    //NSString *url=[Common getUrlString:@"/upload.php"];
-    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:picData resultData:result sender:self onSuccess:@selector(uploadDone) onError:@selector(networkErr)];
-    [post Run];
-}
-
 -(void)uploadDone{
     [self.btnReg setEnabled:[self canCommit]];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    image=[Common resizePic:image resizeTo:CGSizeMake(150, 150)];
     self.imgIcon.image=image;
     iconUrlData=[[NSMutableData alloc]init];
-    [self uploadPic:image result:iconUrlData];
+    [Common uploadPic:image picUrl:iconUrlData sender:self onDone:@selector(uploadDone)];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

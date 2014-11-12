@@ -40,6 +40,7 @@
 		E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */; };
 		E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E221A0A63B500F43300 /* SearchOrgViewController.m */; };
 		E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E251A0A94E900F43300 /* OrgDetailViewController.m */; };
+		E13B4F371A131E6F000047D6 /* LocateNewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */; };
 		E1949D8C1A08B47A005CC530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949D8B1A08B47A005CC530 /* main.m */; };
 		E1949DAC1A08B47B005CC530 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DAB1A08B47B005CC530 /* __Tests.m */; };
 		E1949DCB1A08B5C0005CC530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DB41A08B5C0005CC530 /* AppDelegate.m */; };
@@ -119,6 +120,8 @@
 		E1215E221A0A63B500F43300 /* SearchOrgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOrgViewController.m; sourceTree = "<group>"; };
 		E1215E241A0A94BB00F43300 /* OrgDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgDetailViewController.h; sourceTree = "<group>"; };
 		E1215E251A0A94E900F43300 /* OrgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgDetailViewController.m; sourceTree = "<group>"; };
+		E13B4F351A131E65000047D6 /* LocateNewActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocateNewActivityViewController.h; sourceTree = "<group>"; };
+		E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocateNewActivityViewController.m; sourceTree = "<group>"; };
 		E1949D861A08B47A005CC530 /* 走起.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "走起.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1949D8A1A08B47A005CC530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1949D8B1A08B47A005CC530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				E1215E221A0A63B500F43300 /* SearchOrgViewController.m */,
 				E1215E241A0A94BB00F43300 /* OrgDetailViewController.h */,
 				E1215E251A0A94E900F43300 /* OrgDetailViewController.m */,
+				E13B4F351A131E65000047D6 /* LocateNewActivityViewController.h */,
+				E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */,
 			);
 			path = "走起";
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */,
 				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,
 				7361E90B1A126E9C00E17682 /* NewHotActivityController.m in Sources */,
+				E13B4F371A131E6F000047D6 /* LocateNewActivityViewController.m in Sources */,
 				73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */,
 				7361E9251A12708100E17682 /* LevelCell.m in Sources */,
 				7346D7151A0CA8D20024B4B5 /* ActivityTable.m in Sources */,

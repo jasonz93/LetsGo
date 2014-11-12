@@ -28,6 +28,8 @@
 @property IBOutlet UIView *view;
 @property IBOutlet UIViewController *controller;
 @property IBOutlet UIBarButtonItem *btnCommit;
+@property NSNumber *lat;
+@property NSNumber *lon;
 
 
 -(void)hideActTime;

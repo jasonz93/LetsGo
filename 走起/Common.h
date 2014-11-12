@@ -7,17 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 
-@interface Common : NSObject
+@interface Common : NSObject<NSURLConnectionDelegate>
 
 +(NSString *)getToken;
 +(NSString *)stringFromDate:(NSDate *)date;
 +(NSString *)durFromDate:(NSDate *)date;
 +(NSString *)getUrlString:(NSString *)path;
-+(NSData *)jsonProc:(NSData *)data;
++(void)uploadPic:(UIImage *)pic picUrl:(NSMutableData *)picUrl sender:(id)sender onDone:(SEL)onDone;
 +(void)joinOrg:(NSNumber *)ship_id;
 +(void)quitOrg:(NSNumber *)ship_id;
++(UIImage *)resizePic:(UIImage *)orig resizeTo:(CGSize)size;
++(void)loadPic:(NSString *)urlString imageView:(UIImageView *)view;
 
 @end
 

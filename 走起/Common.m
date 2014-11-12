@@ -35,6 +35,20 @@
     return url;
 }
 
++(void)loadPic:(NSString *)urlString imageView:(UIImageView *)view{
+    NSLog(@"pic Loading!");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *url=[NSURL URLWithString:urlString];
+        NSData *data=[[NSData alloc]initWithContentsOfURL:url];
+        if (data!=nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"pic Loaded!");
+                view.image=[[UIImage alloc]initWithData:data];
+            });
+        }
+    });
+}
+
 +(void)joinOrg:(NSNumber *)ship_id{
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:ship_id forKey:@"organization_id"];
@@ -55,17 +69,37 @@
     NSURLConnection *conn=[[NSURLConnection alloc]initWithRequest:request delegate:nil startImmediately:YES];
 }
 
-+(NSData *)jsonProc:(NSData *)data{
-    NSString *str=@"{";
-    NSMutableData *d=[[NSMutableData alloc]initWithData:data];
-    NSData *pat=[str dataUsingEncoding:NSUTF8StringEncoding];
-    const Byte *con=[pat bytes];
-    NSRange r=[d rangeOfData:pat options:NSDataSearchBackwards range:NSMakeRange(0, d.length)];
-    while (r.location!=NSNotFound) {
-        [d replaceBytesInRange:r withBytes:con];
-        r=[d rangeOfData:pat options:NSDataSearchAnchored range:NSMakeRange(0, d.length)];
-    }
-    return d;
++(void)uploadPic:(UIImage *)pic picUrl:(NSMutableData *)picUrl sender:(id)sender onDone:(SEL)onDone{
+    NSData *picData=UIImageJPEGRepresentation(pic, 1.0);
+    NSString *picEncoded=[picData base64EncodedStringWithOptions:0];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    [dic setValue:picEncoded forKey:@"picdata"];
+    NSData *json=[NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    //NSString *url=[Common getUrlString:@"/upload"];
+    NSString *url=@"http://localhost/upload.php";
+    HTTPPost *post=[[HTTPPost alloc]initWithArgs:url postData:json resultData:picUrl sender:sender onSuccess:onDone onError:@selector(networkErr)];
+    [post Run];
+}
+
++(void)networkErr{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"网络错误，请检查网络。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
+}
+
++(NSURL *)getUrlWithToken:(NSString *)path{
+    NSString *token=[Common getToken];
+    NSString *host=[Common getUrlString:@""];
+    NSString *str=[[NSString alloc]initWithFormat:@"%@%@?user_token=%@",host,path,token];
+    NSURL *url=[NSURL URLWithString:str];
+    return url;
+}
+
++(UIImage *)resizePic:(UIImage *)orig resizeTo:(CGSize)size{
+    UIGraphicsBeginImageContext(size);
+    [orig drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *result=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
 }
 
 @end

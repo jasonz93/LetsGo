@@ -43,6 +43,9 @@ NSMutableArray *orgDataList;
 NSMutableData *orgData;
 NSString *user;
 
+-(IBAction)test:(id)sender{
+    NSLog(@"%f,%f",[self.lat floatValue],[self.lon floatValue]);
+}
 
 -(IBAction)Commit:(id)sender{
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
@@ -112,12 +115,12 @@ NSString *user;
     if (picker == logoPicker){
         self.imgActLogo.image=image;
         logoUrlData=[[NSMutableData alloc]init];
-        [self uploadPic:image result:logoUrlData];
+        [Common uploadPic:image picUrl:logoUrlData sender:self onDone:@selector(uploadDone)];
     }
     if (picker == picPicker){
         self.imgActPic.image=image;
         picUrlData=[[NSMutableData alloc]init];
-        [self uploadPic:image result:picUrlData];
+        [Common uploadPic:image picUrl:logoUrlData sender:self onDone:@selector(uploadDone)];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
