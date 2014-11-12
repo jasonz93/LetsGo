@@ -22,6 +22,8 @@
     UIScrollView *ASV;
     UIPageControl *PGC;
     UITapGestureRecognizer* SingleTap;
+    
+    NSString *Mytoken;
 }
 
 -(void)PageValueChanged;

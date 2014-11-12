@@ -20,6 +20,7 @@
         str=[str stringByAppendingString:token];
     }
     NSURL *url = [NSURL URLWithString:str];
+    NSLog(@"%@",url);
     //self.request =[[NSURLRequest alloc]initWithURL:url];
     self.request=[[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     self.TheConnection=[[NSURLConnection alloc]initWithRequest:self.request delegate:self startImmediately:NO];

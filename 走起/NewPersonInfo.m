@@ -14,20 +14,18 @@
 
 @implementation NewPersonInfo
 
--(void)defaultSaveAppSetting_forbiddisplaypic:(bool)b;
-
-{
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    [defaults setInteger:Uid forKey:@"user_id"];
-    [defaults setValue:MyToken forKey:@"user_token"];
-    [defaults synchronize];
-    
-}
-
 
 - (void)viewDidLoad {
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:136/255.0 alpha:1]];
-    [self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.navigationItem setTitle:@"个人信息"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+   
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    Uid=[[defaults objectForKey:@"user_id"]integerValue];
+    MyToken=[defaults objectForKey:@"user_token"];
+    NSLog(@"PersonInfoView Get token %@,id %d",MyToken,Uid);
+    //MyToken=@"46Ms7ERFe7dpzXCFKjyw";
 
     [self GetInfo];
     [super viewDidLoad];
@@ -60,7 +58,7 @@
     switch(section)
     {
         case 0:
-            return 2;
+            return 1;
             break;
         case 1:
             return MyADic.count;
@@ -75,11 +73,7 @@
     {
         case 0:
         {
-            switch([indexPath row])
-            {
-                case 0:
-                {
-                    static BOOL PersonCellLoaded=NO;
+                PersonCellLoaded=NO;
                     if(!PersonCellLoaded){
                         UINib *nib=[UINib nibWithNibName:@"PersonInfoCell" bundle:nil];
                         [tableView registerNib:nib forCellReuseIdentifier:@"PersonInfoCell"];
@@ -93,9 +87,9 @@
                     [cell initWithUserLogo:UserLogo UserName:UserName Schoolname:SchoolName Praise:UserPraise];
                     cell.accessoryType=UITableViewCellAccessoryNone;
                     return cell;
-                }
-                    break;
-                 default:
+        }
+            break;
+                 /*default:
                 {
                     static BOOL MyLV=NO;
                     if(!MyLV){
@@ -112,12 +106,10 @@
                     cell.accessoryType=UITableViewCellAccessoryNone;
                     return cell;
                 }
-                    break;
-            }
-        }
+                    break;*/
         case 1:
             {
-                static BOOL MyAC=NO;
+                MyAC=NO;
                 if(!MyAC){
                     UINib *nib=[UINib nibWithNibName:@"ActivityIntroCell" bundle:nil];
                     [tableView registerNib:nib forCellReuseIdentifier:@"MYAC"];
@@ -185,7 +177,10 @@
 }
 
 -(void) ReceiveSuccess{
-    NSLog(@"%@",[[NSString alloc]initWithData:RevData encoding:NSUTF8StringEncoding]);
+    NSLog(@"Logout! %@",[[NSString alloc]initWithData:RevData encoding:NSUTF8StringEncoding]);
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"user_token"];
+    [defaults synchronize];
     //TRUE FLASE;
 }
 #pragma mark network
@@ -205,6 +200,7 @@
     UserName=[DataDic objectForKey:@"email"];
     UserPraise=[[DataDic objectForKey:@"praise"] floatValue];
     SchoolName=[DataDic objectForKey:@"school_name"];
+    NSLog(@"%@",DataDic);
     NSLog(@"%@,%f,%@",UserName,UserPraise,SchoolName);
     [self.InfoTable reloadData];
 }
@@ -232,26 +228,9 @@
     switch ([indexPath section]) {
         case 0:
         {
-            switch ([indexPath row]) {
-                case 0:
-                {
-                    return 70;
-                }
-                    break;
-                    
-                case 1:
-                {
-                    return 100;
-                }
-                    break;
-                default:
-                {
-                    return 40;
-                }
-                    break;
-            }
-        }
+            return 70;
             break;
+        }
             
         case 1:
         {

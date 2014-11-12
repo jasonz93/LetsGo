@@ -22,6 +22,8 @@
 
 -(void)initwithTitle:(NSString*)NewTitle Img:(NSData*)NewImg BeginTime:(NSString*)TheBeginTime EndTime:(NSString*)TheEndTime Place:(NSString*)NewPlace{
     self.ActivityTitle.text=NewTitle;
+    
+    
     self.ActivityImg.image=[UIImage imageWithData:NewImg];
     self.ActivityPlaceLabel.text=NewPlace;
     self.ActivityBeginTimeLabel.text=TheBeginTime;

@@ -31,9 +31,6 @@
 		7361E92A1A12709800E17682 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9281A12709800E17682 /* PersonInfoCell.m */; };
 		7361E92B1A12709800E17682 /* PersonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9291A12709800E17682 /* PersonInfoCell.xib */; };
 		73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7B1A08E8720056BFD6 /* GetInfo.m */; };
-		73DB6E7F1A08E8990056BFD6 /* MyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7E1A08E8990056BFD6 /* MyInfoViewController.m */; };
-		73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E811A08E8CD0056BFD6 /* ActivityDetailViewController.m */; };
-		73DB6E881A08EA4D0056BFD6 /* HotActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E841A08EA4D0056BFD6 /* HotActivityViewController.m */; };
 		73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */; };
 		E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */; };
 		E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E171A09521A00F43300 /* CreateActivityScrollView.m */; };
@@ -101,12 +98,6 @@
 		7361E9291A12709800E17682 /* PersonInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoCell.xib; sourceTree = "<group>"; };
 		73DB6E7A1A08E8720056BFD6 /* GetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetInfo.h; sourceTree = "<group>"; };
 		73DB6E7B1A08E8720056BFD6 /* GetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetInfo.m; sourceTree = "<group>"; };
-		73DB6E7D1A08E8990056BFD6 /* MyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoViewController.h; sourceTree = "<group>"; };
-		73DB6E7E1A08E8990056BFD6 /* MyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoViewController.m; sourceTree = "<group>"; };
-		73DB6E801A08E8CD0056BFD6 /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
-		73DB6E811A08E8CD0056BFD6 /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
-		73DB6E831A08EA4D0056BFD6 /* HotActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotActivityViewController.h; sourceTree = "<group>"; };
-		73DB6E841A08EA4D0056BFD6 /* HotActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotActivityViewController.m; sourceTree = "<group>"; };
 		73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityViewController.h; sourceTree = "<group>"; };
 		73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityViewController.m; sourceTree = "<group>"; };
 		E117E86D1A091B3700E19CA8 /* CreateActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateActivityViewController.h; sourceTree = "<group>"; };
@@ -230,14 +221,8 @@
 				7361E90A1A126E9C00E17682 /* NewPersonInfo.m */,
 				7346D7121A0CA8D20024B4B5 /* ActivityTable.h */,
 				7346D7131A0CA8D20024B4B5 /* ActivityTable.m */,
-				73DB6E831A08EA4D0056BFD6 /* HotActivityViewController.h */,
-				73DB6E841A08EA4D0056BFD6 /* HotActivityViewController.m */,
 				73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */,
 				73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */,
-				73DB6E801A08E8CD0056BFD6 /* ActivityDetailViewController.h */,
-				73DB6E811A08E8CD0056BFD6 /* ActivityDetailViewController.m */,
-				73DB6E7D1A08E8990056BFD6 /* MyInfoViewController.h */,
-				73DB6E7E1A08E8990056BFD6 /* MyInfoViewController.m */,
 				7346D7271A0CB0FE0024B4B5 /* CommentViewController.h */,
 				7346D7281A0CB0FE0024B4B5 /* CommentViewController.m */,
 				734BD4991A0CBFA5008A12C2 /* SendCommentViewController.h */,
@@ -404,12 +389,10 @@
 				E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */,
 				7361E90C1A126E9C00E17682 /* NewPersonInfo.m in Sources */,
 				7361E9211A12704200E17682 /* ASProgressPopUpView.m in Sources */,
-				73DB6E7F1A08E8990056BFD6 /* MyInfoViewController.m in Sources */,
 				7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */,
 				E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */,
 				7361E9201A12704200E17682 /* ASPopUpView.m in Sources */,
 				E1949DD41A08B5C0005CC530 /* RegisterView.m in Sources */,
-				73DB6E881A08EA4D0056BFD6 /* HotActivityViewController.m in Sources */,
 				7346D7291A0CB0FE0024B4B5 /* CommentViewController.m in Sources */,
 				E1949DD21A08B5C0005CC530 /* LoginView.m in Sources */,
 				E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */,
@@ -421,7 +404,6 @@
 				73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */,
 				7361E9161A126FCF00E17682 /* MBProgressHUD.m in Sources */,
 				E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */,
-				73DB6E821A08E8CD0056BFD6 /* ActivityDetailViewController.m in Sources */,
 				7361E91A1A12702500E17682 /* ActivityNewView.m in Sources */,
 				7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */,
 				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,

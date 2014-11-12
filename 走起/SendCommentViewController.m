@@ -33,12 +33,18 @@
 }
 
 - (IBAction)SendCommentButton:(id)sender {//CommentContentTxt 数据可能不对应，一会有网要改
-    HTTPPost *SendCommentPost=[[HTTPPost alloc]initWithArgs:SendCommentURL postData:[self.CommentContentTxt.text dataUsingEncoding:NSUTF8StringEncoding] resultData:ResultData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
-    [SendCommentPost Run];
+    NSData *CommentData=[[NSString stringWithFormat:@"{\"comment_content\":\"%@\",\"activity_id\":%@}",self.CommentContentTxt.text,self.Aid] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
+
+    SendCommentURL=[NSString stringWithFormat:@"%@/comments.json?user_token=%@",URLpre,[[NSUserDefaults standardUserDefaults] objectForKey:@"user_token"]];
+    [[PostInfo alloc]initWithURL:SendCommentURL HttpMethod:@"POST" postData:CommentData resultData:ResultData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
+    NSLog(@"Comment Sended");
 }
 
 -(void)ReceiveSuccess{
     NSLog(@"Recevie Data");
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -54,7 +60,7 @@
 
 
 -(void)keyboardDidShow:(NSNotification *)notif{
-    NSLog(@"DidShow");
+    NSLog(@"KeyBoard DidShow");
     if(keyboardVisible){
         return;
     }
@@ -72,7 +78,7 @@
 }
 
 -(void) keyboardDidHide:(NSNotification*)notif{
-    NSLog(@"DidHide");
+    NSLog(@"KeyBoard DidHide");
     NSDictionary* info=[notif userInfo];
     NSValue *aValue=[info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardsize=[aValue CGRectValue].size;

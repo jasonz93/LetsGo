@@ -15,6 +15,10 @@
 @implementation ActivityTable
 
 - (void)viewDidLoad {
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.navigationItem setTitle:@"活动详情"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     [self preinit];
     [super viewDidLoad];
     [self initRefreshControl];
@@ -23,10 +27,10 @@
 }
 
 -(void)preinit{
-    //[[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:136/255.0 alpha:1]];
-    //[self.navigationController.navigationBar setTranslucent:NO];
-    Mytoken=@"46Ms7ERFe7dpzXCFKjyw";//////////////////////////!!!!!!!!!!!!**************************************!!!!!!!!!!!!!
-    NSLog(@"ActivityTable Get Aid=%@",self.Aid);
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    Mytoken=[defaults objectForKey:@"user_token"];
+    //Mytoken=@"46Ms7ERFe7dpzXCFKjyw";//////////////////////////!!!!!!!!!!!!**************************************!!!!!!!!!!!!!
+    NSLog(@"ActivityTable Get Aid=%@,UserToken %@",self.Aid,Mytoken);
     SendCommentBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     ContentTxT=[[UITextView alloc]initWithFrame:CGRectMake(0, 40.0f, [UIScreen mainScreen].applicationFrame.size.width, CGFLOAT_MAX)];
     ContentTxT.editable=NO;
@@ -57,7 +61,15 @@
     SendCommentBtn.backgroundColor=[UIColor blackColor];
     [SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
     Afinished=[[AData_Dic objectForKey:@"finished"]boolValue];
-    Ajioned=[[AData_Dic objectForKey:@"jioned"]boolValue];
+    if([AData_Dic objectForKey:@"ship_id"]==nil)
+    {
+        Ajioned=0;
+    }
+    else
+    {
+        ship_id=[[AData_Dic objectForKey:@"ship_id"]integerValue];
+        Ajioned=1;
+    }
 }
 
 -(void) initRefreshControl{
@@ -78,16 +90,16 @@
     AData=[NSMutableData alloc];
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/activities/%@.json?user_token=%@",URLpre,self.Aid,Mytoken] ResultData:AData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/activities/%@.json",URLpre,self.Aid] ResultData:AData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
+    NSLog(@"Get Activity Detail Data");
     if(self.refreshControl.refreshing)
     {
         [self.refreshControl endRefreshing];
         self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"👻下拉刷新"];
     }
-    NSLog(@"Json Success received!!!");
     AData_Dic= [NSJSONSerialization JSONObjectWithData:AData options:NSJSONReadingMutableContainers error:nil];
     AComment=[AData_Dic objectForKey:@"comments"];
     [self CellPrepare];
@@ -95,9 +107,6 @@
 }
 
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    [segue.destinationViewController setValue:[AData_Dic objectForKey:@"comments"] forKey:@"CommentList"];
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section==0)
         return 4;
@@ -206,7 +215,7 @@
     }
     else
     {
-        static BOOL CommentCellLoaded=NO;
+        CommentCellLoaded=NO;
         if(!CommentCellLoaded){
             UINib *nib=[UINib nibWithNibName:@"CommentCell" bundle:nil];
             [tableView registerNib:nib forCellReuseIdentifier:@"CC"];
@@ -289,6 +298,7 @@
                 break;
             case 1:
             {
+                [self QuitActivity];
                 NSLog(@"Press Quit Activity Button");
             }
                 break;
@@ -310,10 +320,8 @@
     
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships.json?user_token=%@",URLpre,Mytoken];
-    NSDictionary *PrepareToJsonDic=[[NSDictionary alloc]initWithObjectsAndKeys:@"activity_id",[self.Aid integerValue], nil];
-    NSData *PostDataInfo=[NSJSONSerialization dataWithJSONObject:PrepareToJsonDic options:NSJSONWritingPrettyPrinted error:nil];
-    [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"DELETE" postData:PostDataInfo resultData:PostReslut sender:self onSuccess:@selector(QuitSuccess) onError:nil];
+    NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships/%d.json?user_token=%@",URLpre,ship_id,Mytoken];
+    [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"DELETE" postData:nil resultData:PostReslut sender:self onSuccess:@selector(QuitSuccess) onError:nil];
 }
 
 -(void)JionActivity{
@@ -322,9 +330,7 @@
     NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
     NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships.json?user_token=%@",URLpre,Mytoken];
-    //NSDictionary *PrepareToJsonDic=[[NSDictionary alloc]initWithObjectsAndKeys:@"activity_id",[NSNumber numberWithInt:[self.Aid integerValue]], nil];
     NSData *JoinData=[[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]] dataUsingEncoding:NSUTF8StringEncoding];
-    //NSLog(@"URL=%@,DATA=%@",CompleteURL,[[NSString alloc]initWithData:JoinData encoding:NSUTF8StringEncoding] );
     [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"POST" postData:JoinData resultData:PostReslut sender:self onSuccess:@selector(JionSuccess) onError:nil];
 }
 
@@ -335,13 +341,15 @@
 
 -(void)QuitSuccess
 {
-    NSLog(@"Quit Success");
+    NSLog(@"Quit Success,Info:%@",[[NSString alloc]initWithData:PostReslut encoding:NSUTF8StringEncoding]);
+    [self RefreshATable];
 }
 
 
 -(void)OpenSendCommentBtn{
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SendCommentViewController *SendCommentVC=[storyBoard instantiateViewControllerWithIdentifier:@"SendCommentView" ];
+    SendCommentVC.Aid=self.Aid;
     [self presentViewController:SendCommentVC animated:YES completion:^{
     }];
     

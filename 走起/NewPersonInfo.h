@@ -26,6 +26,10 @@
     NSArray *MyADic;
     NSInteger Uid;
     NSString *MyToken;
+    
+    
+    BOOL MyAC;
+    BOOL PersonCellLoaded;
 }
 @property (strong, nonatomic) IBOutlet UITableView *InfoTable;
 

@@ -69,6 +69,8 @@
     NSError *Error;
     NSString *Mytoken;
     NSMutableData *PostReslut;
+    BOOL CommentCellLoaded;
+    NSInteger ship_id;
 }
 
 

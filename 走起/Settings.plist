@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>URLprefix</key>
-	<string>http://1.r7test.sinaapp.com</string>
+	<string>http://127.0.0.1:3000</string>
 	<key>R</key>
 	<integer>0</integer>
 	<key>G</key>
