@@ -337,12 +337,19 @@
 -(void)JionSuccess
 {
     NSLog(@"Jion Activity Success,Receive: %@",[[NSString alloc]initWithData:PostReslut encoding:NSUTF8StringEncoding]);
+    ButtonStyle=1;
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.text = @"离开";
 }
 
 -(void)QuitSuccess
 {
     NSLog(@"Quit Success,Info:%@",[[NSString alloc]initWithData:PostReslut encoding:NSUTF8StringEncoding]);
-    [self RefreshATable];
+    ButtonStyle=2;
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.text = @"加入";
 }
 
 

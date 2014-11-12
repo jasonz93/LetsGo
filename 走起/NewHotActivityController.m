@@ -15,6 +15,7 @@
 @implementation NewHotActivityController
 
 - (void)viewDidLoad {
+    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     Mytoken=[defaults objectForKey:@"user_token"];
     NSLog(@"Hot Activity Get token %@",Mytoken);
@@ -113,7 +114,7 @@
         NSDictionary *tmp=[AList objectAtIndex:itr];
         //viewer.frame=CGRectMake(320*itr,0.0f, 320.0f, ASV.contentSize.height);
         viewer.frame=CGRectMake(ASV.frame.size.width*itr,0.0f, ASV.frame.size.width, ASV.frame.size.height);
-        //[viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
+       // [viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
         //NSLog(@"%f,%f,%f,%f,itr=%d",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height,itr);
         //viewer=[[ActivityNewView alloc]initWithFrame:CGRectMake(320*itr+20.0f, 0+20.0f,320, 300)];
         //[viewer defalutinit];

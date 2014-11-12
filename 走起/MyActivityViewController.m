@@ -16,6 +16,13 @@
 @implementation MyActivityViewController
 
 - (void)viewDidLoad {
+  /*  UIImage *selectedImage = [UIImage imageNamed:@"selected.png"];
+    UIImage *unselectedImage = [UIImage imageNamed:@"unselected.png"];
+    
+    UITabBar *tabBar = tabBarViewController.tabBar;
+    UITabBarItem *item1 = [tabBar.items objectAtIndex:0];
+    [item1 setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];*/
+    
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     mytoken=[defaults objectForKey:@"user_token"];
     Uid=[[defaults objectForKey:@"user_id"]integerValue];
@@ -93,7 +100,7 @@
     else
         tmp=[AedDic objectAtIndex:[indexPath row]];
     NSLog(@"%@",[tmp objectForKey:@"activity_end_time"]);
-    [cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
+    //[cell initwithTitle:[tmp objectForKey:@"activity_title"] Img:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] BeginTime:[tmp objectForKey:@"activity_begin_time"] EndTime:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"]];
     cell.accessoryType=UITableViewCellAccessoryNone;
     return cell;
     

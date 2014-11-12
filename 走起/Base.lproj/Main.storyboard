@@ -9,7 +9,7 @@
         <scene sceneID="idK-oF-9Uc">
             <objects>
                 <navigationController id="Rlc-P5-rj8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的群组" id="YpH-aB-JN9"/>
+                    <tabBarItem key="tabBarItem" title="我的群组" image="group" id="YpH-aB-JN9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RHn-Fb-uhV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -567,11 +567,11 @@
             </objects>
             <point key="canvasLocation" x="1438" y="-642"/>
         </scene>
-        <!--Item-->
+        <!--热门活动-->
         <scene sceneID="S4k-2w-XPd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DvA-0b-y7K" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ZJ7-Pw-Cj6"/>
+                    <tabBarItem key="tabBarItem" title="热门活动" image="hot" id="ZJ7-Pw-Cj6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wvE-3t-9Ee">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -590,7 +590,7 @@
         <scene sceneID="UtS-As-e2T">
             <objects>
                 <navigationController title="我的活动" automaticallyAdjustsScrollViewInsets="NO" id="hmK-4Y-H2Y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的活动" id="BRN-Dy-DEh"/>
+                    <tabBarItem key="tabBarItem" title="我的活动" image="Person" id="BRN-Dy-DEh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Irq-ZI-ciB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -649,11 +649,11 @@
             </objects>
             <point key="canvasLocation" x="1459" y="688"/>
         </scene>
-        <!--Item-->
+        <!--我的-->
         <scene sceneID="gSP-0p-g8M">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CGx-c4-7Qm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="LgS-dE-hGU"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="home" id="LgS-dE-hGU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uFV-DH-fND">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -765,6 +765,12 @@
             <point key="canvasLocation" x="2160" y="-642"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Person" width="30" height="30"/>
+        <image name="group" width="30" height="30"/>
+        <image name="home" width="30" height="30"/>
+        <image name="hot" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N2K-Un-WFo"/>
         <segue reference="0E7-4P-c4E"/>
