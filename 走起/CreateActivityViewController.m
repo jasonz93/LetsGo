@@ -511,7 +511,6 @@ BOOL shouldTouch;
     NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
     NSInteger user_id=[[local objectForKey:@"user_id"]integerValue];
     NSString *url=[NSString stringWithFormat:@"%@/users/%ld/organizations.json",host,user_id];
-    //NSString *url=@"http://localhost/organization_list.txt";
     [[GetInfo alloc]initWithURL:url ResultData:self.orgData sender:self OnSuccess:@selector(gotOrgData) OnError:@selector(errOrgData)];
     return self;
 }

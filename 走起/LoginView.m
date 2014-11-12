@@ -104,6 +104,9 @@
 //登出/uesrs/sign_out?user_token=...
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     // Do any additional setup after loading the view, typically from a nib.
     [self tapBackground];
     self.txtEmail.delegate=self;

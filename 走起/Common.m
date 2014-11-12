@@ -113,8 +113,9 @@
     self.content=[dic objectForKey:@"organization_content"];
     self.logoUrl=[dic objectForKey:@"organization_logo"];
     //self.isJoined=[[dic objectForKey:@"isJoined"]boolValue];
+    self.school_id=[[dic objectForKey:@"school_id"]integerValue];
     self.ship_id=[dic objectForKey:@"ship_id"];
-    if (self.ship_id) {
+    if (self.ship_id!=nil) {
         self.isJoined=YES;
     }
     else{

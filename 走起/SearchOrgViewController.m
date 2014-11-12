@@ -133,6 +133,9 @@ BOOL shouldTouch;
     self.tblOrgs.sectionHeaderHeight=10;
     self.tblOrgs.rowHeight=150;
     self.tblOrgs.backgroundColor=[UIColor groupTableViewBackgroundColor];
+    NSString *url=[Common getUrlString:@"/organizations.json"];
+    searchData=[[NSMutableData alloc]init];
+    [[GetInfo alloc]initWithURL:url ResultData:searchData sender:self OnSuccess:@selector(searchDone) OnError:nil];
 }
 
 @end

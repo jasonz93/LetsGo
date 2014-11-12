@@ -127,6 +127,7 @@
 		E1949DC61A08B5C0005CC530 /* RegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterView.m; sourceTree = "<group>"; };
 		E1949DD81A08B5E7005CC530 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E19781521A13B782008D1E35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E19781541A13CF75008D1E35 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +250,7 @@
 				E1215E251A0A94E900F43300 /* OrgDetailViewController.m */,
 				E13B4F351A131E65000047D6 /* LocateNewActivityViewController.h */,
 				E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */,
+				E19781541A13CF75008D1E35 /* Location.gpx */,
 			);
 			path = "走起";
 			sourceTree = "<group>";

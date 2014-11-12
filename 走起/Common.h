@@ -17,6 +17,7 @@
 @property NSString *logoUrl;
 @property BOOL isJoined;
 @property NSNumber *ship_id;
+@property NSInteger school_id;
 
 -(id)initWithData:(NSDictionary *)dic;
 

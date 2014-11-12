@@ -19,6 +19,9 @@
 @property IBOutlet UITextView *txtOrgContent;
 @property IBOutlet UIImageView *imgOrgLogo;
 @property IBOutlet UIButton  *btnJoin;
+@property IBOutlet UITextField *txtSchoolName;
+@property clsSchool *school;
+@property NSMutableData *schoolData;
 
 @end
 

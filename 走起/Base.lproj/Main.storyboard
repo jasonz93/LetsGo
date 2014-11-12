@@ -203,7 +203,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bu3-Q2-4m4">
-                                <rect key="frame" x="0.0" y="260" width="600" height="30"/>
+                                <rect key="frame" x="20" y="260" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="zjy-9h-3sR"/>
                                 </constraints>
@@ -218,10 +218,10 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUJ-Eb-yKE">
-                                <rect key="frame" x="0.0" y="300" width="600" height="150"/>
+                                <rect key="frame" x="20" y="300" width="560" height="150"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" alwaysBounceHorizontal="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Content" translatesAutoresizingMaskIntoConstraints="NO" id="8gE-Hk-AQ5">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="150"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -246,7 +246,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="School" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzx-8h-wYn">
-                                <rect key="frame" x="0.0" y="460" width="600" height="30"/>
+                                <rect key="frame" x="20" y="460" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fsA-Bz-ifK"/>
                                 </constraints>
@@ -257,7 +257,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Pyh-ng-8y3" secondAttribute="trailing" id="1aj-RM-bGv"/>
-                            <constraint firstItem="jzx-8h-wYn" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" id="2Q5-pA-6E4"/>
+                            <constraint firstItem="jzx-8h-wYn" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" constant="20" id="2Q5-pA-6E4"/>
                             <constraint firstAttribute="bottom" secondItem="Pyh-ng-8y3" secondAttribute="bottom" id="2e8-84-Wop"/>
                             <constraint firstItem="wTG-F0-Cdq" firstAttribute="top" secondItem="J6D-l2-9a9" secondAttribute="top" constant="90" id="7vW-aw-nOB"/>
                             <constraint firstItem="ZUJ-Eb-yKE" firstAttribute="top" secondItem="bu3-Q2-4m4" secondAttribute="bottom" constant="10" id="E7L-lO-oeA"/>
@@ -265,11 +265,11 @@
                             <constraint firstItem="bu3-Q2-4m4" firstAttribute="trailing" secondItem="ZUJ-Eb-yKE" secondAttribute="trailing" id="Hwl-af-7vj"/>
                             <constraint firstItem="bu3-Q2-4m4" firstAttribute="top" secondItem="wTG-F0-Cdq" secondAttribute="bottom" constant="20" id="RQl-zT-uJn"/>
                             <constraint firstAttribute="centerX" secondItem="wTG-F0-Cdq" secondAttribute="centerX" id="ck3-wl-iFN"/>
-                            <constraint firstAttribute="trailing" secondItem="ZUJ-Eb-yKE" secondAttribute="trailing" id="lSp-Kw-j7h"/>
+                            <constraint firstAttribute="trailing" secondItem="ZUJ-Eb-yKE" secondAttribute="trailing" constant="20" id="lSp-Kw-j7h"/>
                             <constraint firstItem="Pyh-ng-8y3" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" id="oPs-HD-C9k"/>
                             <constraint firstItem="jzx-8h-wYn" firstAttribute="top" secondItem="ZUJ-Eb-yKE" secondAttribute="bottom" constant="10" id="q8e-Ou-Pu1"/>
-                            <constraint firstItem="ZUJ-Eb-yKE" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" id="q9E-US-nNn"/>
-                            <constraint firstAttribute="trailing" secondItem="jzx-8h-wYn" secondAttribute="trailing" id="xCP-7Q-9pT"/>
+                            <constraint firstItem="ZUJ-Eb-yKE" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" constant="20" id="q9E-US-nNn"/>
+                            <constraint firstAttribute="trailing" secondItem="jzx-8h-wYn" secondAttribute="trailing" constant="20" id="xCP-7Q-9pT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="群组详情" id="3e7-Rf-sxq"/>
@@ -279,6 +279,7 @@
                         <outlet property="imgOrgLogo" destination="wTG-F0-Cdq" id="3KT-f9-FQ7"/>
                         <outlet property="txtOrgContent" destination="8gE-Hk-AQ5" id="cuZ-f0-xWA"/>
                         <outlet property="txtOrgName" destination="bu3-Q2-4m4" id="Op9-Fz-6WB"/>
+                        <outlet property="txtSchoolName" destination="jzx-8h-wYn" id="hEh-Rs-BfS"/>
                         <segue destination="BWs-aa-Dj6" kind="push" id="wAl-9d-iU3"/>
                     </connections>
                 </viewController>

@@ -175,8 +175,8 @@ NSString *iconUrl;
     if ([txtSchool.text isEqual:@""]){
         CLLocation *loc = [locations lastObject];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-        [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.latitude]stringValue] forKey:@"school_lat"];
-        [dic setValue:[[NSNumber numberWithFloat:loc.coordinate.longitude]stringValue] forKey:@"school_lon"];
+        [dic setValue:[NSNumber numberWithDouble:loc.coordinate.latitude] forKey:@"school_lat"];
+        [dic setValue:[NSNumber numberWithDouble:loc.coordinate.longitude] forKey:@"school_lon"];
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
         self.locData = [NSMutableData alloc];
         NSLog(@"%f,%f",loc.coordinate.latitude,loc.coordinate.longitude);
