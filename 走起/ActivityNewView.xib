@@ -117,6 +117,14 @@
                 <constraint firstItem="Eq2-3H-MV4" firstAttribute="top" secondItem="sOR-YL-66l" secondAttribute="topMargin" id="y7u-Kb-pDX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ActivityImg" destination="Eq2-3H-MV4" id="PzZ-oH-e1Y"/>
+                <outlet property="ApeopleL" destination="yFb-E8-GkS" id="ane-O0-wvq"/>
+                <outlet property="ApeopleMaxL" destination="lFs-b7-Toj" id="QEG-AI-BWq"/>
+                <outlet property="AplaceL" destination="bkG-yN-P6m" id="5N1-nq-BLb"/>
+                <outlet property="AtimeL" destination="nBy-cf-VxT" id="ggS-2D-sNB"/>
+                <outlet property="AtitleL" destination="oFf-GG-niI" id="1vd-OE-2qy"/>
+            </connections>
             <point key="canvasLocation" x="371" y="394.5"/>
         </view>
     </objects>

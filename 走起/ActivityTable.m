@@ -63,7 +63,7 @@
     SendCommentBtn.backgroundColor=[UIColor blackColor];
     [SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
     Afinished=[[AData_Dic objectForKey:@"finished"]boolValue];
-    if([AData_Dic objectForKey:@"ship_id"]==nil)
+    if([[AData_Dic objectForKey:@"ship_id"] isEqual:@""])
     {
         Ajioned=0;
     }
@@ -90,9 +90,8 @@
 
 -(void)GetActivityDetail{
     AData=[NSMutableData alloc];
-    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    [[GetInfo alloc]initWithURL:[NSString stringWithFormat:@"%@/activities/%@.json",URLpre,self.Aid] ResultData:AData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/activities/%@.json",self.Aid]];
+    [[GetInfo alloc]initWithURL:URLpre ResultData:AData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }
 
 -(void) ProcessData{
@@ -322,21 +321,21 @@
 -(void)QuitActivity{
     //curl -X DELETE -H "Content-Type: application/json" -d '{"activity_id":1}' localhost:3000/activity_memberships.json?user_token=dB4EyczCNnaGayypEZXG
     
-    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships/%d.json?user_token=%@",URLpre,ship_id,Mytoken];
-    [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"DELETE" postData:nil resultData:PostReslut sender:self onSuccess:@selector(QuitSuccess) onError:nil];
+    //NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/activity_memberships/%d.json?user_token=%@",ship_id,Mytoken]];
+    NSLog(@"Request Quit Activity,the URL is %@",URLpre);
+    // NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships/%d.json?user_token=%@",URLpre,ship_id,Mytoken];
+    [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"DELETE" postData:nil resultData:PostReslut sender:self onSuccess:@selector(QuitSuccess) onError:nil];
 }
 
 -(void)JionActivity{
     //curl -X POST -H "Content-Type: application/json" -d  localhost:3000/activity_memberships.json?user_token=dB4EyczCNnaGayypEZXG
-    NSLog(@"Do Jion Activity Request");
-    NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[[[NSDictionary alloc]initWithContentsOfFile:URLplist] objectForKey:@"URLprefix"];
-    NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships.json?user_token=%@",URLpre,Mytoken];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat: @"/activity_memberships.json?user_token=%@",Mytoken]];
     NSData *JoinData=[[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]] dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"Post URL:%@\nData%@",CompleteURL,[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]]);
-    [[PostInfo alloc]initWithURL:CompleteURL HttpMethod:@"POST" postData:JoinData resultData:PostReslut sender:self onSuccess:@selector(JionSuccess) onError:nil];
+    NSLog(@"Post URL:%@\nData%@",URLpre,[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]]);
+    PostReslut=[NSMutableData alloc];
+    NSLog(@"Request Join Activity,the URL is %@",URLpre);
+    [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"POST" postData:JoinData resultData:PostReslut sender:self onSuccess:@selector(JionSuccess) onError:nil];
 }
 
 -(void)JionSuccess
@@ -347,7 +346,7 @@
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     Ajioned=YES;
-    //ship_id=[[NSString alloc] initWithData:PostReslut encoding:NSUTF8StringEncoding] ob
+    ship_id=[[[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil]objectForKey:@"ship_id" ] integerValue];
     NSDictionary *test=[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"%@",test);
     NSLog(@"Get New ship id:%d",ship_id);

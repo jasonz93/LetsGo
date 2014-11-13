@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GetInfo.h"
+#import "Common.h"
 @interface SendCommentViewController : UIViewController
 {
     NSString *SendCommentURL;
