@@ -70,7 +70,7 @@
     NSString *Mytoken;
     NSMutableData *PostReslut;
     BOOL CommentCellLoaded;
-    NSInteger ship_id;
+    NSNumber *ship_id;
     NSString *PicURL;
     UIImageView *ActivityPic;
 }

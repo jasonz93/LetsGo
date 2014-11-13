@@ -19,14 +19,16 @@
     self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
     [self.navigationItem setTitle:@"个人信息"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-   
     
+    [self.InfoTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     Uid=[[defaults objectForKey:@"user_id"]integerValue];
     MyToken=[defaults objectForKey:@"user_token"];
     NSLog(@"PersonInfoView Get token %@,id %d",MyToken,Uid);
     //MyToken=@"46Ms7ERFe7dpzXCFKjyw";
 
+    [self initRefreshControl];
+    //[self.refreshControl beginRefreshing];
     [self GetInfo];
     [super viewDidLoad];
     
@@ -35,6 +37,22 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+
+-(void) initRefreshControl{
+    UIRefreshControl *Rc=[[UIRefreshControl alloc]init];
+    Rc.attributedTitle=[[NSAttributedString alloc]initWithString:@"下拉刷新"];
+    [Rc addTarget:self action:@selector(RefreshAList) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl=Rc;
+}
+
+-(void) RefreshAList{
+    if(self.refreshControl.refreshing){
+        self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"加载中"];
+        [self GetInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,7 +185,7 @@
     if (buttonIndex==[actionSheet destructiveButtonIndex])
         //这里捕捉“毁灭键”,其实该键的index是0，从上到下从0开始，称之为毁灭是因为是红的
     {
-        NSLog(@"User Logout，没做完，需要联机，别忘了做完。。。");
+        NSLog(@"User Logout");
         NSString *URLpre=[Common getUrlString:@"/users/sign_out"];
         NSData *CommentData=[[NSString stringWithFormat:@""] dataUsingEncoding:NSUTF8StringEncoding];
         [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"DELETE" postData:CommentData resultData:RevData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
@@ -187,16 +205,22 @@
 #pragma mark network
 
 -(void) GetInfo{
+    if(self.refreshControl.refreshing)
+    {
+        [self.refreshControl endRefreshing];
+        self.refreshControl.attributedTitle=[[NSAttributedString alloc]initWithString:@"👻下拉刷新"];
+    }
     RevData=[NSMutableData alloc];
-    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/%d.json",Uid]];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/%ld.json",(long)Uid]];
     NSLog(@"PersonInfoPage: Request URL is:%@",URLpre);
     [[GetInfo alloc]initWithURL:URLpre ResultData:RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];}
 
 -(void) ProcessData{
     DataDic=[NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
+    NSLog(@"PersonInfoPage:-Data:%@",DataDic);
     MyADic=[DataDic objectForKey:@"myactivity"];
     
-    UserLogo=[DataDic objectForKey:@"userlogo"];
+    UserLogo=[DataDic objectForKey:@"user_logo"];
     UserName=[DataDic objectForKey:@"email"];
     UserPraise=[[DataDic objectForKey:@"praise"] floatValue];
     SchoolName=[DataDic objectForKey:@"school_name"];
