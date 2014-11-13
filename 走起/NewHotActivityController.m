@@ -15,6 +15,34 @@
 @implementation NewHotActivityController
 
 - (void)viewDidLoad {
+[super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+-(void)preinit{
+    //NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    //[defaults removeObjectForKey:@"user_token"];
+    //[defaults synchronize];
+    
+    SingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenDetailView)];
+    SingleTap.delegate=self;
+    SingleTap.cancelsTouchesInView=NO;
+    PageArray=[[NSMutableArray alloc]init] ;
+    [ASVV addGestureRecognizer:SingleTap];
+    ASVV.backgroundColor=[UIColor colorWithRed:227.0/255 green:232.0/255 blue:234.0/255 alpha:1.0f];
+    [self.view addSubview:ASVV];
+    PGC=[[UIPageControl alloc]initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight+10, 200, 36)];
+    NSLog(@"Notice!- HotActivityPage:-  PGC-frame:%f,%f,%f,%f",PGC.frame.origin.x,PGC.frame.origin.y,PGC.frame.size.width,PGC.frame.size.height);
+    NSLog(@"Notice!- HotActivityPage:-  CompareWith Scroll-frame:%f,%f,%f,%f",ASVV.frame.origin.x,ASVV.frame.origin.y,ASVV.frame.size.width,ASVV.frame.size.height);
+
+    PGC.currentPage = 0;
+    PGC.userInteractionEnabled = YES;
+    PGC.alpha = 1.0;
+   [ASVV addSubview:PGC];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
     MicroLen=10.0f;
     [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
@@ -24,35 +52,14 @@
     [self.navigationItem setTitle:@"热门活动"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [self preinit];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     [self GetMyAList];
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
--(void)preinit{
-    
-    SingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenDetailView)];
-    SingleTap.delegate=self;
-    SingleTap.cancelsTouchesInView=NO;
-    
-    ASV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, RTopHeight, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height-RtotalHeight)];
-    ASV.showsHorizontalScrollIndicator = NO;
-    ASV.showsVerticalScrollIndicator = NO;
-    ASV.userInteractionEnabled = YES;
-    ASV.pagingEnabled = YES;
-    ASV.scrollsToTop = NO;
-    ASV.delegate = self;
-    [ASV addGestureRecognizer:SingleTap];
-    ASV.backgroundColor=[UIColor colorWithRed:227.0/255 green:232.0/255 blue:234.0/255 alpha:1.0f];
-    [self.view addSubview:ASV];
-    PGC=[[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight+10, 200, 36)];
-    PGC.currentPage = 0;
-    PGC.userInteractionEnabled = YES;
-    PGC.alpha = 1.0;
-    //SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
-  //  [PGC addTarget:self action:@selector(PageValueChanged) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:PGC];
-    
+-(void)viewDidDisappear:(BOOL)animated{
+    for (UIView* a in PageArray) {
+        [a removeFromSuperview];
+    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -72,7 +79,7 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollViews {
     int pageNum = fabs(scrollViews.contentOffset.x / scrollViews.frame.size.width);
     PGC.currentPage=pageNum;
-    NSLog(@"Trun to page= %d Set the Control page= %d",pageNum,PGC.currentPage);
+    NSLog(@"Trun to page= %d Set the Control page= %ld",pageNum,(long)PGC.currentPage);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,33 +98,16 @@
 
 -(void) ProcessData{
     AList= [NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
-   /* NSDictionary *Errdic=(NSDictionary*)AList;
-     NSLog(@"Alist:%@",Errdic);
-    if([Errdic objectForKey:@"error"]!=nil)
-    {
-       NSLog(@"判断到登陆失效，即将跳转到登陆界面");
-        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
-        [self presentViewController:lv animated:YES completion:^{
-        }];
-        NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-        [defaults removeObjectForKey:@"user_token"];
-        [defaults synchronize];
-        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginView *regview=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
-        regview.hidesBottomBarWhenPushed=YES;
-        [self.navigationController addChildViewController:regview];
-
-    }
-    else
-    {*/
-    ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
+    ASVV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASVV.frame.size.height);
+    ASVV.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
     PGC.numberOfPages = AList.count;
-    NSLog(@"Page Control Display %d dots",PGC.numberOfPages);
+    NSLog(@"Page Control Display %ld dots",(long)PGC.numberOfPages);
     [self initActivityView];
 }
 
 -(void) initActivityView{
+    NSLog(@"Notice!- HotActivityView:- ContentView  size: width:%f ,height:%f",ASVV.contentSize.width,ASVV.contentSize.height);
+    NSLog(@"Notice!- HotActivityView:- scrollview  size: width:%f ,height:%f",ASVV.frame.size.width,ASVV.frame.size.height);
     for(int itr=0;itr<AList.count;itr++)
     {
         ActivityNewView *viewer;
@@ -125,16 +115,11 @@
         if(viewer==nil)
             viewer=[ActivityNewView alloc];
         NSDictionary *tmp=[AList objectAtIndex:itr];
-        //viewer.frame=CGRectMake(320*itr,0.0f, 320.0f, ASV.contentSize.height);
-        viewer.frame=CGRectMake(ASV.frame.size.width*itr+MicroLen,MicroLen, ASV.frame.size.width-2*MicroLen, ASV.frame.size.height-2*MicroLen);
-        NSLog(@"%F,%f,%f,%f",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height);
-        /*[viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];*/
+        //viewer.frame=CGRectMake(320*itr,0.0f, 320.0f, ASVV.contentSize.height);
+        viewer.frame=CGRectMake(ASVV.frame.size.width*itr+MicroLen,MicroLen, ASVV.frame.size.width-2*MicroLen, ASVV.frame.size.height-2*MicroLen);
         [viewer initWithImg:[tmp objectForKey:@"activity_logo"] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
-        //NSLog(@"%f,%f,%f,%f,itr=%d",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height,itr);
-        //viewer=[[ActivityNewView alloc]initWithFrame:CGRectMake(320*itr+20.0f, 0+20.0f,320, 300)];
-        //[viewer defalutinit];
-        //[viewer addGestureRecognizer:SingleTap ];
-        [ASV addSubview:viewer];
+        [ASVV addSubview:viewer];
+        [PageArray addObject:viewer];
         NSLog(@"Add the %d subview OK",itr);
     }
     

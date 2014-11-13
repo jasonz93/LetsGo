@@ -23,9 +23,12 @@
     NSMutableData*RevData;
     UIScrollView *ASV;
     UIPageControl *PGC;
+    __weak IBOutlet UIScrollView *ASVV;
+   // __weak IBOutlet UIPageControl *PGC;
     UITapGestureRecognizer* SingleTap;
     float MicroLen;
     NSString *Mytoken;
+    NSMutableArray *PageArray;
 }
 
 
