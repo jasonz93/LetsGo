@@ -176,9 +176,7 @@
 
 -(void) ReceiveSuccess{
     NSLog(@"Logout! %@",[[NSString alloc]initWithData:RevData encoding:NSUTF8StringEncoding]);
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"user_token"];
-    [defaults synchronize];/*
+    /*
     UIStoryboard *storyBoard=self.storyboard;
     LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
     [self presentViewController:lv animated:YES completion:^{

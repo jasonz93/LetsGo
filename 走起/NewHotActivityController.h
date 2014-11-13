@@ -21,11 +21,14 @@
     BOOL pageControlUsed;
     NSArray *AList;
     NSMutableData*RevData;
-    UIScrollView *ASV;
+    //UIScrollView *ASV;
+    __weak IBOutlet UIScrollView *ASV;
     UIPageControl *PGC;
     UITapGestureRecognizer* SingleTap;
     float MicroLen;
     NSString *Mytoken;
+    NSMutableArray *PageArray;
+
 }
 
 
