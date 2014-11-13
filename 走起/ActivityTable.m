@@ -46,6 +46,7 @@
     
     ContentTxT.text=[AData_Dic objectForKey:@"activity_content"];
     [ContentTxT sizeToFit];
+    ContentTxT.frame=CGRectMake(ContentTxT.frame.origin.x, ContentTxT.frame.origin.y, [UIScreen mainScreen].applicationFrame.size.width, ContentTxT.frame.size.height);
     ContentH=ContentTxT.frame.size.height;
     
     ImgURL=[AData_Dic objectForKey:@"activity_logo"];

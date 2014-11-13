@@ -29,6 +29,7 @@
 		7361E9261A12708100E17682 /* LevelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9241A12708100E17682 /* LevelCell.xib */; };
 		7361E92A1A12709800E17682 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7361E9281A12709800E17682 /* PersonInfoCell.m */; };
 		7361E92B1A12709800E17682 /* PersonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7361E9291A12709800E17682 /* PersonInfoCell.xib */; };
+		736CE8C61A14EDC300E90846 /* SearchActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 736CE8C51A14EDC300E90846 /* SearchActivityController.m */; };
 		73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7B1A08E8720056BFD6 /* GetInfo.m */; };
 		73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */; };
 		E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */; };
@@ -93,6 +94,8 @@
 		7361E9271A12709800E17682 /* PersonInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
 		7361E9281A12709800E17682 /* PersonInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
 		7361E9291A12709800E17682 /* PersonInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonInfoCell.xib; sourceTree = "<group>"; };
+		736CE8C41A14EDC300E90846 /* SearchActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchActivityController.h; sourceTree = "<group>"; };
+		736CE8C51A14EDC300E90846 /* SearchActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchActivityController.m; sourceTree = "<group>"; };
 		73DB6E7A1A08E8720056BFD6 /* GetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetInfo.h; sourceTree = "<group>"; };
 		73DB6E7B1A08E8720056BFD6 /* GetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetInfo.m; sourceTree = "<group>"; };
 		73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityViewController.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				E19781511A13B782008D1E35 /* Main.storyboard */,
+				736CE8C41A14EDC300E90846 /* SearchActivityController.h */,
+				736CE8C51A14EDC300E90846 /* SearchActivityController.m */,
 				7361E90D1A126EC000E17682 /* Settings.plist */,
 				7361E9071A126E9C00E17682 /* NewHotActivityController.h */,
 				7361E9081A126E9C00E17682 /* NewHotActivityController.m */,
@@ -419,6 +424,7 @@
 				7361E91A1A12702500E17682 /* ActivityNewView.m in Sources */,
 				7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */,
 				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,
+				736CE8C61A14EDC300E90846 /* SearchActivityController.m in Sources */,
 				7361E90B1A126E9C00E17682 /* NewHotActivityController.m in Sources */,
 				E13B4F371A131E6F000047D6 /* LocateNewActivityViewController.m in Sources */,
 				73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */,

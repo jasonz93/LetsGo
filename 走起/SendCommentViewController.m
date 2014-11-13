@@ -38,8 +38,7 @@
 
 - (IBAction)SendCommentButton:(id)sender {//CommentContentTxt 数据可能不对应，一会有网要改
     NSData *CommentData=[[NSString stringWithFormat:@"{\"comment_content\":\"%@\",\"activity_id\":%@}",self.CommentContentTxt.text,self.Aid] dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *URLpre=[Common getUrlString:@"/comments.json"];
-    
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat: @"/comments.json?user_token=%@",[Common getToken]]];
     // SendCommentURL=[NSString stringWithFormat:@"%@/comments.json?user_token=%@",URLpre,[[NSUserDefaults standardUserDefaults] objectForKey:@"user_token"]];
     [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"POST" postData:CommentData resultData:ResultData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
     NSLog(@"Comment Sended");
