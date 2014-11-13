@@ -275,12 +275,14 @@ BOOL shouldTouch;
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     if (picker == self.logoPicker){
         UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        image=[Common resizePic:image resizeTo:CGSizeMake(100, 100)];
         self.imgActLogo.image=image;
         self.logoUrlData=[[NSMutableData alloc]init];
         [Common uploadPic:image picUrl:self.logoUrlData sender:self onDone:@selector(uploadDone)];
     }
     if (picker == self.picPicker){
         UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        image=[Common resizePic:image resizeTo:CGSizeMake(300, 150)];
         self.imgActPic.image=image;
         self.picUrlData=[[NSMutableData alloc]init];
         [Common uploadPic:image picUrl:self.picUrlData sender:self onDone:@selector(uploadDone)];
@@ -473,6 +475,12 @@ BOOL shouldTouch;
     CGRect pos = CGRectMake(0.0f, self.view.frame.size.height, size.width, size.height);
     self.dateActTime=[[UIDatePicker alloc]initWithFrame:pos];
     self.dateActEnd=[[UIDatePicker alloc]initWithFrame:pos];
+    self.dateActTime.backgroundColor=[UIColor whiteColor];
+    self.dateActEnd.backgroundColor=[UIColor whiteColor];
+    [self.dateActTime.layer setBorderWidth:1];
+    [self.dateActTime.layer setBorderColor:[[UIColor lightGrayColor]CGColor]];
+    [self.dateActEnd.layer setBorderWidth:1];
+    [self.dateActEnd.layer setBorderColor:[[UIColor lightGrayColor]CGColor]];
     [self.dateActTime addTarget:self action:@selector(dateActTimeChanged) forControlEvents:UIControlEventValueChanged];
     [self.dateActEnd addTarget:self action:@selector(dateActEndChanged) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.dateActTime];

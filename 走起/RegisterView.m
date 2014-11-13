@@ -38,6 +38,8 @@ NSString *iconUrl;
         return NO;
     if ([self.txtPaswd.text isEqualToString:@""])
         return NO;
+    if ([self.txtPaswdConfirm.text isEqualToString:@""])
+        return NO;
     if ([self.txtSid.text isEqualToString:@""])
         return NO;
     if ([self.txtSpwd.text isEqualToString:@""])
@@ -69,9 +71,10 @@ NSString *iconUrl;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
--(IBAction)getIcon:(id)sender{
+-(void)tapOncePic{
     self.picker=[[UIImagePickerController alloc]init];
-    self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    //self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    self.picker.sourceType=UIImagePickerControllerSourceTypeCamera;
     self.picker.mediaTypes=[NSArray arrayWithObjects:@"public.image", nil];
     self.picker.allowsEditing=YES;
     
@@ -82,11 +85,23 @@ NSString *iconUrl;
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     NSLog(@"did end");
+    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.btnReg setEnabled:[self canCommit]];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     NSLog(@"did begin");
+    CGRect frame = searchBar.frame;
+    int offset = frame.origin.y + 32 - (self.view.frame.size.height - 320.0);//键盘高度216
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    
+    //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
+    if(offset > 0)
+        self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -207,10 +222,11 @@ NSString *iconUrl;
 -(IBAction)Register:(id)sender{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
     [dic setValue:txtPaswd.text forKey:@"password"];
-    [dic setValue:txtPaswd.text forKey:@"password_confirmation"];
+    [dic setValue:self.txtPaswdConfirm.text forKey:@"password_confirmation"];
     [dic setValue:txtEmail.text forKey:@"email"];
     [dic setValue:txtSid.text forKey:@"student_id"];
     [dic setValue:txtSpwd.text forKey:@"student_pwd"];
+    [dic setValue:iconUrl forKey:@"user_logo"];
     clsSchool *sch;
     int i;
     for (i=0; i<self.dataList.count; i++) {
@@ -251,6 +267,7 @@ NSString *iconUrl;
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册成功！" delegate:self cancelButtonTitle:@"继续" otherButtonTitles: nil];
             [alert show];
             [self performSegueWithIdentifier:@"registed" sender:self];
+            [self.navigationController popToRootViewControllerAnimated:NO];
             break;
         }
             
@@ -313,15 +330,17 @@ NSString *iconUrl;
     CGPoint point = [gestureRecognizer locationInView:self.view];
     if (CGRectContainsPoint(schoolSearchView.frame, point))
         return NO;
-    else
+    if (CGRectContainsPoint(self.imgIcon.frame, point)) {
+        [self tapOncePic];
         return YES;
+    }
+    return YES;
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     NSLog(@"ib begin");
     CGRect frame = textField.frame;
-    int offset = frame.origin.y + 32 - (self.view.frame.size.height - 225.0);//键盘高度216
-    
+    int offset = frame.origin.y + 32 - (self.view.frame.size.height - 320.0);//键盘高度216
     NSTimeInterval animationDuration = 0.30f;
     [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
     [UIView setAnimationDuration:animationDuration];
@@ -338,6 +357,7 @@ NSString *iconUrl;
     [self.btnReg setEnabled:[self canCommit]];
 }
 
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self tapOnce];
     return YES;
@@ -351,6 +371,7 @@ NSString *iconUrl;
     txtPaswd.delegate=self;
     txtSid.delegate=self;
     txtSpwd.delegate=self;
+    self.txtPaswdConfirm.delegate=self;
     CGPoint point=self.txtSchool.frame.origin;
     CGRect frame=CGRectMake(point.x, point.y-182, 200, 180);
     self.schoolSearchView=[[UITableView alloc]initWithFrame:frame style:UITableViewStylePlain];
@@ -361,9 +382,11 @@ NSString *iconUrl;
     self.dataList = [[NSMutableArray alloc]init];
     self.schoolSearchView.dataSource = self;
     self.schoolSearchView.delegate = self;
-    self.btnReg.layer.borderWidth=1;
-    self.btnReg.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    [self.btnReg.layer setMasksToBounds:YES];
+    [self.btnReg.layer setCornerRadius:5];
     [self.btnReg setEnabled:[self canCommit]];
+    [self.imgIcon.layer setMasksToBounds:YES];
+    [self.imgIcon.layer setCornerRadius:10];
     [self initLoc];
     //schoolSearchView = [[schoolSearchViewController alloc]initWithStyle:UITableViewStylePlain];
     //[schoolSearchView.view setFrame:CGRectMake(30, 40, 200, 0)];

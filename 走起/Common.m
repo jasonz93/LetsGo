@@ -30,13 +30,13 @@
 }
 
 +(NSString *)getUrlString:(NSString *)path{
-    NSString *host=@"http://192.168.3.31:3000";
+    NSString *host=@"http://192.168.18.179:3000";
     NSString *url=[host stringByAppendingString:path];
     return url;
 }
 
 +(void)loadPic:(NSString *)urlString imageView:(UIImageView *)view{
-    NSLog(@"pic Loading!");
+    NSLog(@"pic Loading!URL is [%@]",urlString);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url=[NSURL URLWithString:urlString];
         NSData *data=[[NSData alloc]initWithContentsOfURL:url];
@@ -129,7 +129,7 @@
 @implementation clsSchool
 
 -(id)initWithData:(NSDictionary *)dic{
-    self.schoolID=[[dic objectForKey:@"school_id"]integerValue];
+    self.schoolID=[[dic objectForKey:@"id"]integerValue];
     self.name=[dic objectForKey:@"school_name"];
     return self;
 }

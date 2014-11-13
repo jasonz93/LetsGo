@@ -12,7 +12,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "CreateActivityScrollView.h"
 #import "CreateActivityViewController.h"
 
 @interface LocateNewActivityViewController : UIViewController

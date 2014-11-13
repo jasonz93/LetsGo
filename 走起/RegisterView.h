@@ -30,6 +30,7 @@
 }
 
 @property UITextField *txtPaswd;
+@property IBOutlet UITextField *txtPaswdConfirm;
 @property UITextField *txtEmail;
 @property UITextField *txtSid;
 @property UITextField *txtSpwd;

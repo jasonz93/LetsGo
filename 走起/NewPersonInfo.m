@@ -178,11 +178,12 @@
     NSLog(@"Logout! %@",[[NSString alloc]initWithData:RevData encoding:NSUTF8StringEncoding]);
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:@"user_token"];
-    [defaults synchronize];
-    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [defaults synchronize];/*
+    UIStoryboard *storyBoard=self.storyboard;
     LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
     [self presentViewController:lv animated:YES completion:^{
-    }];
+    }];*/
+    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
     //TRUE FLASE;
 }
 #pragma mark network

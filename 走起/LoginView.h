@@ -23,6 +23,7 @@
 @property NSMutableData *loginData;
 @property (retain) UIActivityIndicatorView *act;
 @property (retain) UINavigationItem *navtitle;
+@property IBOutlet UIButton *btnReg;
 
 @end
 
