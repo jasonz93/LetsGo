@@ -66,7 +66,10 @@
 -(void)viewDidLoad{
     self.map.delegate=self;
     self.searchBar.delegate=self;
-    self.centerIcon.center=self.map.center;
+    UIImageView *center=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"marker-48"]];
+    CGRect viewFrame=self.view.frame;
+    center.center=CGPointMake(viewFrame.size.width/2, self.map.center.y-25);
+    [self.view addSubview:center];
 }
 
 @end

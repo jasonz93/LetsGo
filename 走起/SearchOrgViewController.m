@@ -127,6 +127,7 @@ BOOL shouldTouch;
 }
 
 -(void)viewDidLoad{
+    shouldTouch=NO;
     orgList=[[NSMutableArray alloc]init];
     self.tblOrgs.delegate=self;
     self.tblOrgs.dataSource=self;

@@ -57,12 +57,12 @@ NSMutableData *rData;
 -(void)refreshBtn{
     if (self.org.isJoined) {
         [self.btnJoin setTitle:@"退出" forState:UIControlStateNormal];
-        self.btnJoin.tintColor=[UIColor redColor];
+        self.btnJoin.backgroundColor=[UIColor redColor];
     }
     else
     {
         [self.btnJoin setTitle:@"加入" forState:UIControlStateNormal];
-        self.btnJoin.tintColor=defaultColor;
+        self.btnJoin.backgroundColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
     }/*
     NSArray *views=self.navigationController.viewControllers;
     for (int i=0; i<views.count; i++) {
@@ -85,8 +85,7 @@ NSMutableData *rData;
     [Common loadPic:self.org.logoUrl imageView:self.imgOrgLogo];
     [self.imgOrgLogo.layer setMasksToBounds:YES];
     [self.imgOrgLogo.layer setCornerRadius:75];
-    [self.btnJoin.layer setBorderWidth:1];
-    [self.btnJoin.layer setBorderColor:[[UIColor lightGrayColor]CGColor]];
+    self.btnJoin.tintColor=[UIColor whiteColor];
     [self refreshBtn];
 }
 

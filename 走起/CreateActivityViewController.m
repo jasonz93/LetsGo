@@ -15,9 +15,11 @@
 
 @implementation CreateActivityViewController
 
-BOOL shouldTouch;
+BOOL shouldTouch,working;
 
 -(IBAction)Commit:(id)sender{
+    working=YES;
+    self.btnCommit.enabled=[self canCommit];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:self.txtActTitle.text forKey:@"activity_title"];
     [dic setValue:self.txtActContent.text forKey:@"activity_content"];
@@ -38,6 +40,7 @@ BOOL shouldTouch;
 }
 
 -(void)commitDone{
+    working=NO;
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"成功发起活动" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alert show];
     NSArray *views=self.navigationController.viewControllers;
@@ -76,11 +79,11 @@ BOOL shouldTouch;
                 self.txtActPlace.delegate=self;
                 [cell addSubview:self.txtActPlace];
                 self.btnLocate=[[UIButton alloc]initWithFrame:CGRectMake(size.width-100, 5, 90, 30)];
-                self.btnLocate.backgroundColor=[UIColor cyanColor];
+                self.btnLocate.backgroundColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
                 [self.btnLocate.layer setMasksToBounds:YES];
                 [self.btnLocate.layer setCornerRadius:8.0];
                 [self.btnLocate setTitle:@"选取位置" forState:UIControlStateNormal];
-                [self.btnLocate setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+                [self.btnLocate setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 [self.btnLocate addTarget:self action:@selector(clickLocate) forControlEvents:UIControlEventTouchUpInside];
                 [cell addSubview:self.btnLocate];
                 return cell;
@@ -149,8 +152,8 @@ BOOL shouldTouch;
                 [cell addSubview:self.imgActLogo];
                 self.btnLogo=[[UIButton alloc]initWithFrame:CGRectMake(size.width/2+10, 65, 90, 30)];
                 [self.btnLogo setTitle:@"选取小图" forState:UIControlStateNormal];
-                [self.btnLogo setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-                self.btnLogo.backgroundColor=[UIColor cyanColor];
+                [self.btnLogo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                self.btnLogo.backgroundColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
                 [self.btnLogo.layer setMasksToBounds:YES];
                 [self.btnLogo.layer setCornerRadius:8];
                 [self.btnLogo addTarget:self action:@selector(getLogo) forControlEvents:UIControlEventTouchUpInside];
@@ -170,8 +173,8 @@ BOOL shouldTouch;
                 [self.btnPic.layer setMasksToBounds:YES];
                 [self.btnPic.layer setCornerRadius:8];
                 [self.btnPic setTitle:@"选取大图" forState:UIControlStateNormal];
-                [self.btnPic setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-                self.btnPic.backgroundColor=[UIColor cyanColor];
+                [self.btnPic setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                self.btnPic.backgroundColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
                 [self.btnPic addTarget:self action:@selector(getPic) forControlEvents:UIControlEventTouchUpInside];
                 [cell addSubview:self.btnPic];
                 return cell;
@@ -236,6 +239,9 @@ BOOL shouldTouch;
 }
 
 -(BOOL)canCommit{
+    if (working) {
+        return NO;
+    }
     if ([self.txtActCap.text isEqualToString:@""])
         return NO;
     if ([self.txtActContent.text isEqualToString:@""])
@@ -492,6 +498,7 @@ BOOL shouldTouch;
     self.tblActOrg.delegate=self.tblActOrgDele;
     self.tblActOrg.dataSource=self.tblActOrgDele;
     [self.view addSubview:self.tblActOrg];
+    working=NO;
 }
 
 -(void)tblActOrgClicked{
@@ -515,10 +522,7 @@ BOOL shouldTouch;
     self.onClicked=onClick;
     self.orgData=[[NSMutableData alloc]init];
     self.orgDataList=[[NSMutableArray alloc]init];
-    NSString *host=[Common getUrlString:@""];
-    NSUserDefaults *local=[NSUserDefaults standardUserDefaults];
-    NSInteger user_id=[[local objectForKey:@"user_id"]integerValue];
-    NSString *url=[NSString stringWithFormat:@"%@/users/%ld/organizations.json",host,user_id];
+    NSString *url=[Common getUrlString:@"/organizations/mymanage.json"];
     [[GetInfo alloc]initWithURL:url ResultData:self.orgData sender:self OnSuccess:@selector(gotOrgData) OnError:@selector(errOrgData)];
     return self;
 }
