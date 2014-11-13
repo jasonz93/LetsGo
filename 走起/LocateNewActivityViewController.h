@@ -20,6 +20,7 @@
 @property IBOutlet UIImageView *centerIcon;
 @property IBOutlet UISearchBar *searchBar;
 @property CreateActivityViewController *createActView;
+@property CLLocationManager *locMgr;
 
 @end
 

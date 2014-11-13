@@ -9,11 +9,40 @@
 #import <Foundation/Foundation.h>
 #import "LocateNewActivityViewController.h"
 
-@interface LocateNewActivityViewController()<MKMapViewDelegate,UISearchBarDelegate>
+@interface LocateNewActivityViewController()<MKMapViewDelegate,UISearchBarDelegate,CLLocationManagerDelegate>
 
 @end
 
 @implementation LocateNewActivityViewController
+
+
+-(void)initLoc{
+    self.locMgr = [[CLLocationManager alloc]init];
+    self.locMgr.delegate = self;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        [self.locMgr requestAlwaysAuthorization];
+    if ([CLLocationManager locationServicesEnabled]){
+        self.locMgr.distanceFilter = kCLDistanceFilterNone;
+        self.locMgr.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+        [self.locMgr startUpdatingLocation];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"开启定位后可自动选择您所在的学校" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    CLLocation *loc = [locations lastObject];
+    MKCoordinateRegion viewRegion=MKCoordinateRegionMakeWithDistance(loc.coordinate, 10000, 10000);
+    [self.map setRegion:viewRegion animated:YES];
+    [self.locMgr stopUpdatingLocation];
+}
+
+-(void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager{
+    NSLog(@"location paused");
+}
+
 
 -(IBAction)setLocate:(id)sender{
     NSArray *views=self.navigationController.viewControllers;
@@ -64,6 +93,7 @@
 }
 
 -(void)viewDidLoad{
+    [self initLoc];
     self.map.delegate=self;
     self.searchBar.delegate=self;
     UIImageView *center=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"marker-48"]];
