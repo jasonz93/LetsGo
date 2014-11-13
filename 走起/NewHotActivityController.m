@@ -15,16 +15,7 @@
 @implementation NewHotActivityController
 
 - (void)viewDidLoad {
-    MicroLen=10.0f;
-    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    Mytoken=[defaults objectForKey:@"user_token"];
-    NSLog(@"Hot Activity Get token %@",Mytoken);
-    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
-    [self.navigationItem setTitle:@"热门活动"];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    [self preinit];
-    [self GetMyAList];
+                            
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -35,25 +26,49 @@
     SingleTap.delegate=self;
     SingleTap.cancelsTouchesInView=NO;
     
-    ASV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, RTopHeight, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height-RtotalHeight)];
+    /*ASV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, RTopHeight, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height-RtotalHeight)];
     ASV.showsHorizontalScrollIndicator = NO;
     ASV.showsVerticalScrollIndicator = NO;
     ASV.userInteractionEnabled = YES;
     ASV.pagingEnabled = YES;
     ASV.scrollsToTop = NO;
-    ASV.delegate = self;
+    ASV.delegate = self;*/
     [ASV addGestureRecognizer:SingleTap];
     ASV.backgroundColor=[UIColor colorWithRed:227.0/255 green:232.0/255 blue:234.0/255 alpha:1.0f];
-    [self.view addSubview:ASV];
+    //[self.view addSubview:ASV];
     PGC=[[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight+10, 200, 36)];
     PGC.currentPage = 0;
     PGC.userInteractionEnabled = YES;
     PGC.alpha = 1.0;
     //SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
   //  [PGC addTarget:self action:@selector(PageValueChanged) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:PGC];
+    [ASV addSubview:PGC];
     
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    MicroLen=10.0f;
+    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    Mytoken=[defaults objectForKey:@"user_token"];
+    NSLog(@"Hot Activity Get token %@",Mytoken);
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.navigationItem setTitle:@"热门活动"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self preinit];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    [self GetMyAList];
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated{
+    for (UIView* a in PageArray) {
+        [a removeFromSuperview];
+    }
+    [PageArray removeAllObjects];
+    [PGC removeFromSuperview];
+}
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
@@ -111,7 +126,9 @@
     }
     else
     {*/
+    //ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
     ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
+    ASV.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
     PGC.numberOfPages = AList.count;
     NSLog(@"Page Control Display %d dots",PGC.numberOfPages);
     [self initActivityView];
@@ -134,6 +151,7 @@
         //viewer=[[ActivityNewView alloc]initWithFrame:CGRectMake(320*itr+20.0f, 0+20.0f,320, 300)];
         //[viewer defalutinit];
         //[viewer addGestureRecognizer:SingleTap ];
+        [PageArray addObject:viewer];
         [ASV addSubview:viewer];
         NSLog(@"Add the %d subview OK",itr);
     }
