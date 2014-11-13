@@ -18,30 +18,6 @@
 //#import "TimeMapCell.h"
 //#import "CommentTableCell.h"
 #import "SendCommentViewController.h"
-#ifndef ATable
-#define ATable
-
-#define AImgIndex 0
-#define ATitleIndex 1
-#define AOwnerIndex 2
-#define AOrginazationIndex 3
-#define ATimeIndex 4
-#define APlaceIndex 5
-#define APeopleIndex 6
-#define AContentIndex 7
-#define ACommentTopIndex 8
-
-#define AImgH 0//200
-#define ATitleH 1//20
-#define AOwnerH 2//15
-#define AOrginazationH  3//15
-#define ATimeH 4
-#define APlaceH 5//173
-#define APeopleH  6//15
-#define AContentH   7
-#define ACommentTitleH   8
-#define ACommentH   9
-#endif
 
 @interface ActivityTable : UITableViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MBProgressHUDDelegate>
 {

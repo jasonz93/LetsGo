@@ -34,7 +34,7 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *loc = [locations lastObject];
-    MKCoordinateRegion viewRegion=MKCoordinateRegionMakeWithDistance(loc.coordinate, 10000, 10000);
+    MKCoordinateRegion viewRegion=MKCoordinateRegionMakeWithDistance(loc.coordinate, 3000, 3000);
     [self.map setRegion:viewRegion animated:YES];
     [self.locMgr stopUpdatingLocation];
 }

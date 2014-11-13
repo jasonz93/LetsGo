@@ -30,7 +30,7 @@
 }
 
 +(NSString *)getUrlString:(NSString *)path{
-    NSString *host=@"http://192.168.18.179:3000";
+    NSString *host=@"http://192.168.3.28:3000";
     NSString *url=[host stringByAppendingString:path];
     return url;
 }

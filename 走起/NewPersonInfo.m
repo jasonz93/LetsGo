@@ -76,7 +76,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -157,6 +157,24 @@
                 return cell;
             }
             break;
+        case 2:
+        {
+            
+            UITableViewCell *cell=[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CanCell"];
+            if(cell==nil)
+            {
+                cell=[[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CanCell"];
+            }
+            cell.textLabel.text=@"发起活动";
+            cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
+            cell.textLabel.textColor=[UIColor whiteColor];
+            cell.textLabel.textAlignment=NSTextAlignmentCenter;
+            cell.backgroundColor=[UIColor orangeColor];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            return cell;
+            
+        }
+            break;
         default:
         {
             UITableViewCell *cell=[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CanCell"];
@@ -168,7 +186,7 @@
             cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
             cell.textLabel.textColor=[UIColor whiteColor];
             cell.textLabel.textAlignment=NSTextAlignmentCenter;
-            cell.backgroundColor=[UIColor orangeColor];
+            cell.backgroundColor=[UIColor redColor];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -178,7 +196,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([indexPath section]==2)
+    if([indexPath section]==3)
     {
         UIActionSheet *LogoutQ=[[UIActionSheet alloc]initWithTitle:@"确定注销登录？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"注销登录" otherButtonTitles:nil, nil];        //注销登录
          [LogoutQ showInView:self.view];
@@ -190,6 +208,10 @@
         AactivityDetail.hidesBottomBarWhenPushed=YES;
         AactivityDetail.Aid=[[MyADic objectAtIndex:[indexPath row]]objectForKey:@"activity_id"];
         [self.navigationController pushViewController:AactivityDetail animated:YES];
+    }
+    if([indexPath section]==2)
+    {
+        [self OpenAddView];
     }
 }
 
