@@ -63,7 +63,7 @@
         <!--发起活动-->
         <scene sceneID="nwt-Yq-jNT">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Mxe-tU-RpM" customClass="CreateActivityViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createactivityview" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mxe-tU-RpM" customClass="CreateActivityViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6sy-4P-zHf"/>
                         <viewControllerLayoutGuide type="bottom" id="sR7-YH-dpc"/>
@@ -238,6 +238,14 @@
                                     <constraint firstItem="8gE-Hk-AQ5" firstAttribute="top" secondItem="ZUJ-Eb-yKE" secondAttribute="top" id="dsT-4D-vBA"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="School" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzx-8h-wYn">
+                                <rect key="frame" x="44" y="460" width="536" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fsA-Bz-ifK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pyh-ng-8y3">
                                 <rect key="frame" x="0.0" y="570" width="600" height="30"/>
                                 <state key="normal" title="Button">
@@ -247,26 +255,27 @@
                                     <action selector="joinOrg:" destination="uIj-me-7Su" eventType="touchUpInside" id="aBj-4q-ZyF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="School" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jzx-8h-wYn">
-                                <rect key="frame" x="20" y="460" width="560" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="school" translatesAutoresizingMaskIntoConstraints="NO" id="j1b-lc-iFy">
+                                <rect key="frame" x="16" y="465" width="20" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="fsA-Bz-ifK"/>
+                                    <constraint firstAttribute="height" constant="20" id="izC-ZO-TkI"/>
+                                    <constraint firstAttribute="width" constant="20" id="sBc-mX-ixL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Pyh-ng-8y3" secondAttribute="trailing" id="1aj-RM-bGv"/>
-                            <constraint firstItem="jzx-8h-wYn" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" constant="20" id="2Q5-pA-6E4"/>
+                            <constraint firstItem="jzx-8h-wYn" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" constant="44" id="2Q5-pA-6E4"/>
                             <constraint firstAttribute="bottom" secondItem="Pyh-ng-8y3" secondAttribute="bottom" id="2e8-84-Wop"/>
                             <constraint firstItem="wTG-F0-Cdq" firstAttribute="top" secondItem="J6D-l2-9a9" secondAttribute="top" constant="90" id="7vW-aw-nOB"/>
                             <constraint firstItem="ZUJ-Eb-yKE" firstAttribute="top" secondItem="bu3-Q2-4m4" secondAttribute="bottom" constant="10" id="E7L-lO-oeA"/>
                             <constraint firstItem="bu3-Q2-4m4" firstAttribute="leading" secondItem="ZUJ-Eb-yKE" secondAttribute="leading" id="E7V-Db-cUX"/>
                             <constraint firstItem="bu3-Q2-4m4" firstAttribute="trailing" secondItem="ZUJ-Eb-yKE" secondAttribute="trailing" id="Hwl-af-7vj"/>
                             <constraint firstItem="bu3-Q2-4m4" firstAttribute="top" secondItem="wTG-F0-Cdq" secondAttribute="bottom" constant="20" id="RQl-zT-uJn"/>
+                            <constraint firstItem="j1b-lc-iFy" firstAttribute="top" secondItem="ZUJ-Eb-yKE" secondAttribute="bottom" constant="15" id="U5P-Ac-M4r"/>
                             <constraint firstAttribute="centerX" secondItem="wTG-F0-Cdq" secondAttribute="centerX" id="ck3-wl-iFN"/>
+                            <constraint firstItem="j1b-lc-iFy" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" constant="16" id="fk4-ON-E9S"/>
                             <constraint firstAttribute="trailing" secondItem="ZUJ-Eb-yKE" secondAttribute="trailing" constant="20" id="lSp-Kw-j7h"/>
                             <constraint firstItem="Pyh-ng-8y3" firstAttribute="leading" secondItem="J6D-l2-9a9" secondAttribute="leading" id="oPs-HD-C9k"/>
                             <constraint firstItem="jzx-8h-wYn" firstAttribute="top" secondItem="ZUJ-Eb-yKE" secondAttribute="bottom" constant="10" id="q8e-Ou-Pu1"/>
@@ -722,8 +731,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oD9-q4-gdB">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oD9-q4-gdB">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="发表评论" id="ZBY-b6-Hj6">
                                         <barButtonItem key="leftBarButtonItem" title="Item" id="HGZ-gs-u3J">
@@ -739,11 +748,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="muG-85-7gC">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muG-85-7gC">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Maw-jK-lkN">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Maw-jK-lkN">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -770,7 +779,7 @@
                             <constraint firstAttribute="trailing" secondItem="oD9-q4-gdB" secondAttribute="trailing" id="SDr-b2-K0U"/>
                             <constraint firstItem="muG-85-7gC" firstAttribute="top" secondItem="oD9-q4-gdB" secondAttribute="bottom" id="q4a-0a-2W6"/>
                             <constraint firstItem="oD9-q4-gdB" firstAttribute="leading" secondItem="Dp9-8x-MQu" secondAttribute="leading" id="rLp-zt-GYe"/>
-                            <constraint firstItem="oD9-q4-gdB" firstAttribute="top" secondItem="q5p-du-CVo" secondAttribute="bottom" id="raA-mU-2Q7"/>
+                            <constraint firstItem="oD9-q4-gdB" firstAttribute="top" secondItem="q5p-du-CVo" secondAttribute="top" id="raA-mU-2Q7"/>
                         </constraints>
                     </view>
                     <connections>
@@ -778,6 +787,7 @@
                         <outlet property="CommentContentTxt" destination="Maw-jK-lkN" id="mQu-48-CW3"/>
                         <outlet property="Scroll" destination="muG-85-7gC" id="OGG-cx-pkX"/>
                         <outlet property="SendButton" destination="S68-TK-Udo" id="Ixm-Hl-xec"/>
+                        <outlet property="SendNav" destination="oD9-q4-gdB" id="DvC-f2-Qj4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXH-gK-O9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -840,6 +850,7 @@
         <image name="group" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="hot" width="30" height="30"/>
+        <image name="school" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N2K-Un-WFo"/>

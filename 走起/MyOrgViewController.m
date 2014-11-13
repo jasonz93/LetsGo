@@ -118,6 +118,8 @@ clsOrg *org;
     cell.detailTextLabel.text=org.content;
     cell.layer.borderWidth=1;
     cell.layer.borderColor=[[UIColor lightGrayColor]CGColor];
+    [cell.imageView.layer setMasksToBounds:YES];
+    [cell.imageView.layer setCornerRadius:10];
     return cell;
 }
 

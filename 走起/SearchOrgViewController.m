@@ -46,6 +46,8 @@ BOOL shouldTouch;
     //[Common loadPic:org.logoUrl imageView:cell.imageView];
     cell.layer.borderColor=[[UIColor lightGrayColor]CGColor];
     cell.layer.borderWidth=1;
+    [cell.imageView.layer setMasksToBounds:YES];
+    [cell.imageView.layer setCornerRadius:10];
     return cell;
 }
 
