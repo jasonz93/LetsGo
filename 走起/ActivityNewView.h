@@ -17,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *AplaceL;
 @property (weak, nonatomic) IBOutlet UILabel *ApeopleMaxL;
 @property (weak, nonatomic) IBOutlet UILabel *ApeopleL;
+@property (weak, nonatomic) IBOutlet UILabel *AtimeendL;
 
--(void)initWithImg:(NSString*)img Title:(NSString*)title Time:(NSString*)Atime Place:(NSString*)place PeopleMax:(NSString*)PMax PeopleJioned:(NSString*)Pj;
+-(void)initWithImg:(NSString*)img Title:(NSString*)title Time:(NSString*)Atime TimeEnd:(NSString*)Timeend Place:(NSString*)place PeopleMax:(NSString*)PMax PeopleJioned:(NSString*)Pj;
 
 @end

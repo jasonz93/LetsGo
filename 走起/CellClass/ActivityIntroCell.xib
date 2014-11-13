@@ -40,7 +40,7 @@
                             <constraint firstAttribute="height" constant="13" id="eCO-Gq-26J"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="site" translatesAutoresizingMaskIntoConstraints="NO" id="4Va-O0-XZf">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locate" translatesAutoresizingMaskIntoConstraints="NO" id="4Va-O0-XZf">
                         <rect key="frame" x="118" y="63" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="jHy-gn-foy"/>
@@ -86,7 +86,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="site" width="72" height="72"/>
+        <image name="locate" width="38" height="30"/>
         <image name="time" width="40" height="40"/>
     </resources>
 </document>

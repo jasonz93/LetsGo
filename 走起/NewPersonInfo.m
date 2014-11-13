@@ -19,14 +19,15 @@
     self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
     [self.navigationItem setTitle:@"个人信息"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     [self.InfoTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     Uid=[[defaults objectForKey:@"user_id"]integerValue];
     MyToken=[defaults objectForKey:@"user_token"];
-    NSLog(@"PersonInfoView Get token %@,id %d",MyToken,Uid);
-    //MyToken=@"46Ms7ERFe7dpzXCFKjyw";
-
+    NSLog(@"PersonInfoView Get token %@,id %ld",MyToken,(long)Uid);
+    //创建一个右边按钮
+    UIBarButtonItem *AddActivity=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(OpenAddView)];
+    [self.navigationItem setRightBarButtonItem:AddActivity];
     [self initRefreshControl];
     //[self.refreshControl beginRefreshing];
     [self GetInfo];
@@ -39,7 +40,19 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)OpenAddView{
+   /* UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateActivityViewController *CreatVC=[storyBoard instantiateViewControllerWithIdentifier:@"creatactivityview" ];
+    [self presentViewController:CreatVC animated:YES completion:^{
+    }];*/
+    
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateActivityViewController *CreatVC=[storyBoard instantiateViewControllerWithIdentifier:@"createactivityview" ];
+    CreatVC.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:CreatVC animated:YES];
 
+    
+}
 
 -(void) initRefreshControl{
     UIRefreshControl *Rc=[[UIRefreshControl alloc]init];
@@ -218,14 +231,24 @@
 -(void) ProcessData{
     DataDic=[NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"PersonInfoPage:-Data:%@",DataDic);
+    
     MyADic=[DataDic objectForKey:@"myactivity"];
     
     UserLogo=[DataDic objectForKey:@"user_logo"];
-    UserName=[DataDic objectForKey:@"email"];
-    UserPraise=[[DataDic objectForKey:@"praise"] floatValue];
+    if([DataDic objectForKey:@"student_name"]==nil)
+    {
+        NSLog(@"名字为空，显示email!");
+        UserName=[DataDic objectForKey:@"email"];
+    }
+    else
+    {
+        NSLog(@"有名字，显示名字");
+        UserName=[DataDic objectForKey:@"student_name"];
+    }
+    UserPraise=[DataDic objectForKey:@"praise"];
     SchoolName=[DataDic objectForKey:@"school_name"];
     NSLog(@"%@",DataDic);
-    NSLog(@"%@,%f,%@",UserName,UserPraise,SchoolName);
+    NSLog(@"%@,%@,%@",UserName,UserPraise,SchoolName);
     [self.InfoTable reloadData];
 }
 
@@ -252,7 +275,7 @@
     switch ([indexPath section]) {
         case 0:
         {
-            return 70;
+            return 85;
             break;
         }
             

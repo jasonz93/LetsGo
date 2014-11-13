@@ -19,7 +19,17 @@
     SingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenDetailView)];
     SingleTap.delegate=self;
     SingleTap.cancelsTouchesInView=NO;
-                            
+    
+    ASV.delegate=self;
+    MicroLen=10.0f;
+    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    Mytoken=[defaults objectForKey:@"user_token"];
+    NSLog(@"Hot Activity Get token %@",Mytoken);
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.navigationItem setTitle:@"热门活动"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -46,17 +56,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    ASV.delegate=self;
-    MicroLen=10.0f;
-    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    Mytoken=[defaults objectForKey:@"user_token"];
-    NSLog(@"Hot Activity Get token %@",Mytoken);
-    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
-    [self.navigationItem setTitle:@"热门活动"];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [self preinit];
-    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     if(!PArryAlloced)
     {
         NSLog(@"Alloc PageArry");
@@ -93,7 +93,7 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollViews {
     int pageNum = fabs(scrollViews.contentOffset.x / scrollViews.frame.size.width);
     PGC.currentPage=pageNum;
-    NSLog(@"Trun to page= %d Set the Control page= %d",pageNum,PGC.currentPage);
+    NSLog(@"Trun to page= %d Set the Control page= %ld",pageNum,(long)PGC.currentPage);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -136,7 +136,7 @@
     ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
     ASV.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
     PGC.numberOfPages = AList.count;
-    NSLog(@"Page Control Display %d dots",PGC.numberOfPages);
+    NSLog(@"Page Control Display %ld dots",(long)PGC.numberOfPages);
     [self initActivityView];
 }
 
@@ -152,7 +152,7 @@
         viewer.frame=CGRectMake(ASV.frame.size.width*itr+MicroLen,MicroLen, ASV.frame.size.width-2*MicroLen, ASV.frame.size.height-2*MicroLen);
         NSLog(@"%F,%f,%f,%f",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height);
         /*[viewer initWithImg:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tmp objectForKey:@"activity_logo"]]] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];*/
-        [viewer initWithImg:[tmp objectForKey:@"activity_logo"] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
+        [viewer initWithImg:[tmp objectForKey:@"activity_logo"] Title:[tmp objectForKey:@"activity_title"] Time:[tmp objectForKey:@"activity_begin_time"] TimeEnd:[tmp objectForKey:@"activity_end_time"] Place:[tmp objectForKey:@"activity_place"] PeopleMax:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_max"]] PeopleJioned:[NSString stringWithFormat:@"%@",[tmp objectForKey:@"activity_people_number"]]];
         //NSLog(@"%f,%f,%f,%f,itr=%d",viewer.frame.origin.x,viewer.frame.origin.y,viewer.frame.size.width,viewer.frame.size.height,itr);
         //viewer=[[ActivityNewView alloc]initWithFrame:CGRectMake(320*itr+20.0f, 0+20.0f,320, 300)];
         //[viewer defalutinit];

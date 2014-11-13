@@ -15,5 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *PraiseL;
 
 
--(void)initWithUserLogo:(NSString*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(int)Praise;
+-(void)initWithUserLogo:(NSString*)Uimg UserName:(NSString*)Uname Schoolname:(NSString*)schoolname Praise:(NSNumber*)Praise;
 @end

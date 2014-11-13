@@ -73,6 +73,10 @@
         Ajioned=1;
     }
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [self GetActivityDetail];
+    [self.ATableView reloadData];
+}
 
 -(void) initRefreshControl{
     UIRefreshControl *Rc=[[UIRefreshControl alloc]init];

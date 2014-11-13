@@ -18,6 +18,10 @@
     self.CommentContentTxt.returnKeyType=UIReturnKeyDefault;
     self.SendButton.title=@"发送";
     self.CancelButton.title=@"取消";
+    self.SendNav.barTintColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+    [self.SendNav setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.SendNav.tintColor=[UIColor whiteColor];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
