@@ -28,6 +28,7 @@
     float MicroLen;
     NSString *Mytoken;
     NSMutableArray *PageArray;
+    BOOL PArryAlloced;
 
 }
 

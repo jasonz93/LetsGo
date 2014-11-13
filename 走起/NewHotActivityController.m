@@ -15,17 +15,16 @@
 @implementation NewHotActivityController
 
 - (void)viewDidLoad {
+    
+    SingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenDetailView)];
+    SingleTap.delegate=self;
+    SingleTap.cancelsTouchesInView=NO;
                             
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
 -(void)preinit{
-    
-    SingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenDetailView)];
-    SingleTap.delegate=self;
-    SingleTap.cancelsTouchesInView=NO;
-    
     /*ASV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, RTopHeight, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height-RtotalHeight)];
     ASV.showsHorizontalScrollIndicator = NO;
     ASV.showsVerticalScrollIndicator = NO;
@@ -36,17 +35,18 @@
     [ASV addGestureRecognizer:SingleTap];
     ASV.backgroundColor=[UIColor colorWithRed:227.0/255 green:232.0/255 blue:234.0/255 alpha:1.0f];
     //[self.view addSubview:ASV];
-    PGC=[[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].applicationFrame.size.width/2-100, [UIScreen mainScreen].applicationFrame.size.height-RTopHeight+10, 200, 36)];
+    PGC=[[UIPageControl alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-100,self.view.frame.size.height-MicroLen-20, 200, 36)];
     PGC.currentPage = 0;
     PGC.userInteractionEnabled = YES;
     PGC.alpha = 1.0;
     //SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
   //  [PGC addTarget:self action:@selector(PageValueChanged) forControlEvents:UIControlEventTouchDown];
-    [ASV addSubview:PGC];
+    [self.view addSubview:PGC];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    ASV.delegate=self;
     MicroLen=10.0f;
     [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
@@ -57,6 +57,12 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [self preinit];
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    if(!PArryAlloced)
+    {
+        NSLog(@"Alloc PageArry");
+        PageArray=[[NSMutableArray alloc]init];
+        PArryAlloced=YES;
+    }
     [self GetMyAList];
 }
 

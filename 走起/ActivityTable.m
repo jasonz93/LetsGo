@@ -63,13 +63,13 @@
     SendCommentBtn.backgroundColor=[UIColor blackColor];
     [SendCommentBtn addTarget:self action:@selector(OpenSendCommentBtn) forControlEvents:UIControlEventTouchDown];
     Afinished=[[AData_Dic objectForKey:@"finished"]boolValue];
-    if([[AData_Dic objectForKey:@"ship_id"] isEqual:@""])
+    ship_id=[AData_Dic objectForKey:@"ship_id"];
+    if(ship_id==nil)
     {
         Ajioned=0;
     }
     else
     {
-        ship_id=[[AData_Dic objectForKey:@"ship_id"]integerValue];
         Ajioned=1;
     }
 }
@@ -279,7 +279,7 @@
     {
         UIView *CTview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].applicationFrame.size.width, 15)];
         UILabel *CTL=[[UILabel alloc]initWithFrame:CGRectMake(8, 8, [UIScreen mainScreen].applicationFrame.size.width, 15)];
-        CTL.text=[NSString stringWithFormat: @"评论 %d",AComment.count];
+        CTL.text=[NSString stringWithFormat: @"评论 %lu",(unsigned long)AComment.count];
         CTL.font=[UIFont systemFontOfSize:13.0f];
         CTL.textColor=[UIColor colorWithRed:96.0/255 green:125.0/255 blue:139.0/255 alpha:1.0f];
         CTview.backgroundColor=[UIColor whiteColor];
@@ -322,7 +322,7 @@
     //curl -X DELETE -H "Content-Type: application/json" -d '{"activity_id":1}' localhost:3000/activity_memberships.json?user_token=dB4EyczCNnaGayypEZXG
     
     //NSString *URLplist=[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/activity_memberships/%d.json?user_token=%@",ship_id,Mytoken]];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/activity_memberships/%@.json?user_token=%@",ship_id,Mytoken]];
     NSLog(@"Request Quit Activity,the URL is %@",URLpre);
     // NSString *CompleteURL=[NSString stringWithFormat:@"%@/activity_memberships/%d.json?user_token=%@",URLpre,ship_id,Mytoken];
     [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"DELETE" postData:nil resultData:PostReslut sender:self onSuccess:@selector(QuitSuccess) onError:nil];
@@ -331,8 +331,8 @@
 -(void)JionActivity{
     //curl -X POST -H "Content-Type: application/json" -d  localhost:3000/activity_memberships.json?user_token=dB4EyczCNnaGayypEZXG
     NSString *URLpre=[Common getUrlString:[NSString stringWithFormat: @"/activity_memberships.json?user_token=%@",Mytoken]];
-    NSData *JoinData=[[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]] dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"Post URL:%@\nData%@",URLpre,[NSString stringWithFormat:@"{\"activity_id\":%d}",[self.Aid integerValue]]);
+    NSData *JoinData=[[NSString stringWithFormat:@"{\"activity_id\":%ld}",(long)[self.Aid integerValue]] dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"Post URL:%@\nData%@",URLpre,[NSString stringWithFormat:@"{\"activity_id\":%ld}",(long)[self.Aid integerValue]]);
     PostReslut=[NSMutableData alloc];
     NSLog(@"Request Join Activity,the URL is %@",URLpre);
     [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"POST" postData:JoinData resultData:PostReslut sender:self onSuccess:@selector(JionSuccess) onError:nil];
@@ -346,10 +346,11 @@
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     Ajioned=YES;
-    ship_id=[[[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil]objectForKey:@"ship_id" ] integerValue];
+    ship_id=[[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil]objectForKey:@"ship_id" ];
+    
     NSDictionary *test=[NSJSONSerialization JSONObjectWithData:PostReslut options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"%@",test);
-    NSLog(@"Get New ship id:%d",ship_id);
+    NSLog(@"Get New ship id:%@",ship_id);
     cell.textLabel.text = @"离开";
 }
 
