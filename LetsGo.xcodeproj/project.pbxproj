@@ -32,7 +32,6 @@
 		73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7B1A08E8720056BFD6 /* GetInfo.m */; };
 		73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */; };
 		E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */; };
-		E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E171A09521A00F43300 /* CreateActivityScrollView.m */; };
 		E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */; };
 		E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E221A0A63B500F43300 /* SearchOrgViewController.m */; };
 		E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E251A0A94E900F43300 /* OrgDetailViewController.m */; };
@@ -100,8 +99,6 @@
 		73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityViewController.m; sourceTree = "<group>"; };
 		E117E86D1A091B3700E19CA8 /* CreateActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateActivityViewController.h; sourceTree = "<group>"; };
 		E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateActivityViewController.m; sourceTree = "<group>"; };
-		E1215E171A09521A00F43300 /* CreateActivityScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateActivityScrollView.m; sourceTree = "<group>"; };
-		E1215E191A09522D00F43300 /* CreateActivityScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateActivityScrollView.h; sourceTree = "<group>"; };
 		E1215E1E1A0A5FA100F43300 /* MyOrgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrgViewController.h; sourceTree = "<group>"; };
 		E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrgViewController.m; sourceTree = "<group>"; };
 		E1215E211A0A63A400F43300 /* SearchOrgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchOrgViewController.h; sourceTree = "<group>"; };
@@ -240,8 +237,6 @@
 				E117E86D1A091B3700E19CA8 /* CreateActivityViewController.h */,
 				E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */,
 				E1949D891A08B47A005CC530 /* Supporting Files */,
-				E1215E171A09521A00F43300 /* CreateActivityScrollView.m */,
-				E1215E191A09522D00F43300 /* CreateActivityScrollView.h */,
 				E1215E1E1A0A5FA100F43300 /* MyOrgViewController.h */,
 				E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */,
 				E1215E211A0A63A400F43300 /* SearchOrgViewController.h */,
@@ -405,7 +400,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */,
-				E1215E181A09521A00F43300 /* CreateActivityScrollView.m in Sources */,
 				7361E90C1A126E9C00E17682 /* NewPersonInfo.m in Sources */,
 				7361E9211A12704200E17682 /* ASProgressPopUpView.m in Sources */,
 				7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */,

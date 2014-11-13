@@ -155,4 +155,8 @@ clsOrg *org;
     self.refreshControl=rc;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [self pullRefresh];
+}
+
 @end

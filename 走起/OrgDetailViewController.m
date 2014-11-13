@@ -63,7 +63,7 @@ NSMutableData *rData;
     {
         [self.btnJoin setTitle:@"加入" forState:UIControlStateNormal];
         self.btnJoin.tintColor=defaultColor;
-    }
+    }/*
     NSArray *views=self.navigationController.viewControllers;
     for (int i=0; i<views.count; i++) {
         if ([views[i] isKindOfClass:[MyOrgViewController class]]) {
@@ -71,7 +71,7 @@ NSMutableData *rData;
             MyOrgViewController *my=views[i];
             [my refreshOrgs];
         }
-    }
+    }*/
 }
 
 -(void)gotSchool{
