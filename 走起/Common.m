@@ -115,6 +115,7 @@
     //self.isJoined=[[dic objectForKey:@"isJoined"]boolValue];
     self.school_id=[[dic objectForKey:@"school_id"]integerValue];
     self.ship_id=[dic objectForKey:@"ship_id"];
+    self.school_name=[dic objectForKey:@"school_name"];
     if (self.ship_id!=nil) {
         self.isJoined=YES;
     }

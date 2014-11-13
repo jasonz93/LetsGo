@@ -18,6 +18,7 @@
 @property BOOL isJoined;
 @property NSNumber *ship_id;
 @property NSInteger school_id;
+@property NSString *school_name;
 
 -(id)initWithData:(NSDictionary *)dic;
 

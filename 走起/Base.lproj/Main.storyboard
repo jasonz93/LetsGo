@@ -95,6 +95,7 @@
                     <connections>
                         <outlet property="btnCommit" destination="OuC-1c-NEx" id="14F-A0-qmc"/>
                         <outlet property="tblMain" destination="d1m-ED-YTu" id="n7h-JU-YLx"/>
+                        <segue destination="BGu-Lr-42K" kind="show" id="eEB-D9-NI9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMf-rN-MhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,11 +637,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="nwx-m5-jUj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3H1-Qs-amO">
-                            <connections>
-                                <segue destination="Mxe-tU-RpM" kind="show" id="AfK-ap-rZv"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3H1-Qs-amO"/>
                     </navigationItem>
                     <connections>
                         <outlet property="ActivityList" destination="UrM-jQ-1iI" id="Big-VT-1es"/>
@@ -655,7 +652,7 @@
             <objects>
                 <tableViewController id="BGu-Lr-42K" customClass="NewPersonInfo" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YPY-kF-Jz0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -827,9 +824,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="OF8-XF-GdN">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UZe-6g-NP4"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="OF8-XF-GdN"/>
                     <connections>
                         <outlet property="ASV" destination="sB6-kd-jJe" id="gzc-nd-bjo"/>
                         <outlet property="PGC" destination="519-ef-dld" id="m2f-bt-yXZ"/>
@@ -848,7 +843,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N2K-Un-WFo"/>
-        <segue reference="XN4-7n-K7z"/>
+        <segue reference="eEB-D9-NI9"/>
         <segue reference="wAl-9d-iU3"/>
     </inferredMetricsTieBreakers>
 </document>

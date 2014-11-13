@@ -74,19 +74,11 @@ NSMutableData *rData;
     }*/
 }
 
--(void)gotSchool{
-    NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:self.schoolData options:NSJSONReadingMutableLeaves error:nil];
-    self.school=[[clsSchool alloc]initWithData:dic];
-    self.txtSchoolName.text=self.school.name;
-}
-
 -(void)viewDidLoad{
     defaultColor=self.btnJoin.tintColor;
     self.txtOrgName.text=self.org.name;
     self.txtOrgContent.text=self.org.content;
-    self.schoolData=[[NSMutableData alloc]init];
-    NSString *url=[NSString stringWithFormat:@"%@/schools/%ld.json",[Common getUrlString:@""],self.org.school_id];
-    [[GetInfo alloc]initWithURL:url ResultData:self.schoolData sender:self OnSuccess:@selector(gotSchool) OnError:nil];
+    self.txtSchoolName.text=self.org.school_name;
     //NSURL *url=[NSURL URLWithString:self.org.logoUrl];
     //UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     //self.imgOrgLogo.image=image;
