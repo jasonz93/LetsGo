@@ -31,12 +31,13 @@
     [self.navigationItem setTitle:@"我参与的"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];    [super viewDidLoad];
     [self initRefreshControl];
-    [self.refreshControl beginRefreshing];
-    [self RefreshAList];
+    //[self.refreshControl beginRefreshing];
+    //[self RefreshAList];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    NSLog(@"Hot Activity Get token %@,id %d",mytoken,Uid);
+    NSLog(@"MyActivity Get token %@,id %ld",mytoken,(long)Uid);
+    [self GetMyAList];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -125,7 +126,7 @@
 
 -(void) GetMyAList{
     self.RevData=[NSMutableData alloc];
-    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/%d/activities.json",Uid]];
+    NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/%ld/activities.json",(long)Uid]];
     // NSLog(@"URL is %@",[NSString stringWithFormat:@"%@/users/%d/activities.json",URLpre,Uid] );
     [[GetInfo alloc]initWithURL:URLpre ResultData:self.RevData sender:self OnSuccess:@selector(ProcessData) OnError:@selector(DealError)];
 }

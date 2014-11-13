@@ -18,11 +18,12 @@
 #import "LevelCell.h"
 #import "Common.h"
 #import "LoginView.h"
+#import "CreateActivityViewController.h"
 @interface NewPersonInfo : UITableViewController<MBProgressHUDDelegate,UIActionSheetDelegate>{
     NSString *UserLogo;
     NSString *UserName;
     NSString *SchoolName;
-    float UserPraise;
+    NSNumber *UserPraise;
     NSMutableData *RevData;
     NSDictionary *DataDic;
     NSArray *MyADic;
