@@ -39,6 +39,7 @@
 		E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E251A0A94E900F43300 /* OrgDetailViewController.m */; };
 		E13B4F371A131E6F000047D6 /* LocateNewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */; };
 		E14C046C1A1590D900D89C41 /* OrgActListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C046B1A1590D900D89C41 /* OrgActListViewController.m */; };
+		E18B43101A15F1A4009DBD05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E18B430E1A15F1A4009DBD05 /* Main.storyboard */; };
 		E1949D8C1A08B47A005CC530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949D8B1A08B47A005CC530 /* main.m */; };
 		E1949DAC1A08B47B005CC530 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DAB1A08B47B005CC530 /* __Tests.m */; };
 		E1949DCB1A08B5C0005CC530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DB41A08B5C0005CC530 /* AppDelegate.m */; };
@@ -115,6 +116,7 @@
 		E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocateNewActivityViewController.m; sourceTree = "<group>"; };
 		E14C046A1A15909D00D89C41 /* OrgActListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgActListViewController.h; sourceTree = "<group>"; };
 		E14C046B1A1590D900D89C41 /* OrgActListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgActListViewController.m; sourceTree = "<group>"; };
+		E18B430F1A15F1A4009DBD05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E1949D861A08B47A005CC530 /* 走起.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "走起.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1949D8A1A08B47A005CC530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1949D8B1A08B47A005CC530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		E1949D881A08B47A005CC530 /* 走起 */ = {
 			isa = PBXGroup;
 			children = (
+				E18B430E1A15F1A4009DBD05 /* Main.storyboard */,
 				73FF3DD21A1594FE00C8766F /* CommentDetailView.h */,
 				73FF3DD31A1594FE00C8766F /* CommentDetailView.m */,
 				736CE8C41A14EDC300E90846 /* SearchActivityController.h */,
@@ -369,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7361E9261A12708100E17682 /* LevelCell.xib in Resources */,
+				E18B43101A15F1A4009DBD05 /* Main.storyboard in Resources */,
 				7361E92B1A12709800E17682 /* PersonInfoCell.xib in Resources */,
 				7346D7201A0CA9580024B4B5 /* ActivityIntroCell.xib in Resources */,
 				7346D7221A0CA9580024B4B5 /* CommentCell.xib in Resources */,
@@ -460,6 +464,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E18B430E1A15F1A4009DBD05 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E18B430F1A15F1A4009DBD05 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		E1949DD71A08B5E7005CC530 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

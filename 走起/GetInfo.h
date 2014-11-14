@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MBProgressHUD.h"
 
-@interface GetInfo : NSObject<NSURLConnectionDelegate>
+@interface GetInfo : NSObject<NSURLConnectionDelegate,MBProgressHUDDelegate>
 @property NSMutableData* ResultDic;
 @property SEL OnSuccess;
 @property SEL OnError;
@@ -20,7 +21,7 @@
 @end
 
 
-@interface PostInfo : NSObject<NSURLConnectionDelegate>
+@interface PostInfo : NSObject<NSURLConnectionDelegate,MBProgressHUDDelegate>
 @property NSMutableData* PResultDic;
 @property SEL POnSuccess;
 @property SEL POnError;

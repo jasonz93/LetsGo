@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 @interface clsOrg : NSObject
 
@@ -53,7 +54,7 @@
 
 @end
 
-@interface HTTPPost : NSObject
+@interface HTTPPost : NSObject<MBProgressHUDDelegate>
 
 @property NSMutableData *receiveData;
 @property NSMutableURLRequest *request;

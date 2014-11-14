@@ -209,8 +209,29 @@
 
 -(void)conncetion:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     NSLog(@"%@", [error localizedDescription]);
-    if(self.onErr)
-        [sender performSelector:onErr];
+//    if(self.onErr)
+//        [sender performSelector:onErr];
+    [self DealError];
+}
+
+-(void)DealError{
+    NSLog(@"NetWork Error");
+    UIViewController *controller=self.sender;
+    MBProgressHUD *ErrorView=[[MBProgressHUD alloc]initWithView:controller.view];
+    ErrorView.customView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cry"]];
+    ErrorView.mode=MBProgressHUDModeCustomView;
+    ErrorView.delegate=self;
+    ErrorView.labelText=@"网络不给力";
+    [ErrorView show:YES];
+    [controller.view addSubview:ErrorView];
+    [ErrorView hide:YES afterDelay:2];
+    
+}
+
+-(void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [hud removeFromSuperview];
+    hud = nil;
 }
 
 

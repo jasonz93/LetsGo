@@ -42,7 +42,8 @@
 
 -(void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     NSLog(@"%@",[error localizedDescription]);
-    [self.Sender performSelector:self.OnError];
+    //[self.Sender performSelector:self.OnError];
+    [self DealError];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -52,6 +53,27 @@
     NSLog(@"%@",str);
     [self.Sender performSelector:self.OnSuccess];
 }
+
+-(void)DealError{
+    NSLog(@"NetWork Error");
+    UIViewController *controller=self.Sender;
+    MBProgressHUD *ErrorView=[[MBProgressHUD alloc]initWithView:controller.view];
+    ErrorView.customView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cry"]];
+    ErrorView.mode=MBProgressHUDModeCustomView;
+    ErrorView.delegate=self;
+    ErrorView.labelText=@"网络不给力";
+    [ErrorView show:YES];
+    [controller.view addSubview:ErrorView];
+    [ErrorView hide:YES afterDelay:2];
+    
+}
+
+-(void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [hud removeFromSuperview];
+    hud = nil;
+}
+
 @end
 
 
@@ -83,7 +105,28 @@
 
 -(void)conncetion:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     NSLog(@"%@", [error localizedDescription]);
-    [self.PSender performSelector:self.POnError];
+//    [self.PSender performSelector:self.POnError];
+    [self DealError];
+}
+
+-(void)DealError{
+    NSLog(@"NetWork Error");
+    UIViewController *controller=self.PSender;
+    MBProgressHUD *ErrorView=[[MBProgressHUD alloc]initWithView:controller.view];
+    ErrorView.customView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cry"]];
+    ErrorView.mode=MBProgressHUDModeCustomView;
+    ErrorView.delegate=self;
+    ErrorView.labelText=@"网络不给力";
+    [ErrorView show:YES];
+    [controller.view addSubview:ErrorView];
+    [ErrorView hide:YES afterDelay:2];
+    
+}
+
+-(void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [hud removeFromSuperview];
+    hud = nil;
 }
 
 
