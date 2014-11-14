@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "OrgDetailViewController.h"
 #import "MyOrgViewController.h"
+#import "OrgActListViewController.h"
 
 @interface OrgDetailViewController()
 
@@ -18,6 +19,13 @@
 
 UIColor *defaultColor;
 NSMutableData *rData;
+
+-(IBAction)getActs:(id)sender{
+    UIStoryboard *storyboard=self.storyboard;
+    OrgActListViewController *orgact=[storyboard instantiateViewControllerWithIdentifier:@"OrgActList"];
+    orgact.org=self.org;
+    [self.navigationController pushViewController:orgact animated:YES];
+}
 
 -(IBAction)joinOrg:(id)sender{
     if (self.org.isJoined) {

@@ -24,6 +24,21 @@
 
 @end
 
+@interface clsAct : NSObject
+
+@property NSString *act_title;
+@property NSString *act_content;
+@property NSString *act_logo;
+@property NSString *act_pic;
+@property NSString *act_id;
+@property NSString *act_begin;
+@property NSString *act_end;
+@property NSString *act_place;
+
+-(id)initWithData:(NSDictionary *)dic;
+
+@end
+
 @interface Common : NSObject<NSURLConnectionDelegate>
 
 +(NSString *)getToken;

@@ -36,6 +36,7 @@
 		E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E221A0A63B500F43300 /* SearchOrgViewController.m */; };
 		E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E251A0A94E900F43300 /* OrgDetailViewController.m */; };
 		E13B4F371A131E6F000047D6 /* LocateNewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */; };
+		E14C046C1A1590D900D89C41 /* OrgActListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C046B1A1590D900D89C41 /* OrgActListViewController.m */; };
 		E1949D8C1A08B47A005CC530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949D8B1A08B47A005CC530 /* main.m */; };
 		E1949DAC1A08B47B005CC530 /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DAB1A08B47B005CC530 /* __Tests.m */; };
 		E1949DCB1A08B5C0005CC530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1949DB41A08B5C0005CC530 /* AppDelegate.m */; };
@@ -107,6 +108,8 @@
 		E1215E251A0A94E900F43300 /* OrgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgDetailViewController.m; sourceTree = "<group>"; };
 		E13B4F351A131E65000047D6 /* LocateNewActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocateNewActivityViewController.h; sourceTree = "<group>"; };
 		E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocateNewActivityViewController.m; sourceTree = "<group>"; };
+		E14C046A1A15909D00D89C41 /* OrgActListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgActListViewController.h; sourceTree = "<group>"; };
+		E14C046B1A1590D900D89C41 /* OrgActListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgActListViewController.m; sourceTree = "<group>"; };
 		E1949D861A08B47A005CC530 /* 走起.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "走起.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1949D8A1A08B47A005CC530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1949D8B1A08B47A005CC530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 				E13B4F351A131E65000047D6 /* LocateNewActivityViewController.h */,
 				E13B4F361A131E6F000047D6 /* LocateNewActivityViewController.m */,
 				E19781541A13CF75008D1E35 /* Location.gpx */,
+				E14C046A1A15909D00D89C41 /* OrgActListViewController.h */,
+				E14C046B1A1590D900D89C41 /* OrgActListViewController.m */,
 			);
 			path = "走起";
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 			files = (
 				734BD49B1A0CBFA5008A12C2 /* SendCommentViewController.m in Sources */,
 				7361E90C1A126E9C00E17682 /* NewPersonInfo.m in Sources */,
+				E14C046C1A1590D900D89C41 /* OrgActListViewController.m in Sources */,
 				7361E9211A12704200E17682 /* ASProgressPopUpView.m in Sources */,
 				7346D71F1A0CA9580024B4B5 /* ActivityIntroCell.m in Sources */,
 				E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */,

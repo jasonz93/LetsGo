@@ -30,7 +30,7 @@
 }
 
 +(NSString *)getUrlString:(NSString *)path{
-    NSString *host=@"http://192.168.3.28:3000";
+    NSString *host=@"http://192.168.18.179:3000";
     NSString *url=[host stringByAppendingString:path];
     return url;
 }
@@ -100,6 +100,22 @@
     UIImage *result=UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return result;
+}
+
+@end
+
+@implementation clsAct
+
+-(id)initWithData:(NSDictionary *)dic{
+    self.act_title=[dic objectForKey:@"activity_title"];
+    self.act_content=[dic objectForKey:@"activity_content"];
+    self.act_id=[dic objectForKey:@"activity_id"];
+    self.act_logo=[dic objectForKey:@"activity_logo"];
+    self.act_pic=[dic objectForKey:@"activity_pic"];
+    self.act_place=[dic objectForKey:@"activity_place"];
+    self.act_begin=[dic objectForKey:@"activity_begin_time"];
+    self.act_end=[dic objectForKey:@"activity_end_time"];
+    return self;
 }
 
 @end
