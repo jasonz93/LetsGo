@@ -22,6 +22,11 @@
     self.AplaceL.text=place;
     self.ApeopleMaxL.text=[NSString stringWithFormat:@"人数限额：%@ ",PMax];
     self.ApeopleL.text=[NSString stringWithFormat:@"已参加：%@ 人",Pj];
+    [self.ActivityImg.layer setMasksToBounds:YES];
+    [self.ActivityImg.layer setCornerRadius:10];
+    [self.ActivityImg.layer setBorderWidth:1];
+    [self.ActivityImg.layer setBorderColor:[[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]CGColor]];
+    
     self.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"121313213"]];
 }
 

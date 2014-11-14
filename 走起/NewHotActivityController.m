@@ -22,7 +22,7 @@
     
     ASV.delegate=self;
     MicroLen=10.0f;
-    [self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
+    //[self.tabBarController.tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     Mytoken=[defaults objectForKey:@"user_token"];
     NSLog(@"Hot Activity Get token %@",Mytoken);
@@ -111,33 +111,40 @@
 }
 
 -(void) ProcessData{
-    AList= [NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
-   /* NSDictionary *Errdic=(NSDictionary*)AList;
-     NSLog(@"Alist:%@",Errdic);
-    if([Errdic objectForKey:@"error"]!=nil)
+    BOOL Geterror=YES;
+    id Rawresult=[NSJSONSerialization JSONObjectWithData:RevData options:NSJSONReadingMutableContainers error:nil];
+    if([Rawresult isKindOfClass:[NSArray class]])
+    {
+        NSLog(@"Receive Array Json");
+        AList=Rawresult;
+        Geterror=NO;
+    }
+    else if([Rawresult isKindOfClass:[NSDictionary class]])
+    {
+        NSLog(@"Get Dic Class ,may be error");
+        Geterror=YES;
+    }
+    if(Geterror)
     {
        NSLog(@"判断到登陆失效，即将跳转到登陆界面");
-        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginView *lv=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
-        [self presentViewController:lv animated:YES completion:^{
-        }];
         NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
         [defaults removeObjectForKey:@"user_token"];
         [defaults synchronize];
-        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        /*UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
         LoginView *regview=[storyBoard instantiateViewControllerWithIdentifier:@"loginview" ];
         regview.hidesBottomBarWhenPushed=YES;
-        [self.navigationController addChildViewController:regview];
-
+        [self.navigationController addChildViewController:regview];*/
+        [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
     }
     else
-    {*/
+    {
     //ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
     ASV.contentSize=CGSizeMake([UIScreen mainScreen].applicationFrame.size.width*AList.count, ASV.frame.size.height);
     ASV.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
     PGC.numberOfPages = AList.count;
     NSLog(@"Page Control Display %ld dots",(long)PGC.numberOfPages);
     [self initActivityView];
+    }
 }
 
 -(void) initActivityView{

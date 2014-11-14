@@ -76,7 +76,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -167,11 +167,28 @@
             {
                 cell=[[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CanCell"];
             }
+            cell.textLabel.text=@"本校个人活动";
+            cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
+            cell.textLabel.textColor=[UIColor whiteColor];
+            cell.textLabel.textAlignment=NSTextAlignmentCenter;
+            cell.backgroundColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+            break;
+        case 3:
+        {
+            
+            UITableViewCell *cell=[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"CanCell"];
+            if(cell==nil)
+            {
+                cell=[[UITableViewCell alloc ] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CanCell"];
+            }
             cell.textLabel.text=@"发起活动";
             cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
             cell.textLabel.textColor=[UIColor whiteColor];
             cell.textLabel.textAlignment=NSTextAlignmentCenter;
-            cell.backgroundColor=[UIColor orangeColor];
+            cell.backgroundColor=[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return cell;
             
@@ -188,7 +205,7 @@
             cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
             cell.textLabel.textColor=[UIColor whiteColor];
             cell.textLabel.textAlignment=NSTextAlignmentCenter;
-            cell.backgroundColor=[UIColor redColor];
+            cell.backgroundColor=[UIColor colorWithRed:189.0f/255 green:0.0f blue:0.0f alpha:1.0f];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -198,7 +215,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([indexPath section]==3)
+    if([indexPath section]==4)
     {
         UIActionSheet *LogoutQ=[[UIActionSheet alloc]initWithTitle:@"确定注销登录？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"注销登录" otherButtonTitles:nil, nil];        //注销登录
          [LogoutQ showInView:self.view];
@@ -212,6 +229,17 @@
         [self.navigationController pushViewController:AactivityDetail animated:YES];
     }
     if([indexPath section]==2)
+    {//OrgActListView
+        UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        OrgActListViewController *SchoolActView=[storyBoard instantiateViewControllerWithIdentifier:@"OrgActListView" ];
+        SchoolActView.hidesBottomBarWhenPushed=YES;
+        clsSchool *school=[[clsSchool alloc]init];
+        NSLog(@"Schoolname is %@,id is %@",[DataDic objectForKey:@"school_name"],[DataDic objectForKey:@"school_id"]);
+        school.schoolID=[[DataDic objectForKey:@"school_id"]integerValue];
+        SchoolActView.school=school;
+        [self.navigationController pushViewController:SchoolActView animated:YES];
+    }
+    if([indexPath section]==3)
     {
         [self OpenAddView];
     }
@@ -223,7 +251,7 @@
         //这里捕捉“毁灭键”,其实该键的index是0，从上到下从0开始，称之为毁灭是因为是红的
     {
         NSLog(@"User Logout");
-        NSString *URLpre=[Common getUrlString:@"/users/sign_out"];
+        NSString *URLpre=[Common getUrlString:[NSString stringWithFormat:@"/users/sign_out?user_token=%@",MyToken]];
         NSData *CommentData=[[NSString stringWithFormat:@""] dataUsingEncoding:NSUTF8StringEncoding];
         [[PostInfo alloc]initWithURL:URLpre HttpMethod:@"DELETE" postData:CommentData resultData:RevData sender:self onSuccess:@selector(ReceiveSuccess) onError:nil];
         }

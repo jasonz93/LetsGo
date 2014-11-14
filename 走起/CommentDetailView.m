@@ -72,6 +72,11 @@
         cell.UserLogo.image=[UIImage imageNamed:@"SnowPng"];
     }
     cell.accessoryType=UITableViewCellAccessoryNone;
+    [cell.UserLogo.layer setMasksToBounds:YES];
+    [cell.UserLogo.layer setCornerRadius:10];
+    [cell.UserLogo.layer setBorderWidth:1];
+    [cell.UserLogo.layer setBorderColor:[[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]CGColor]];
+    
        return cell;
 }
 

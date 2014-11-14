@@ -26,6 +26,11 @@
     [Common loadPic:NewImg imageView:self.ActivityImg];
     self.ActivityPlaceLabel.text=NewPlace;
     self.ActivityBeginTimeLabel.text=TheBeginTime;
+    [self.ActivityImg.layer setMasksToBounds:YES];
+    [self.ActivityImg.layer setCornerRadius:10];
+    [self.ActivityImg.layer setBorderWidth:1];
+    [self.ActivityImg.layer setBorderColor:[[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]CGColor]];
+    
     //self.ActivityEndTimeLabel.text=TheEndTime;
 }
 
