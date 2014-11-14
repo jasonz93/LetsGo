@@ -32,6 +32,7 @@
 		736CE8C61A14EDC300E90846 /* SearchActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 736CE8C51A14EDC300E90846 /* SearchActivityController.m */; };
 		73DB6E7C1A08E8720056BFD6 /* GetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E7B1A08E8720056BFD6 /* GetInfo.m */; };
 		73DB6E8A1A08EA4D0056BFD6 /* MyActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */; };
+		73FF3DD41A1594FE00C8766F /* CommentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF3DD31A1594FE00C8766F /* CommentDetailView.m */; };
 		E117E86F1A091B5300E19CA8 /* CreateActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */; };
 		E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E1F1A0A5FB900F43300 /* MyOrgViewController.m */; };
 		E1215E231A0A63B500F43300 /* SearchOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1215E221A0A63B500F43300 /* SearchOrgViewController.m */; };
@@ -100,6 +101,8 @@
 		73DB6E7B1A08E8720056BFD6 /* GetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetInfo.m; sourceTree = "<group>"; };
 		73DB6E861A08EA4D0056BFD6 /* MyActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityViewController.h; sourceTree = "<group>"; };
 		73DB6E871A08EA4D0056BFD6 /* MyActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityViewController.m; sourceTree = "<group>"; };
+		73FF3DD21A1594FE00C8766F /* CommentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailView.h; sourceTree = "<group>"; };
+		73FF3DD31A1594FE00C8766F /* CommentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailView.m; sourceTree = "<group>"; };
 		E117E86D1A091B3700E19CA8 /* CreateActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateActivityViewController.h; sourceTree = "<group>"; };
 		E117E86E1A091B5300E19CA8 /* CreateActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateActivityViewController.m; sourceTree = "<group>"; };
 		E1215E1E1A0A5FA100F43300 /* MyOrgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOrgViewController.h; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				E19781511A13B782008D1E35 /* Main.storyboard */,
+				73FF3DD21A1594FE00C8766F /* CommentDetailView.h */,
+				73FF3DD31A1594FE00C8766F /* CommentDetailView.m */,
 				736CE8C41A14EDC300E90846 /* SearchActivityController.h */,
 				736CE8C51A14EDC300E90846 /* SearchActivityController.m */,
 				7361E90D1A126EC000E17682 /* Settings.plist */,
@@ -422,6 +427,7 @@
 				7361E9161A126FCF00E17682 /* MBProgressHUD.m in Sources */,
 				E1215E201A0A5FB900F43300 /* MyOrgViewController.m in Sources */,
 				7361E91A1A12702500E17682 /* ActivityNewView.m in Sources */,
+				73FF3DD41A1594FE00C8766F /* CommentDetailView.m in Sources */,
 				7346D7211A0CA9580024B4B5 /* CommentCell.m in Sources */,
 				E1215E261A0A94E900F43300 /* OrgDetailViewController.m in Sources */,
 				736CE8C61A14EDC300E90846 /* SearchActivityController.m in Sources */,

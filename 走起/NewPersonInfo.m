@@ -117,6 +117,8 @@
                     }
                     [cell initWithUserLogo:UserLogo UserName:UserName Schoolname:SchoolName Praise:UserPraise];
                     cell.accessoryType=UITableViewCellAccessoryNone;
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            
                     return cell;
         }
             break;

@@ -18,7 +18,7 @@
 //#import "TimeMapCell.h"
 //#import "CommentTableCell.h"
 #import "SendCommentViewController.h"
-
+#import "CommentDetailView.h"
 @interface ActivityTable : UITableViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,MBProgressHUDDelegate>
 {
     NSMutableData *AData;
