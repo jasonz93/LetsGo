@@ -69,7 +69,7 @@
     if (self.org!=nil){
         url=[NSString stringWithFormat:@"%@/organizations/%ld/activities.json",[Common getUrlString:@""],self.org.orgID];
     }else{
-        url=[NSString stringWithFormat:@""];
+        url=[NSString stringWithFormat:@"%@/schools/%ld/personalactivities.json",[Common getUrlString:@""],self.school.schoolID];
     }
     [[GetInfo alloc]initWithURL:url ResultData:self.actData sender:self OnSuccess:@selector(gotActList) OnError:nil];
     

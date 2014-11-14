@@ -289,7 +289,7 @@
             </objects>
             <point key="canvasLocation" x="1876" y="2176"/>
         </scene>
-        <!--群组活动-->
+        <!--活动列表-->
         <scene sceneID="mqA-Lw-zgq">
             <objects>
                 <tableViewController storyboardIdentifier="OrgActListView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cgd-WK-Qcr" sceneMemberID="viewController">
@@ -310,7 +310,7 @@
                             <outlet property="delegate" destination="cgd-WK-Qcr" id="owH-eg-Nqq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="群组活动" id="0kE-oH-l6N"/>
+                    <navigationItem key="navigationItem" title="活动列表" id="0kE-oH-l6N"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bET-he-HSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
