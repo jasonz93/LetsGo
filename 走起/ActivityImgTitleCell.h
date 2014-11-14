@@ -14,8 +14,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *ActivityTimeL;
 @property (weak, nonatomic) IBOutlet UILabel *ActivityPlaceL;
 @property (weak, nonatomic) IBOutlet UILabel *ActivityOwnerL;
+@property (weak, nonatomic) IBOutlet UILabel *EndTime;
 
 
--(void)initWithImg:(NSString*)NewImg Title:(NSString*)NewTitle Place:(NSString*)Newplace Time:(NSString*)newtime Owner:(NSString*)newowner;
+-(void)initWithImg:(NSString*)NewImg Title:(NSString*)NewTitle Place:(NSString*)Newplace Time:(NSString*)newtime   NewEndTime:(NSString*)NewEndtime Owner:(NSString*)newowner;
 
 @end

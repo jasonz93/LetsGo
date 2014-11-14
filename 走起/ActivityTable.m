@@ -54,7 +54,8 @@
     OwnerTxt=[NSString stringWithFormat:@"发起者：%@",[AData_Dic objectForKey:@"owner_name"]];
     OrginizationTxt=[NSString stringWithFormat:@"活动所属群组：%@",[AData_Dic objectForKey:@"organization_name"]];
     PlaceTxt=[NSString stringWithFormat:@"活动地点：%@",[AData_Dic objectForKey:@"activity_place"]];
-    TimeTxt=[NSString stringWithFormat:@"%@ - %@",[AData_Dic objectForKey:@"activity_begin_time"],[AData_Dic objectForKey:@"activity_end_time"]];
+    TimeTxt=[AData_Dic objectForKey:@"activity_begin_time"];
+    TimeEndTxt=[AData_Dic objectForKey:@"activity_end_time"];
     PeopleTxt=[NSString stringWithFormat:@"报名人数：%@   人数限额：%@",[AData_Dic objectForKey:@"activity_people_max"],[AData_Dic objectForKey:@"activity_people_number"]];
     PicURL=[AData_Dic objectForKey:@"activity_pic"];
     [SendCommentBtn setTitle:@"发表评论" forState:UIControlStateNormal];
@@ -117,7 +118,12 @@
     if(section==0)
         return 4;
     else
-        return AComment.count+1;
+    {
+        if(AComment.count<10)
+            return AComment.count;
+        else
+            return  AComment.count+1;
+    }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -147,7 +153,7 @@
                 [Common loadPic:ImgURL imageView:cell.ActivityImg];
                 cell.accessoryType=UITableViewCellAccessoryNone;
                 cell.selectionStyle=UITableViewCellSelectionStyleNone;
-                [cell initWithImg:ImgURL Title:TitleTxt Place:PlaceTxt Time:TimeTxt Owner:OwnerTxt];
+                [cell initWithImg:ImgURL Title:TitleTxt Place:PlaceTxt Time:TimeTxt NewEndTime:TimeEndTxt Owner:OwnerTxt];
                 return cell;
             }
                 break;
@@ -223,16 +229,16 @@
     }
     else
     {
-        if([indexPath row]==AComment.count)
+        if(AComment.count>=10 &&[indexPath row]==AComment.count)
         {
             UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"BtnCell"];
             if(cell==nil)
                 cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BtnCell"];
             cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
-            cell.textLabel.textColor=[UIColor whiteColor];
+            cell.textLabel.textColor=[UIColor grayColor];
             cell.textLabel.textAlignment=NSTextAlignmentCenter;
             cell.textLabel.text=@"查看更多";
-            cell.backgroundColor=[UIColor colorWithRed:38.0/255 green:166.0/255 blue:154.0/255 alpha:1.0];
+            cell.backgroundColor=[UIColor whiteColor];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -262,6 +268,11 @@
             cell.UserLogo.image=[UIImage imageNamed:@"SnowPng"];
             // cell.UserLogo.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[AComment objectAtIndex:[indexPath row]]objectForKey:@"user_logo"]]]];
         }
+            [cell.UserLogo .layer setMasksToBounds:YES];
+            [cell.UserLogo.layer setCornerRadius:10];
+            [cell.UserLogo.layer setBorderWidth:1];
+            [cell.UserLogo.layer setBorderColor:[[UIColor colorWithRed:0.0f green:150.0/255 blue:136.0/255 alpha:1.0f]CGColor]];
+            
         cell.accessoryType=UITableViewCellAccessoryNone;
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
             
@@ -291,7 +302,14 @@
     }
     else
     {
-        return 66;
+        if([indexPath row]==AComment.count)
+        {
+            return 40;
+        }
+        else
+        {
+            return 66;
+        }
     }
 }
 

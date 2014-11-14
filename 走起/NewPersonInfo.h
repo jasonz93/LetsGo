@@ -19,6 +19,7 @@
 #import "Common.h"
 #import "LoginView.h"
 #import "CreateActivityViewController.h"
+#import "OrgActListViewController.h"
 @interface NewPersonInfo : UITableViewController<MBProgressHUDDelegate,UIActionSheetDelegate>{
     NSString *UserLogo;
     NSString *UserName;

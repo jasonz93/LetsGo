@@ -49,6 +49,7 @@
     NSNumber *ship_id;
     NSString *PicURL;
     UIImageView *ActivityPic;
+    NSString *TimeEndTxt;
 }
 
 
