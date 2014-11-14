@@ -26,8 +26,8 @@
     MyToken=[defaults objectForKey:@"user_token"];
     NSLog(@"PersonInfoView Get token %@,id %ld",MyToken,(long)Uid);
     //创建一个右边按钮
-    UIBarButtonItem *AddActivity=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(OpenAddView)];
-    [self.navigationItem setRightBarButtonItem:AddActivity];
+    /*UIBarButtonItem *AddActivity=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(OpenAddView)];
+    [self.navigationItem setRightBarButtonItem:AddActivity];*/
     [self initRefreshControl];
     //[self.refreshControl beginRefreshing];
     [self GetInfo];
@@ -117,6 +117,8 @@
                     }
                     [cell initWithUserLogo:UserLogo UserName:UserName Schoolname:SchoolName Praise:UserPraise];
                     cell.accessoryType=UITableViewCellAccessoryNone;
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            
                     return cell;
         }
             break;

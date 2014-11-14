@@ -117,7 +117,7 @@
     if(section==0)
         return 4;
     else
-        return AComment.count;
+        return AComment.count+1;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -223,6 +223,21 @@
     }
     else
     {
+        if([indexPath row]==AComment.count)
+        {
+            UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"BtnCell"];
+            if(cell==nil)
+                cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BtnCell"];
+            cell.textLabel.font=[UIFont systemFontOfSize:18.0f];
+            cell.textLabel.textColor=[UIColor whiteColor];
+            cell.textLabel.textAlignment=NSTextAlignmentCenter;
+            cell.textLabel.text=@"查看更多";
+            cell.backgroundColor=[UIColor colorWithRed:38.0/255 green:166.0/255 blue:154.0/255 alpha:1.0];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+        else
+        {
         CommentCellLoaded=NO;
         if(!CommentCellLoaded){
             UINib *nib=[UINib nibWithNibName:@"CommentCell" bundle:nil];
@@ -236,16 +251,22 @@
         NSDictionary *tmp =[AComment objectAtIndex:[indexPath row]];
         cell.User_name.text=[tmp objectForKey:@"email"];
         cell.CommentContent.text=[tmp objectForKey:@"comment_content"];
+        NSLog(@"User Comment Info is :%@",tmp);
         if([[AComment objectAtIndex:[indexPath row]] objectForKey:@"user_logo"])
         {
-            cell.UserLogo.image=[UIImage imageNamed:@"SnowPng"];
+            [Common loadPic:[[AComment objectAtIndex:[indexPath row]]objectForKey:@"user_logo"] imageView:cell.UserLogo];
+
         }
         else
         {
-            cell.UserLogo.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[AComment objectAtIndex:[indexPath row]]objectForKey:@"user_logo"]]]];
+            cell.UserLogo.image=[UIImage imageNamed:@"SnowPng"];
+            // cell.UserLogo.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[AComment objectAtIndex:[indexPath row]]objectForKey:@"user_logo"]]]];
         }
         cell.accessoryType=UITableViewCellAccessoryNone;
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            
         return cell;
+        }
         
         
     }
@@ -270,7 +291,7 @@
     }
     else
     {
-        return 70;
+        return 66;
     }
 }
 
@@ -294,6 +315,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([indexPath section]==0)
+    {
     if([indexPath row]==3)
     {
         switch(ButtonStyle)
@@ -319,9 +342,25 @@
             default:
                 NSLog(@"Press Button Error!!");
         }
+    }}
+    else
+    {
+        if([indexPath row]==AComment.count)
+        {
+            [self OpenCommentDetail];
+        }
     }
 }
 
+
+-(void)OpenCommentDetail{
+    NSLog(@"ActivityTable:- Open CommentList View");
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CommentDetailView *CDetail=[storyBoard instantiateViewControllerWithIdentifier:@"CommentsDetailView" ];
+    CDetail.hidesBottomBarWhenPushed=YES;
+    CDetail.Aid=self.Aid;
+    [self.navigationController pushViewController:CDetail animated:YES];
+}
 
 -(void)QuitActivity{
     //curl -X DELETE -H "Content-Type: application/json" -d '{"activity_id":1}' localhost:3000/activity_memberships.json?user_token=dB4EyczCNnaGayypEZXG

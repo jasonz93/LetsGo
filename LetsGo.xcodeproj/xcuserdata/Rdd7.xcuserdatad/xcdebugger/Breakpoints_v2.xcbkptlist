@@ -106,11 +106,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x8d70;&#x8d77;/ActivityTable.m"
+<<<<<<< HEAD
             timestampString = "437578380.751909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "347"
             endingLineNumber = "347"
+=======
+            timestampString = "437633951.658203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
+>>>>>>> 484d6cb19bcd3eb8b5fc630b70921ce5350a1773
             landmarkName = "-JionSuccess"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +146,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x8d70;&#x8d77;/ActivityTable.m"
+<<<<<<< HEAD
             timestampString = "437578380.751909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "358"
             endingLineNumber = "358"
+=======
+            timestampString = "437633951.658203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+>>>>>>> 484d6cb19bcd3eb8b5fc630b70921ce5350a1773
             landmarkName = "-JionSuccess"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +170,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x8d70;&#x8d77;/SearchActivityController.m"
+<<<<<<< HEAD
             timestampString = "437581351.856375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
             endingLineNumber = "73"
+=======
+            timestampString = "437588411.280293"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+>>>>>>> 484d6cb19bcd3eb8b5fc630b70921ce5350a1773
             landmarkName = "-searchBar:textDidChange:"
             landmarkType = "5">
          </BreakpointContent>
