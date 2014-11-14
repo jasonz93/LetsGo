@@ -518,6 +518,8 @@ BOOL shouldTouch,working;
 
 -(id)initWithTableView:(UITableView *)tbl sender:(id)sender onClick:(SEL)onClick{
     self.sender=sender;
+    UIViewController *controller=sender;
+    self.view=controller.view;
     self.tblActOrg=tbl;
     self.onClicked=onClick;
     self.orgData=[[NSMutableData alloc]init];

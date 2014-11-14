@@ -54,6 +54,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tblOrgs" destination="kq1-Fl-AfS" id="alz-py-gAs"/>
+                        <segue destination="uIj-me-7Su" kind="push" id="bZq-Yg-8BT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSK-66-ltK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -69,11 +70,11 @@
                         <viewControllerLayoutGuide type="bottom" id="sR7-YH-dpc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j7i-SO-S8w">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="d1m-ED-YTu">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -95,29 +96,30 @@
                     <connections>
                         <outlet property="btnCommit" destination="OuC-1c-NEx" id="14F-A0-qmc"/>
                         <outlet property="tblMain" destination="d1m-ED-YTu" id="n7h-JU-YLx"/>
+                        <segue destination="nWP-CC-AVC" kind="show" id="aRD-yn-3td"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMf-rN-MhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2268" y="732"/>
+            <point key="canvasLocation" x="2268" y="688"/>
         </scene>
         <!--选取地点-->
         <scene sceneID="YT2-bb-zFg">
             <objects>
-                <viewController storyboardIdentifier="actLocate" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nWP-CC-AVC" customClass="LocateNewActivityViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="actLocate" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nWP-CC-AVC" customClass="LocateNewActivityViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FOw-ND-wCr"/>
                         <viewControllerLayoutGuide type="bottom" id="C1N-Yz-DeX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tXS-V7-OEm">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bF8-xh-4PG">
-                                <rect key="frame" x="0.0" y="114" width="600" height="486"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                             </mapView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ZT2-bS-Nmw">
-                                <rect key="frame" x="0.0" y="70" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -129,7 +131,7 @@
                             <constraint firstAttribute="bottom" secondItem="bF8-xh-4PG" secondAttribute="bottom" id="dgz-NU-GH9"/>
                             <constraint firstItem="ZT2-bS-Nmw" firstAttribute="leading" secondItem="tXS-V7-OEm" secondAttribute="leading" id="kMd-hT-gdA"/>
                             <constraint firstAttribute="trailing" secondItem="ZT2-bS-Nmw" secondAttribute="trailing" id="lri-Gd-CGx"/>
-                            <constraint firstItem="ZT2-bS-Nmw" firstAttribute="top" secondItem="tXS-V7-OEm" secondAttribute="top" constant="70" id="pvh-Mo-j72"/>
+                            <constraint firstItem="ZT2-bS-Nmw" firstAttribute="top" secondItem="tXS-V7-OEm" secondAttribute="top" constant="64" id="pvh-Mo-j72"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="选取地点" id="hxP-Fu-RNy">
@@ -142,12 +144,11 @@
                     <connections>
                         <outlet property="map" destination="bF8-xh-4PG" id="I4p-VT-evJ"/>
                         <outlet property="searchBar" destination="ZT2-bS-Nmw" id="qQD-MJ-pfn"/>
-                        <segue destination="Mxe-tU-RpM" kind="show" id="XN4-7n-K7z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iwz-VM-pVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2986" y="732"/>
+            <point key="canvasLocation" x="2990" y="688"/>
         </scene>
         <!--加入群组-->
         <scene sceneID="0Lw-yo-8zd">
@@ -281,12 +282,39 @@
                         <outlet property="txtOrgContent" destination="8gE-Hk-AQ5" id="cuZ-f0-xWA"/>
                         <outlet property="txtOrgName" destination="bu3-Q2-4m4" id="Op9-Fz-6WB"/>
                         <outlet property="txtSchoolName" destination="jzx-8h-wYn" id="hEh-Rs-BfS"/>
-                        <segue destination="BWs-aa-Dj6" kind="push" id="wAl-9d-iU3"/>
+                        <segue destination="cgd-WK-Qcr" kind="push" id="48s-s1-7Ku"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9VX-O8-gPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876" y="2176"/>
+        </scene>
+        <!--群组活动-->
+        <scene sceneID="mqA-Lw-zgq">
+            <objects>
+                <tableViewController storyboardIdentifier="OrgActListView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cgd-WK-Qcr" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fGw-pK-3fX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sNx-Dy-RBW">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sNx-Dy-RBW" id="9As-Ul-gXW">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cgd-WK-Qcr" id="9V7-Iw-sSd"/>
+                            <outlet property="delegate" destination="cgd-WK-Qcr" id="owH-eg-Nqq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="群组活动" id="0kE-oH-l6N"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bET-he-HSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2599" y="2176"/>
         </scene>
         <!--用户注册-->
         <scene sceneID="dmf-2E-9me">
@@ -622,7 +650,7 @@
             </objects>
             <point key="canvasLocation" x="707" y="0.0"/>
         </scene>
-        <!--My Activity View Controller-->
+        <!--我的活动-->
         <scene sceneID="SyL-EM-uEt">
             <objects>
                 <tableViewController id="exT-BR-3mF" customClass="MyActivityViewController" sceneMemberID="viewController">
@@ -635,8 +663,8 @@
                             <outlet property="delegate" destination="exT-BR-3mF" id="YOc-wc-ies"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="nwx-m5-jUj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3H1-Qs-amO">
+                    <navigationItem key="navigationItem" title="我的活动" id="nwx-m5-jUj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="3H1-Qs-amO">
                             <connections>
                                 <segue destination="z6N-5G-Sns" kind="push" id="fXs-Bg-Be4"/>
                             </connections>
@@ -666,6 +694,7 @@
                     <navigationItem key="navigationItem" id="gN2-mK-5ba"/>
                     <connections>
                         <outlet property="InfoTable" destination="YPY-kF-Jz0" id="i9U-0c-v6n"/>
+                        <segue destination="Mxe-tU-RpM" kind="show" id="UAM-IX-R2E"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOL-Nf-VTR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -746,8 +775,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oD9-q4-gdB">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oD9-q4-gdB">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="发表评论" id="ZBY-b6-Hj6">
                                         <barButtonItem key="leftBarButtonItem" title="Item" id="HGZ-gs-u3J">
@@ -763,11 +792,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="muG-85-7gC">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muG-85-7gC">
+                                <rect key="frame" x="0.0" y="84" width="600" height="516"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Maw-jK-lkN">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Maw-jK-lkN">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -792,7 +821,7 @@
                             <constraint firstItem="muG-85-7gC" firstAttribute="bottom" secondItem="33f-zE-DEt" secondAttribute="top" id="62X-zA-Heo"/>
                             <constraint firstItem="muG-85-7gC" firstAttribute="trailing" secondItem="oD9-q4-gdB" secondAttribute="trailing" id="9fv-pT-Zh5"/>
                             <constraint firstAttribute="trailing" secondItem="oD9-q4-gdB" secondAttribute="trailing" id="SDr-b2-K0U"/>
-                            <constraint firstItem="muG-85-7gC" firstAttribute="top" secondItem="oD9-q4-gdB" secondAttribute="bottom" id="q4a-0a-2W6"/>
+                            <constraint firstItem="muG-85-7gC" firstAttribute="top" secondItem="oD9-q4-gdB" secondAttribute="bottom" constant="20" id="q4a-0a-2W6"/>
                             <constraint firstItem="oD9-q4-gdB" firstAttribute="leading" secondItem="Dp9-8x-MQu" secondAttribute="leading" id="rLp-zt-GYe"/>
                             <constraint firstItem="oD9-q4-gdB" firstAttribute="top" secondItem="q5p-du-CVo" secondAttribute="bottom" id="raA-mU-2Q7"/>
                         </constraints>
@@ -809,7 +838,7 @@
             </objects>
             <point key="canvasLocation" x="2160" y="-642"/>
         </scene>
-        <!--Search Activity Controller-->
+        <!--搜索活动-->
         <scene sceneID="vaP-Wt-LQZ">
             <objects>
                 <tableViewController id="z6N-5G-Sns" customClass="SearchActivityController" sceneMemberID="viewController">
@@ -827,7 +856,7 @@
                             <outlet property="delegate" destination="z6N-5G-Sns" id="GpQ-QV-3Sf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6cb-aM-kqs"/>
+                    <navigationItem key="navigationItem" title="搜索活动" id="6cb-aM-kqs"/>
                     <connections>
                         <outlet property="ASearch" destination="WN7-0Q-6W0" id="y0s-kH-Cco"/>
                         <outlet property="ATable" destination="i5W-SJ-bgq" id="b4l-ye-KQV"/>
@@ -877,9 +906,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="OF8-XF-GdN">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UZe-6g-NP4"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="OF8-XF-GdN"/>
                     <connections>
                         <outlet property="ASV" destination="sB6-kd-jJe" id="gzc-nd-bjo"/>
                         <outlet property="PGC" destination="519-ef-dld" id="m2f-bt-yXZ"/>
@@ -898,6 +925,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N2K-Un-WFo"/>
-        <segue reference="wAl-9d-iU3"/>
+        <segue reference="bZq-Yg-8BT"/>
     </inferredMetricsTieBreakers>
 </document>

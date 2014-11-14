@@ -23,6 +23,7 @@
 @property SEL onClicked;
 @property clsOrg *selectOrg;
 @property id sender;
+@property UIView *view;
 
 -(id)initWithTableView:(UITableView *)tbl sender:(id)sender onClick:(SEL)onClick;
 
